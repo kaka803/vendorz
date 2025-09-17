@@ -22,10 +22,10 @@ export const CartProvider = ({ children }) => {
   // ✅ Add to cart
   const addToCart = (product) => {
     setCart((prev) => {
-      const exist = prev.find((item) => item.id === product.id);
+      const exist = prev.find((item) => item.id === product._id);
       if (exist) {
         return prev.map((item) =>
-          item.id === product.id
+          item.id === product._id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
@@ -33,7 +33,7 @@ export const CartProvider = ({ children }) => {
         return [
           ...prev,
           {
-            id: product.id,
+            id: product._id,
             title: product.title,
             price: Number(
               typeof product.price === "string"
