@@ -23,7 +23,7 @@ const { addToCart } = useCart();
   
 useEffect(() => {
   if (products?.products && products.products.length > 0) {
-    const found = products.products.find((p) => p.id == id);
+    const found = products.products.find((p) => p._id == id);
     setProduct(found);
     setSelected(found.images?.[0] || "");
   } else {

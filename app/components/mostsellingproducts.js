@@ -48,8 +48,8 @@ const LatestProducts = () => {
           }}
         >
           {productslatest.map((product) => (
-            <SwiperSlide key={product.id}>
-              <Link href={`/product/${product.id}`}>
+            <SwiperSlide key={product._id}>
+              <Link href={`/product/${product._id}`}>
               <div className="group bg-white rounded-sm  overflow-hidden  transition ">
                 {/* Product Image */}
                 <div className="w-full h-60 overflow-hidden relative">

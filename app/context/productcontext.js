@@ -7,16 +7,16 @@ export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    // server API ko call karo
-    const updateProducts = async () => {
-      const res = await fetch("/api/updateProductIds");
-      const data = await res.json();
-      if (data.success) {
-        setProducts(data.products);
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("/api/getproducts");
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
       }
     };
-
-    updateProducts();
+    fetchProducts();
   }, []);
 
   return (

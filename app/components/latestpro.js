@@ -51,7 +51,7 @@ const LatestProducts = () => {
         >
           {productslatest.map((product) => (
             <SwiperSlide key={product.id}>
-              <Link href={`/product/${product.id}`}>
+              <Link href={`/product/${product._id}`}>
               <div onClick={() => addToCart(product)} className="group bg-white rounded-sm shadow-md overflow-hidden  transition hover:shadow-lg">
                 {/* Product Image */}
                 <div className="w-full h-60 overflow-hidden relative">
