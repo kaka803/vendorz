@@ -8,12 +8,18 @@ export async function POST(req) {
 
     // Included array me se transaction attributes nikal lo
     const charge = webhookData.included?.[0];
+    console.log('charge info',charge);
+    
     if (!charge) {
       return NextResponse.json({ error: "Charge info missing" }, { status: 400 });
     }
 
     const referenceId = charge.attributes?.referenceId; // orderId jo aapne transaction me bheja
-    const paymentStatus = charge.attributes?.status;   // "processed", "failed", etc.
+    const paymentStatus = charge.attributes?.status;
+    
+    console.log('referenceId:', referenceId);
+    console.log('paymentStatus:', paymentStatus);
+    // "processed", "failed", etc.
 
     if (!referenceId) {
       return NextResponse.json({ error: "Order referenceId missing" }, { status: 400 });
