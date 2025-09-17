@@ -1,4 +1,7 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Josefin_Sans } from "next/font/google";
+import { ProductProvider } from "./context/productcontext";
+import { CartProvider } from "./context/cartcontext";
+import { AuthProvider } from "./context/AuthContext";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -8,6 +11,10 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+const josefinSans = Josefin_Sans({
+  variable: "--font-josefin-sans",
   subsets: ["latin"],
 });
 
@@ -20,9 +27,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${josefinSans.variable} antialiased`}
       >
+        <AuthProvider>
+        <ProductProvider>
+          <CartProvider>
         {children}
+          </CartProvider>
+        </ProductProvider>
+        </AuthProvider>
       </body>
     </html>
   );

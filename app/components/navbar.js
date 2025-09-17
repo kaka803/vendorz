@@ -1,0 +1,147 @@
+"use client";
+import React, { useState, useEffect } from "react";
+import { Search, ShoppingCart, Menu, X, LogOut } from "lucide-react";
+import { useCart } from "../context/cartcontext";
+import Link from "next/link";
+import SearchOverlay from "./searchOverlay";
+import { useAuth } from "../context/AuthContext";
+
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [avatarDropdown, setAvatarDropdown] = useState(false);
+  const { cart } = useCart();
+  const { user, logout } = useAuth();
+
+  return (
+    <>
+      <div className="w-full navbar px-4 fixed top-10 z-30">
+        <div className="max-w-[1280px] rounded-lg shadow-[0_10px_30px_rgba(0,0,0,0.15)] bg-gradient-to-br from-[#43644d] to-[#2e4634] mx-auto flex justify-between items-center h-17 px-6">
+
+          {/* Left Links */}
+          <div className="hidden md:flex space-x-6 text-white font-medium">
+            <Link href="/" className="hover:text-gray-200 font-sans font-light">Home</Link>
+            <Link href="/shop" className="hover:text-gray-200 font-sans font-light">Shop</Link>
+            <Link href="/contact" className="hover:text-gray-200 font-sans font-light">Contact</Link>
+          </div>
+
+          {/* Logo */}
+          <div className="text-white font-bold text-3xl mt-2 md:mt-2 lg:text-5xl">Vendorz</div>
+
+          {/* Right Side */}
+          <div className="flex items-center space-x-6">
+            {/* Search Icon */}
+            <button onClick={() => setSearchOpen(true)} className="text-white hover:text-gray-200">
+              <Search size={22} />
+            </button>
+
+            {/* Cart */}
+            <Link href="/cart">
+              <button className="text-white mt-2 hover:text-gray-200 relative">
+                <ShoppingCart size={22} />
+                <span className="absolute -top-4 -right-3 bg-white font-sans text-green-950 text-xs font-bold px-2 py-0.5 rounded-full">
+                  {cart.reduce((acc, item) => acc + item.quantity, 0)}
+                </span>
+              </button>
+            </Link>
+
+            {/* Conditional User/Login */}
+            {user ? (
+              <div className="relative hidden md:block">
+                <button onClick={() => setAvatarDropdown(!avatarDropdown)} className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-green-800 font-bold uppercase">
+                  {user.name[0]}
+                </button>
+
+                {avatarDropdown && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md overflow-hidden z-50">
+                    <div className="p-3 border-b text-sm text-gray-700">
+                      <p className="font-medium">{user.name}</p>
+                      <p className="truncate text-gray-500">{user.email}</p>
+                    </div>
+                    <button
+                      onClick={() => {
+                        setAvatarDropdown(false);
+                        logout();
+                      }}
+                      className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                    >
+                      <LogOut size={16} />
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <>
+                <Link href="/auth">
+                  <button className="bg-white text-[#000000] px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition">
+                    Login
+                  </button>
+                </Link>
+                
+              </>
+            )}
+
+            {/* Mobile Menu Button */}
+            <button className="md:hidden text-white" onClick={() => setIsOpen(true)}>
+              <Menu size={26} />
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Sidebar */}
+        <div className={`fixed top-0 right-0 h-full w-64 bg-[#004730] text-white transform ${isOpen ? "translate-x-0" : "translate-x-full"} transition-transform duration-300 ease-in-out z-20`}>
+          <div className="flex justify-end p-4">
+            <button onClick={() => setIsOpen(false)}>
+              <X size={26} />
+            </button>
+          </div>
+          <div className="flex flex-col space-y-6 mt-10 px-6 font-medium">
+            <Link href="/" className="hover:text-gray-300 uppercase font-light">Home</Link>
+<Link href="/shop" className="hover:text-gray-300 uppercase font-light">Shop</Link>
+<Link href="/contact" className="hover:text-gray-300 uppercase font-light">Contact</Link>
+
+            {user ? (
+             <div className="relative">
+                <button onClick={() => setAvatarDropdown(!avatarDropdown)} className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-green-800 font-bold uppercase">
+                  {user.name[0]}
+                </button>
+
+                {avatarDropdown && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md overflow-hidden z-50">
+                    <div className="p-3 border-b text-sm text-gray-700">
+                      <p className="font-medium">{user.name}</p>
+                      <p className="truncate text-gray-500">{user.email}</p>
+                    </div>
+                    <button
+                      onClick={() => {
+                        setAvatarDropdown(false);
+                        logout();
+                      }}
+                      className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                    >
+                      <LogOut size={16} />
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <button className="bg-white text-[#007b53] px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition w-fit">
+                Login
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Background Overlay */}
+        {isOpen && <div className="fixed inset-0 bg-black/40 z-10" onClick={() => setIsOpen(false)} />}
+      </div>
+
+      {/* Search Overlay */}
+      <SearchOverlay isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+    </>
+  );
+};
+
+export default Navbar;
