@@ -20,7 +20,7 @@ export async function POST(req) {
     }
 
     // DB update
-    const order = await Order.findById(referenceId); // agar orderId same hai to
+const order = await Order.findOne({ referenceId: referenceId }); // agar orderId same hai to
     if (!order) {
       return NextResponse.json({ error: "Order not found" }, { status: 404 });
     }
