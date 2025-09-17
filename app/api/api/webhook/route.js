@@ -6,23 +6,26 @@ export async function POST(req) {
     const webhookData = await req.json();
     console.log("Webhook received:", webhookData);
 
-    // Transaction info nikal lo
-    const transaction = webhookData?.data?.attributes;
-    const referenceId = transaction?.referenceId; // Agar tumne orderId ya referenceId bheja tha transaction me
+    // Included array me se transaction attributes nikal lo
+    const charge = webhookData.included?.[0];
+    if (!charge) {
+      return NextResponse.json({ error: "Charge info missing" }, { status: 400 });
+    }
 
-    const paymentStatus = transaction?.status; // "processed", "failed", etc.
+    const referenceId = charge.attributes?.referenceId; // orderId jo aapne transaction me bheja
+    const paymentStatus = charge.attributes?.status;   // "processed", "failed", etc.
 
     if (!referenceId) {
       return NextResponse.json({ error: "Order referenceId missing" }, { status: 400 });
     }
 
     // DB update
-    const order = await Order.findById(referenceId);
+    const order = await Order.findById(referenceId); // agar orderId same hai to
     if (!order) {
       return NextResponse.json({ error: "Order not found" }, { status: 404 });
     }
 
-    order.paymentStatus = paymentStatus === "processed" ? "paid" : "failed";
+    order.paymentStatus = paymentStatus === "paid";
     await order.save();
 
     return NextResponse.json({ success: true });
