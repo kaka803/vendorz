@@ -28,7 +28,8 @@ export const CartProvider = ({ children }) => {
           item.id === product._id
             ? { ...item, quantity: item.quantity + 1 }
             : item
-        );
+          );
+          
       } else {
         return [
           ...prev,
@@ -42,6 +43,7 @@ export const CartProvider = ({ children }) => {
         ];
       }
     });
+    alert('updated Cart')
   };
 
   // ✅ Remove from cart

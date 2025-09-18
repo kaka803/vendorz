@@ -10,7 +10,7 @@ export default function SearchOverlay({ isOpen, onClose }) {
   const { allproducts } = useProducts();
   const [query, setQuery] = useState("");
   const [filtered, setFiltered] = useState([]);
-  const addToCart = useCart()
+  const {addToCart} = useCart()
 
   useEffect(() => {
     if (query.trim() === "") {
@@ -81,7 +81,7 @@ export default function SearchOverlay({ isOpen, onClose }) {
             </div>
 
            
-            <button onClick={()=> addToCart(product)} className="flex items-center gap-2 bg-[#365a41] text-white px-3 py-2 rounded-lg hover:bg-[#2d4a35] transition">
+            <button  onClick={() => addToCart(product)} className="flex items-center gap-2 bg-[#365a41] text-white px-3 py-2 rounded-lg hover:bg-[#2d4a35] transition">
               <ShoppingCart size={16} />
               <span className="text-sm">Add</span>
             </button>
