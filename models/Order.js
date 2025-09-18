@@ -2,10 +2,15 @@ import mongoose from "mongoose";
 
 const OrderSchema = new mongoose.Schema({
   shippingAddress: {
-    name: { type: String, required: true },
+    firstName: { type: String, required: true },
+    lastName: { type: String },
     email: { type: String, required: true },
     phone: { type: String, required: true },
-    description: { type: String },
+    country: { type: String, required: true },
+    city: { type: String, required: true },
+    address: { type: String, required: true },
+    postalCode: { type: String },
+    note: { type: String },
   },
   products: [
     {
@@ -23,8 +28,8 @@ const OrderSchema = new mongoose.Schema({
   total: { type: Number, required: true },
   UserEmail: { type: String },
   paymentStatus: { type: String, default: "pending" },
-  exactlyPaymentUrl: { type: String }, // ye frontend ko bhejna hai
-  referenceId: { type: String }, // ye frontend ko bhejna hai
+  exactlyPaymentUrl: { type: String }, // frontend ko bhejna hai
+  referenceId: { type: String }, // frontend ko bhejna hai
   createdAt: { type: Date, default: Date.now },
 });
 

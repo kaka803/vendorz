@@ -56,7 +56,7 @@ export default function ProductClient({ params }) {
                 <img
                   src={selected}
                   alt={product.title}
-                  className="w-full h-full object-cover transition-all duration-500 ease-in-out hover:scale-105"
+                  className="w-full h-full object-contain transition-all duration-500 ease-in-out hover:scale-105"
                 />
               ) : (
                 <div className="flex items-center justify-center h-full text-gray-400">
@@ -80,7 +80,7 @@ export default function ProductClient({ params }) {
                   <img
                     src={img}
                     alt={`thumb-${i}`}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
                   />
                 </button>
               ))}
@@ -123,12 +123,12 @@ export default function ProductClient({ params }) {
             <div className="prose max-w-none text-gray-700">
               <h3 className="mt-2">Description</h3>
               <div
-                className="wrap-anywhere font-sans"
-                dangerouslySetInnerHTML={{
-                  __html: product.description || "",
-                }}
-              />
-            </div>
+  className="wrap-anywhere font-sans whitespace-pre-line"
+  dangerouslySetInnerHTML={{
+    __html: product.description || "",
+  }}
+/>
+            </div>  
 
             {/* Technical Specs */}
             <div className="mt-2">

@@ -51,6 +51,21 @@ export default function DashboardPage() {
     low_poly: false
   });
   const [addLoading, setAddLoading] = useState(false);
+  // --- Add State for Pagination ---
+const [currentPage, setCurrentPage] = useState(1);
+const productsPerPage = 25;
+
+// Calculate indexes
+const indexOfLastProduct = currentPage * productsPerPage;
+const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+const currentProducts = allproducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
+const totalPages = Math.ceil(allproducts.length / productsPerPage);
+
+const handlePageChange = (pageNumber) => {
+  setCurrentPage(pageNumber);
+};
+
   useEffect(() => {
     fetchAllProducts()
   }, [])
@@ -242,7 +257,8 @@ useEffect(() => {
           
 
           {/* Products */}
-          {activePage === "products" && (
+          {/* Products */}
+{activePage === "products" && (
   loading ? (
     <div className="flex justify-center items-center h-96">
       <HashLoader color="#ef4444" />
@@ -253,7 +269,7 @@ useEffect(() => {
     <div>
       <h2 className="text-xl font-bold mb-4">All Products</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {allproducts.map((product) => (
+        {currentProducts.map((product) => (
           <div
             key={product._id}
             className="bg-white p-4 rounded-xl shadow flex flex-col justify-between"
@@ -274,9 +290,41 @@ useEffect(() => {
           </div>
         ))}
       </div>
+
+      {/* Pagination Controls */}
+      <div className="flex justify-center items-center gap-2 mt-6">
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="px-3 py-1 rounded border disabled:opacity-50"
+        >
+          Prev
+        </button>
+        
+        {Array.from({ length: totalPages }, (_, i) => (
+          <button
+            key={i + 1}
+            onClick={() => handlePageChange(i + 1)}
+            className={`px-3 py-1 rounded border ${
+              currentPage === i + 1 ? "bg-red-500 text-white" : "bg-white"
+            }`}
+          >
+            {i + 1}
+          </button>
+        ))}
+
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className="px-3 py-1 rounded border disabled:opacity-50"
+        >
+          Next
+        </button>
+      </div>
     </div>
   )
 )}
+
 
 
           {/* Users */}

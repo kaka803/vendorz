@@ -64,13 +64,13 @@ export default function ShopPage() {
   return (
     <>
       <Navbar />
-      <div className="main-container mt-40 flex flex-col lg:flex-row gap-8 py-10 font-sans px-4 sm:px-6 lg:px-8">
+      <div className="main-container mt-30 flex flex-col lg:flex-row gap-8 py-10 font-sans px-4 sm:px-6 lg:px-8">
         
         {/* Sidebar Filters */}
         <aside
           className="w-full lg:w-1/4 bg-white shadow rounded-md p-5
                      h-fit max-h-[80vh] overflow-y-auto
-                     sticky top-20
+                     sticky top-40
                      order-2 lg:order-1"
         >
           <h2 className="text-lg font-semibold mb-4">Filters</h2>
@@ -124,7 +124,7 @@ export default function ShopPage() {
                           <img
                             src={product.images[0]}
                             alt={product.name}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
                           />
                           {/* Hover Add to Cart */}
                           <div className="absolute bottom-[-60px] left-0 w-full flex justify-center transition-all duration-500 group-hover:bottom-0">
