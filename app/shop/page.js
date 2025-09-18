@@ -7,7 +7,7 @@ import Navbar from "../components/navbar";
 import { HashLoader } from "react-spinners";
 
 export default function ShopPage() {
-  const { products, totalProducts, fetchProducts, loading } = useProducts();
+  const { allproducts, loading } = useProducts();
 
   // ✅ States
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -16,30 +16,42 @@ export default function ShopPage() {
 
   const PRODUCTS_PER_PAGE = 25;
 
-  // ✅ Fetch products when page, filters or sort changes
-  useEffect(() => {
-    // Construct query params for API
-    const params = new URLSearchParams();
-    params.append("page", currentPage);
-    params.append("limit", PRODUCTS_PER_PAGE);
-
-    if (selectedCategories.length > 0) {
-      params.append("categories", selectedCategories.join(","));
-    }
-
-    if (sortOption) {
-      params.append("sort", sortOption);
-    }
-
-    fetchProducts(currentPage, PRODUCTS_PER_PAGE, selectedCategories, sortOption);
-  }, [currentPage, selectedCategories, sortOption]);
-
-  // ✅ Categories dynamically nikalna (current products me se)
+  // ✅ Categories dynamically nikalna (allproducts me se)
   const categories = useMemo(() => {
-    return [...new Set(products.map((p) => p.category))];
-  }, [products]);
+    return [...new Set(allproducts.map((p) => p.category))];
+  }, [allproducts]);
 
-  // ✅ Filter handler
+  // ✅ Filtering + Sorting + Pagination apply karo
+  const filteredProducts = useMemo(() => {
+    let filtered = [...allproducts];
+
+    // Category filter
+    if (selectedCategories.length > 0) {
+      filtered = filtered.filter((p) =>
+        selectedCategories.includes(p.category)
+      );
+    }
+
+    // Sorting
+    if (sortOption === "low-high") {
+      filtered = filtered.sort((a, b) => a.price_numeric - b.price_numeric);
+    } else if (sortOption === "high-low") {
+      filtered = filtered.sort((a, b) => b.price_numeric - a.price_numeric);
+    }
+
+    return filtered;
+  }, [allproducts, selectedCategories, sortOption]);
+
+  // ✅ Pagination calculation
+  const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
+
+  // ✅ Current page ke products
+  const paginatedProducts = useMemo(() => {
+    const start = (currentPage - 1) * PRODUCTS_PER_PAGE;
+    return filteredProducts.slice(start, start + PRODUCTS_PER_PAGE);
+  }, [filteredProducts, currentPage]);
+
+  // ✅ Category change handler
   const handleCategoryChange = (category) => {
     setSelectedCategories((prev) =>
       prev.includes(category)
@@ -48,14 +60,6 @@ export default function ShopPage() {
     );
     setCurrentPage(1); // reset to first page
   };
-
-  // ✅ Pagination calculation
-  const totalPages = Math.ceil(totalProducts / PRODUCTS_PER_PAGE);
-  useEffect(() => {
-    console.log(totalProducts);
-    
-  }, [totalProducts])
-  
 
   return (
     <>
@@ -111,8 +115,8 @@ export default function ShopPage() {
           ) : (
             <>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                {products.length > 0 ? (
-                  products.map((product) => (
+                {paginatedProducts.length > 0 ? (
+                  paginatedProducts.map((product) => (
                     <Link key={product._id} href={`/product/${product._id}`}>
                       <div className="group hover:scale-105 hover:-translate-y-2 duration-500 bg-white rounded-sm shadow-md overflow-hidden transition hover:shadow-lg cursor-pointer">
                         {/* Product Image */}

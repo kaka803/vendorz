@@ -3,11 +3,14 @@
 import { useState, useEffect } from "react";
 import { X, Search, ShoppingCart } from "lucide-react";
 import { useProducts } from "../context/productcontext";
+import { useCart } from "../context/cartcontext";
+import Link from "next/link";
 
 export default function SearchOverlay({ isOpen, onClose }) {
   const { allproducts } = useProducts();
   const [query, setQuery] = useState("");
   const [filtered, setFiltered] = useState([]);
+  const addToCart = useCart()
 
   useEffect(() => {
     if (query.trim() === "") {
@@ -53,14 +56,14 @@ export default function SearchOverlay({ isOpen, onClose }) {
         Start typing to search products...
       </p>
     ) : filtered.length > 0 ? (
-      <ul className="space-y-4">
+      <ul className="flex flex-col gap-4">
         {filtered.map((product) => (
-          <li
-            key={product.id}
+         <Link key={product._id} href={`/product/${product._id}`}> <li
+            
             className="flex items-center justify-between bg-white/90 backdrop-blur-sm border border-white/30 rounded-xl p-3 hover:shadow-lg hover:scale-[1.02] transition cursor-pointer"
           >
             {/* Left: Image + Info */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 mb-2">
               <img
                 src={product.images[0]}
                 alt={product.name}
@@ -77,12 +80,12 @@ export default function SearchOverlay({ isOpen, onClose }) {
               </div>
             </div>
 
-            {/* Right: Add to Cart */}
-            <button className="flex items-center gap-2 bg-[#365a41] text-white px-3 py-2 rounded-lg hover:bg-[#2d4a35] transition">
+           
+            <button onClick={()=> addToCart(product)} className="flex items-center gap-2 bg-[#365a41] text-white px-3 py-2 rounded-lg hover:bg-[#2d4a35] transition">
               <ShoppingCart size={16} />
               <span className="text-sm">Add</span>
             </button>
-          </li>
+          </li></Link>
         ))}
       </ul>
     ) : (

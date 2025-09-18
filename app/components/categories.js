@@ -7,13 +7,13 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import Link from "next/link";
 
 const CategorySection = () => {
-  const { products } = useProducts();
+  const { allproducts } = useProducts();
 
   // Extract unique categories
   const categories = useMemo(() => {
-    const allCategories = products.map((p) => p.category);
+    const allCategories = allproducts.map((p) => p.category);
     return [...new Set(allCategories)];
-  }, [products]);
+  }, [allproducts]);
 
   // Optional: Different background colors for each category
   const bgColorMap = {
@@ -64,7 +64,7 @@ const CategorySection = () => {
                     {category.charAt(0).toUpperCase() + category.slice(1)}
                   </h3>
                   <p className="text-xs text-white mt-1 font-sans">
-                    {products.filter((p) => p.category === category).length}{" "}
+                    {allproducts.filter((p) => p.category === category).length}{" "}
                     Products
                   </p>
                 </div>

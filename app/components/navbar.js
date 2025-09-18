@@ -47,7 +47,7 @@ const pathname = usePathname();
           <div className="text-white font-bold text-3xl mt-2 md:mt-0 lg:text-5xl filter-invert"><img src="/logo.svg" alt="" className="w-40 max-md:w-24" /></div>
 
           {/* Right Side */}
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center space-x-6 max-md:space-x-3">
             {/* Search Icon */}
             <button onClick={() => setSearchOpen(true)} className="text-white hover:text-gray-200">
               <Search size={22} />
