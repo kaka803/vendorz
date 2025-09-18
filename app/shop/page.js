@@ -7,7 +7,10 @@ import Navbar from "../components/navbar";
 import { HashLoader } from "react-spinners";
 
 export default function ShopPage() {
-  const { allproducts, loading } = useProducts();
+  const { allproducts, loading, products } = useProducts();
+
+  // ✅ Agar allproducts available hai to use karo, warna products use karo
+  const productData = allproducts.length > 0 ? allproducts : products;
 
   // ✅ States
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -16,14 +19,14 @@ export default function ShopPage() {
 
   const PRODUCTS_PER_PAGE = 25;
 
-  // ✅ Categories dynamically nikalna (allproducts me se)
+  // ✅ Categories dynamically nikalna
   const categories = useMemo(() => {
-    return [...new Set(allproducts.map((p) => p.category))];
-  }, [allproducts]);
+    return [...new Set(productData.map((p) => p.category))];
+  }, [productData]);
 
   // ✅ Filtering + Sorting + Pagination apply karo
   const filteredProducts = useMemo(() => {
-    let filtered = [...allproducts];
+    let filtered = [...productData];
 
     // Category filter
     if (selectedCategories.length > 0) {
@@ -40,7 +43,7 @@ export default function ShopPage() {
     }
 
     return filtered;
-  }, [allproducts, selectedCategories, sortOption]);
+  }, [productData, selectedCategories, sortOption]);
 
   // ✅ Pagination calculation
   const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);

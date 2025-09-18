@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { useProducts } from "../context/productcontext";
 import { HashLoader } from "react-spinners";
+import { useRouter } from "next/navigation";
 
 
 
@@ -19,7 +20,19 @@ import { HashLoader } from "react-spinners";
 
 
 export default function DashboardPage() {
-  const {allproducts, fetchAllProducts, loading, setallproducts} = useProducts();
+  const router = useRouter();
+  const [allowed, setAllowed] = useState(false);
+
+  useEffect(() => {
+    const adminInfo = localStorage.getItem("adminInfo");
+
+    if (adminInfo) {
+      setAllowed(true); // ✅ agar mila to access do
+    } else {
+      router.replace("/adminlogin"); // ❌ agar nahi mila to login pe bhej do
+    }
+  }, [router]);
+  const {allproducts, fetchAllProducts, loading, setallproducts, allproductloadidng} = useProducts();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activePage, setActivePage] = useState("products");
   const [Users, setUsers] = useState([])
@@ -196,6 +209,13 @@ useEffect(() => {
     }
   };
 
+  const handleLogout = () => {
+    // 🗑️ Admin info clear from localStorage
+    localStorage.removeItem("adminInfo");
+
+    // 🔄 Redirect to login page
+    router.push("/adminlogin");
+  };
   return (
     <div className="flex h-screen overflow-hidden font-sans">
       {/* Sidebar */}
@@ -247,7 +267,7 @@ useEffect(() => {
             <Menu size={24} />
           </button>
           <h1 className="text-lg font-semibold capitalize">{activePage}</h1>
-          <button className="bg-red-500 text-white text-sm px-4 py-2 rounded hover:bg-red-600 transition-all">
+          <button onClick={handleLogout} className="bg-[#365a41] text-white text-sm px-4 py-2 rounded hover:bg-[#203b28] transition-all">
             Logout
           </button>
         </header>
@@ -259,9 +279,9 @@ useEffect(() => {
           {/* Products */}
           {/* Products */}
 {activePage === "products" && (
-  loading ? (
+  allproductloadidng ? (
     <div className="flex justify-center items-center h-96">
-      <HashLoader color="#ef4444" />
+      <HashLoader color="#365a41" />
     </div>
   ) : allproducts.length === 0 ? (
     <div className="text-center text-gray-500">No products found.</div>
@@ -377,7 +397,7 @@ useEffect(() => {
             onClick={() => setSelectedOrder(o)}
           >
             <td className="py-2 px-4">{i + 1}</td>
-            <td className="py-2 px-4 font-medium">{o.shippingAddress.name}</td>
+            <td className="py-2 px-4 font-medium">{o.shippingAddress.firstName + " " + o.shippingAddress.lastName}</td>
             <td className="py-2 px-4">{new Date(o.createdAt).toLocaleDateString()}</td>
             <td className="py-2 px-4 font-semibold">Rs. {o.total}</td>
             <td className="py-2 px-4">
@@ -410,7 +430,7 @@ useEffect(() => {
           
           <div className="space-y-2">
             <p><strong>Order ID:</strong> {selectedOrder._id}</p>
-            <p><strong>Name:</strong> {selectedOrder.shippingAddress.name}</p>
+            <p><strong>Name:</strong> {o.shippingAddress.firstName + " " + o.shippingAddress.lastName}</p>
             <p><strong>Email:</strong> {selectedOrder.shippingAddress.email}</p>
             <p><strong>Phone:</strong> {selectedOrder.shippingAddress.phone}</p>
             <p><strong>Description:</strong> {selectedOrder.shippingAddress.description}</p>

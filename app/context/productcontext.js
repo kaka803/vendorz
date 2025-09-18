@@ -8,6 +8,7 @@ export const ProductProvider = ({ children }) => {
   const [allproducts, setallproducts] = useState([])
   const [totalProducts, setTotalProducts] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [allproductloadidng, setallproductloadidng] = useState(false)
 
   // ✅ Fetch products function
   const fetchProducts = async (
@@ -44,7 +45,7 @@ export const ProductProvider = ({ children }) => {
 
   const fetchAllProducts = async () => {
   try {
-    setLoading(true);
+    setallproductloadidng(true);
 
     // Limit ko bahut bada set karo, ya page/limit remove kar do
     const response = await fetch(`/api/getallproducts`); 
@@ -55,7 +56,7 @@ export const ProductProvider = ({ children }) => {
   } catch (error) {
     console.error("Error fetching all products:", error);
   } finally {
-    setLoading(false);
+    setallproductloadidng(false);
   }
 };
 
@@ -68,7 +69,7 @@ export const ProductProvider = ({ children }) => {
   }, [])
 
   return (
-    <ProductContext.Provider value={{ products, totalProducts, loading, fetchProducts, fetchAllProducts,allproducts, setallproducts }}>
+    <ProductContext.Provider value={{ products, totalProducts, loading, fetchProducts, fetchAllProducts,allproducts, setallproducts, allproductloadidng }}>
       {children}
     </ProductContext.Provider>
   );
