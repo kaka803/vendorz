@@ -31,7 +31,7 @@ const order = await Order.findOne({ referenceId: referenceId }); // agar orderId
       return NextResponse.json({ error: "Order not found" }, { status: 404 });
     }
 
-    order.paymentStatus = paymentStatus === "paid";
+    order.paymentStatus = paymentStatus;
     await order.save();
 
     return NextResponse.json({ success: true });
