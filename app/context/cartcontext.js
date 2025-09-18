@@ -47,9 +47,14 @@ export const CartProvider = ({ children }) => {
   };
 
   // ✅ Remove from cart
-  const removeFromCart = (id) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
-  };
+ const removeFromCart = (id) => {
+  setCart((prev) => {
+    const updatedCart = prev.filter((item) => item.id !== id);
+    // localStorage update karo
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    return updatedCart;
+  });
+};
 
   // ✅ Update quantity
   const updateQuantity = (id, quantity) => {
