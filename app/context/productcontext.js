@@ -51,7 +51,6 @@ export const ProductProvider = ({ children }) => {
     const data = await response.json();
 
     setallproducts(data.products);
-    setTotalProducts(data.total || 0);
 
   } catch (error) {
     console.error("Error fetching all products:", error);
@@ -63,6 +62,9 @@ export const ProductProvider = ({ children }) => {
 
   useEffect(() => {
     fetchProducts();
+  }, [])
+  useEffect(() => {
+    fetchAllProducts();
   }, [])
 
   return (
