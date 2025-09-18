@@ -3,10 +3,14 @@
 import { useState } from "react";
 import Navbar from "../components/navbar";
 import { useCart } from "../context/cartcontext";
+import { useAuth } from "../context/AuthContext";
 
 export default function CheckoutPage() {
   const { cart, subtotal, total } = useCart();
   const [payloading, setpayloading] = useState(false)
+  const { user } = useAuth();
+
+  const UserEmail = user ? user.email : "";
 
   const [form, setForm] = useState({
     name: "",
@@ -32,6 +36,7 @@ const handlePayNow = async () => {
         products: cart,
         subtotal,
         total,
+        UserEmail,
       }),
     });
 
@@ -57,7 +62,7 @@ const handlePayNow = async () => {
   return (
     <>
       <Navbar />
-      <div className="max-w-[85%] mx-auto mt-30">
+      <div className="max-w-[85%] mx-auto mt-35 font-sans">
         <h2 className="text-2xl font-semibold mb-6">Checkout</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="space-y-4">

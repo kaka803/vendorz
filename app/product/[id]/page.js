@@ -104,7 +104,7 @@ useEffect(() => {
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="text-3xl font-bold font-sans text-[#365a41]">{product.price}</div>
+            <div className="text-3xl font-bold font-sans text-[#365a41]">${product.price_numeric}</div>
             <div className="text-sm font-sans text-gray-500">
               {product.is_paid ? "Paid" : "Free"}
             </div>

@@ -8,10 +8,13 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { ShoppingCart, ChevronLeft, ChevronRight } from "lucide-react";
 import { useProducts } from "../context/productcontext";
 import Link from "next/link";
+import { HashLoader } from "react-spinners";
+import { useCart } from "../context/cartcontext";
 
 const LatestProducts = () => {
-  const { products } = useProducts();
-  const productslatest = products.slice(0, 12);
+  const { products, loading } = useProducts();
+  const productslatest = products.slice(10, 20);
+  const { addToCart } = useCart();
 
   // buttons ke ref
   const prevRef = useRef(null);
@@ -23,7 +26,9 @@ const LatestProducts = () => {
 
       <div className="w-[100%] max-w-[1280px] relative">
       <h1 className=" text-start text-3xl mb-5 font-sans uppercase text-[#365a41]">Most Selling Products</h1>
-        
+        <div className={`${loading ? 'flex justify-center items-center w-full h-[200px]' : 'block'}`}>
+        {loading && <HashLoader size={40} color="#365a41" />}
+        </div>
 
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
@@ -60,7 +65,7 @@ const LatestProducts = () => {
                   />
                   {/* Hover Add to Cart */}
                 <div className="absolute bottom-[-60px] left-0 w-full flex justify-center transition-all duration-500 group-hover:bottom-0">
-                   <button className="flex justify-center w-full items-center gap-2 bg-[#365a41] text-white px-6 py-2  shadow  transition">
+                   <button onClick={() => addToCart(product)} className="flex justify-center w-full items-center gap-2 bg-[#365a41] text-white px-6 py-2  shadow  transition">
                     <ShoppingCart size={18} />
                     Add to Cart
                   </button>
@@ -76,7 +81,7 @@ const LatestProducts = () => {
                     {product.description}
                   </p>
                   <p className="mt-3 font-sans text-xl font-bold text-[#365a41]">
-                    {product.price}
+                    ${product.price_numeric}
                   </p>
                 </div>
               </div>

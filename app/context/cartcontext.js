@@ -35,11 +35,7 @@ export const CartProvider = ({ children }) => {
           {
             id: product._id,
             title: product.title,
-            price: Number(
-              typeof product.price === "string"
-                ? product.price.replace(/[^0-9.]/g, "")
-                : product.price
-            ),
+            price: product.price_numeric,
             image: product.images?.[0] || "",
             quantity: 1,
           },

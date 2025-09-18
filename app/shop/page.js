@@ -1,13 +1,13 @@
-// app/shop/page.jsx
 "use client";
-import { useState, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useProducts } from "../context/productcontext";
 import Link from "next/link";
 import { ShoppingCart } from "lucide-react";
 import Navbar from "../components/navbar";
+import { HashLoader } from "react-spinners";
 
 export default function ShopPage() {
-  const { products } = useProducts();
+  const { products, totalProducts, fetchProducts, loading } = useProducts();
 
   // ✅ States
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -16,8 +16,28 @@ export default function ShopPage() {
 
   const PRODUCTS_PER_PAGE = 25;
 
-  // ✅ Categories dynamically nikalna
-  const categories = [...new Set(products.map((p) => p.category))];
+  // ✅ Fetch products when page, filters or sort changes
+  useEffect(() => {
+    // Construct query params for API
+    const params = new URLSearchParams();
+    params.append("page", currentPage);
+    params.append("limit", PRODUCTS_PER_PAGE);
+
+    if (selectedCategories.length > 0) {
+      params.append("categories", selectedCategories.join(","));
+    }
+
+    if (sortOption) {
+      params.append("sort", sortOption);
+    }
+
+    fetchProducts(currentPage, PRODUCTS_PER_PAGE, selectedCategories, sortOption);
+  }, [currentPage, selectedCategories, sortOption]);
+
+  // ✅ Categories dynamically nikalna (current products me se)
+  const categories = useMemo(() => {
+    return [...new Set(products.map((p) => p.category))];
+  }, [products]);
 
   // ✅ Filter handler
   const handleCategoryChange = (category) => {
@@ -26,42 +46,16 @@ export default function ShopPage() {
         ? prev.filter((c) => c !== category)
         : [...prev, category]
     );
-    setCurrentPage(1); // reset to page 1 when filter changes
+    setCurrentPage(1); // reset to first page
   };
 
-  // ✅ Filtering & Sorting
-  const filteredProducts = useMemo(() => {
-    let result = [...products];
-
-    // Filter by categories
-    if (selectedCategories.length > 0) {
-      result = result.filter((p) => selectedCategories.includes(p.category));
-    }
-
-    // Sorting
-    if (sortOption === "low-high") {
-      result.sort(
-        (a, b) =>
-          parseFloat(a.price.replace(/[^0-9.-]+/g, "")) -
-          parseFloat(b.price.replace(/[^0-9.-]+/g, ""))
-      );
-    } else if (sortOption === "high-low") {
-      result.sort(
-        (a, b) =>
-          parseFloat(b.price.replace(/[^0-9.-]+/g, "")) -
-          parseFloat(a.price.replace(/[^0-9.-]+/g, ""))
-      );
-    }
-
-    return result;
-  }, [products, selectedCategories, sortOption]);
-
-  // ✅ Pagination
-  const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
-  const paginatedProducts = filteredProducts.slice(
-    (currentPage - 1) * PRODUCTS_PER_PAGE,
-    currentPage * PRODUCTS_PER_PAGE
-  );
+  // ✅ Pagination calculation
+  const totalPages = Math.ceil(totalProducts / PRODUCTS_PER_PAGE);
+  useEffect(() => {
+    console.log(totalProducts);
+    
+  }, [totalProducts])
+  
 
   return (
     <>
@@ -110,64 +104,72 @@ export default function ShopPage() {
 
         {/* Product Grid */}
         <div className="w-full lg:w-3/4 order-1 lg:order-2">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {paginatedProducts.length > 0 ? (
-              paginatedProducts.map((product) => (
-                <Link key={product.id} href={`/product/${product.id}`}>
-                  <div className="group hover:scale-105 hover:-translate-y-2 duration-500 bg-white rounded-sm shadow-md overflow-hidden transition hover:shadow-lg cursor-pointer">
-                    {/* Product Image */}
-                    <div className="w-full h-56 sm:h-60 overflow-hidden relative">
-                      <img
-                        src={product.images[0]}
-                        alt={product.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      {/* Hover Add to Cart */}
-                      <div className="absolute bottom-[-60px] left-0 w-full flex justify-center transition-all duration-500 group-hover:bottom-0">
-                        <button className="flex justify-center w-full items-center gap-2 bg-[#365a41] text-white px-6 py-2 shadow transition">
-                          <ShoppingCart size={18} />
-                          Add to Cart
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Card Content */}
-                    <div className="p-5">
-                      <h3 className="text-lg font-sans font-semibold text-gray-800 truncate">
-                        {product.name}
-                      </h3>
-                      <p className="text-sm font-sans text-gray-500 mt-1 line-clamp-2">
-                        {product.description}
-                      </p>
-                      <p className="mt-3 font-sans text-xl font-bold text-[#365a41]">
-                        {product.price}
-                      </p>
-                    </div>
-                  </div>
-                </Link>
-              ))
-            ) : (
-              <p className="text-gray-500">No products found</p>
-            )}
-          </div>
-
-          {/* ✅ Pagination */}
-          {totalPages > 1 && (
-            <div className="flex flex-wrap justify-center items-center gap-2 mt-8">
-              {Array.from({ length: totalPages }, (_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentPage(index + 1)}
-                  className={`px-4 py-2 rounded text-sm border ${
-                    currentPage === index + 1
-                      ? "bg-[#365a41] text-white"
-                      : "bg-white text-gray-700 hover:bg-gray-100"
-                  }`}
-                >
-                  {index + 1}
-                </button>
-              ))}
+          {loading ? (
+            <div className="flex justify-center items-center h-full w-full">
+              <HashLoader size={50} color="#365a41" />
             </div>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                {products.length > 0 ? (
+                  products.map((product) => (
+                    <Link key={product._id} href={`/product/${product._id}`}>
+                      <div className="group hover:scale-105 hover:-translate-y-2 duration-500 bg-white rounded-sm shadow-md overflow-hidden transition hover:shadow-lg cursor-pointer">
+                        {/* Product Image */}
+                        <div className="w-full h-56 sm:h-60 overflow-hidden relative">
+                          <img
+                            src={product.images[0]}
+                            alt={product.name}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                          {/* Hover Add to Cart */}
+                          <div className="absolute bottom-[-60px] left-0 w-full flex justify-center transition-all duration-500 group-hover:bottom-0">
+                            <button className="flex justify-center w-full items-center gap-2 bg-[#365a41] text-white px-6 py-2 shadow transition">
+                              <ShoppingCart size={18} />
+                              Add to Cart
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Card Content */}
+                        <div className="p-5">
+                          <h3 className="text-lg font-sans font-semibold text-gray-800 truncate">
+                            {product.name}
+                          </h3>
+                          <p className="text-sm font-sans text-gray-500 mt-1 line-clamp-2">
+                            {product.description}
+                          </p>
+                          <p className="mt-3 font-sans text-xl font-bold text-[#365a41]">
+                            ${product.price_numeric}
+                          </p>
+                        </div>
+                      </div>
+                    </Link>
+                  ))
+                ) : (
+                  <p className="text-gray-500">No products found</p>
+                )}
+              </div>
+
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="flex flex-wrap justify-center items-center gap-2 mt-8">
+                  {Array.from({ length: totalPages }, (_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentPage(index + 1)}
+                      className={`px-4 py-2 rounded text-sm border ${
+                        currentPage === index + 1
+                          ? "bg-[#365a41] text-white"
+                          : "bg-white text-gray-700 hover:bg-gray-100"
+                      }`}
+                    >
+                      {index + 1}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>

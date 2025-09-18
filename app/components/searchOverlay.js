@@ -5,7 +5,7 @@ import { X, Search, ShoppingCart } from "lucide-react";
 import { useProducts } from "../context/productcontext";
 
 export default function SearchOverlay({ isOpen, onClose }) {
-  const { products } = useProducts();
+  const { allproducts } = useProducts();
   const [query, setQuery] = useState("");
   const [filtered, setFiltered] = useState([]);
 
@@ -14,12 +14,12 @@ export default function SearchOverlay({ isOpen, onClose }) {
       setFiltered([]);
     } else {
       setFiltered(
-        products.filter((p) =>
+        allproducts.filter((p) =>
           p.title.toLowerCase().includes(query.toLowerCase())
         )
       );
     }
-  }, [query, products]);
+  }, [query, allproducts]);
 
   if (!isOpen) return null;
 
@@ -72,7 +72,7 @@ export default function SearchOverlay({ isOpen, onClose }) {
                   {product.title}
                 </p>
                 <p className="text-[#365a41] font-bold mt-1">
-                  {product.price}
+                  ${product.price_numeric}
                 </p>
               </div>
             </div>

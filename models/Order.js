@@ -21,6 +21,7 @@ const OrderSchema = new mongoose.Schema({
   subtotal: { type: Number, required: true },
   shippingFee: { type: Number, default: 0 },
   total: { type: Number, required: true },
+  UserEmail: { type: String },
   paymentStatus: { type: String, default: "pending" },
   exactlyPaymentUrl: { type: String }, // ye frontend ko bhejna hai
   referenceId: { type: String }, // ye frontend ko bhejna hai

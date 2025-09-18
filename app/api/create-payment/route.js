@@ -5,7 +5,7 @@ export async function POST(req) {
   await connectDb();
   try {
     
-    const { shippingAddress, products, subtotal, total } = await req.json();
+    const { shippingAddress, products, subtotal, total, UserEmail } = await req.json();
     const amountString = total?.toFixed(2)
     console.log(amountString);
     const referenceId = "order_" + Date.now(); // Unique order ID
@@ -42,6 +42,7 @@ export async function POST(req) {
       total,
       exactlyPaymentUrl: hostedUrl,
       paymentStatus: "pending",
+      UserEmail: UserEmail,
       referenceId: referenceId,
     });
     newOrder.save();

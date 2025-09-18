@@ -5,6 +5,7 @@ import { useCart } from "../context/cartcontext";
 import Link from "next/link";
 import SearchOverlay from "./searchOverlay";
 import { useAuth } from "../context/AuthContext";
+import { usePathname } from "next/navigation"; //
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +13,9 @@ const Navbar = () => {
   const [avatarDropdown, setAvatarDropdown] = useState(false);
   const { cart } = useCart();
   const { user, logout } = useAuth();
-
+const pathname = usePathname();
+ const isActive = (path) =>
+    pathname === path ? "border-b-2 border-white pb-1" : "";
   return (
     <>
       <div className="w-full navbar px-4 fixed top-10 z-30">
@@ -20,13 +23,28 @@ const Navbar = () => {
 
           {/* Left Links */}
           <div className="hidden md:flex space-x-6 text-white font-medium">
-            <Link href="/" className="hover:text-gray-200 font-sans font-light">Home</Link>
-            <Link href="/shop" className="hover:text-gray-200 font-sans font-light">Shop</Link>
-            <Link href="/contact" className="hover:text-gray-200 font-sans font-light">Contact</Link>
+            <Link
+              href="/"
+              className={`hover:text-gray-200 font-sans font-light ${isActive("/")}`}
+            >
+              Home
+            </Link>
+            <Link
+              href="/shop"
+              className={`hover:text-gray-200 font-sans font-light ${isActive("/shop")}`}
+            >
+              Shop
+            </Link>
+            <Link
+              href="/myorders"
+              className={`hover:text-gray-200 font-sans font-light ${isActive("/myorders")}`}
+            >
+              My Orders
+            </Link>
           </div>
 
           {/* Logo */}
-          <div className="text-white font-bold text-3xl mt-2 md:mt-2 lg:text-5xl">Vendorz</div>
+          <div className="text-white font-bold text-3xl mt-2 md:mt-0 lg:text-5xl filter-invert"><img src="/logo.svg" alt="" className="w-40 max-md:w-24" /></div>
 
           {/* Right Side */}
           <div className="flex items-center space-x-6">
@@ -74,7 +92,7 @@ const Navbar = () => {
             ) : (
               <>
                 <Link href="/auth">
-                  <button className="bg-white text-[#000000] px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition">
+                  <button className="bg-white max-md:hidden text-[#000000] px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition">
                     Login
                   </button>
                 </Link>
@@ -97,9 +115,24 @@ const Navbar = () => {
             </button>
           </div>
           <div className="flex flex-col space-y-6 mt-10 px-6 font-medium">
-            <Link href="/" className="hover:text-gray-300 uppercase font-light">Home</Link>
-<Link href="/shop" className="hover:text-gray-300 uppercase font-light">Shop</Link>
-<Link href="/contact" className="hover:text-gray-300 uppercase font-light">Contact</Link>
+             <Link
+              href="/"
+              className={`hover:text-gray-300 uppercase font-light ${isActive("/")}`}
+            >
+              Home
+            </Link>
+            <Link
+              href="/shop"
+              className={`hover:text-gray-300 uppercase font-light ${isActive("/shop")}`}
+            >
+              Shop
+            </Link>
+            <Link
+              href="/myorders"
+              className={`hover:text-gray-300 uppercase font-light ${isActive("/myorders")}`}
+            >
+              My Orders
+            </Link>
 
             {user ? (
              <div className="relative">
@@ -127,7 +160,7 @@ const Navbar = () => {
                 )}
               </div>
             ) : (
-              <button className="bg-white text-[#007b53] px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition w-fit">
+              <button className="bg-white  text-[#007b53] px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition w-fit">
                 Login
               </button>
             )}
