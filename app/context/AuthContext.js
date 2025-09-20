@@ -2,6 +2,7 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const AuthContext = createContext();
 
@@ -54,7 +55,7 @@ useEffect(() => {
       const result = await res.json();
       if (!res.ok) throw new Error(result.error);
       console.log(result);
-      
+      toast.success("Registration successful!");
       setUser(result.user);
         alert("Registration successful!");
       return { success: true };
@@ -75,7 +76,7 @@ useEffect(() => {
       const result = await res.json();
       if (!res.ok) throw new Error(result.error);
       setUser(result.user);
-      alert("Login successful!");
+      toast.success("Login successful!");
         localStorage.setItem("token", result.token); // token localStorage me store kar rahe hain
       router.push("/");
       return { success: true };

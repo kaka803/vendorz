@@ -19,11 +19,11 @@ const pathname = usePathname();
   return (
     <>
       <div className="w-full navbar px-4 fixed top-5 z-30">
-        <div className="max-w-[1280px] rounded-lg backdrop-blur-md bg-white/60 border border-white/20 shadow-[0_10px_30px_rgba(0,0,0,0.15)] mx-auto flex justify-between items-center h-19 px-6">
+        <div className="max-w-[1280px] rounded-lg backdrop-blur-lg bg-white/60 border border-white/20 shadow-[0_10px_30px_rgba(0,0,0,0.15)] mx-auto flex justify-between items-center h-19 px-6">
 
 
           {/* Left Links */}
-          <div className="hidden md:flex space-x-6 text-[black] font-semibold">
+          <div className="hidden lg:flex space-x-6 text-[black] font-semibold">
             <Link
               href="/"
               className={`text-[black] font-semibold font-sans  ${isActive("/")}`}
@@ -57,10 +57,10 @@ const pathname = usePathname();
           </div>
 
           {/* Logo */}
-          <div className="text-white font-bold text-3xl mt-2 md:mt-0 lg:text-5xl  "><img src="/logo.svg" alt="" className="w-40 max-md:w-24" /></div>
+          <div className="text-white font-bold text-3xl mt-2 lg:mt-0 lg:text-5xl  "><img src="/logo.svg" alt="" className="w-40 max-lg:w-24" /></div>
 
           {/* Right Side */}
-          <div className="flex items-center space-x-6 max-md:space-x-3">
+          <div className="flex items-center space-x-6 max-lg:space-x-3">
             {/* Search Icon */}
             <button onClick={() => setSearchOpen(true)} className="text-black ml-5 hover:text-gray-800">
               <Search size={22} />
@@ -68,7 +68,7 @@ const pathname = usePathname();
 
             {/* Cart */}
             <Link href="/cart">
-              <button className="text-black hover:text-gray-800 mt-2 mr-2  relative">
+              <button className="text-black hover:text-gray-800 mt-2 lg:mr-2  relative">
                 <ShoppingCart size={22} />
                 <span className="absolute -top-4 -right-3 bg-white font-sans text-green-950 text-xs font-bold px-2 py-0.5 rounded-full">
                   {cart.reduce((acc, item) => acc + item.quantity, 0)}
@@ -78,13 +78,13 @@ const pathname = usePathname();
 
             {/* Conditional User/Login */}
             {user ? (
-              <div className="relative hidden md:block">
+              <div className="relative hidden lg:block">
                 <button onClick={() => setAvatarDropdown(!avatarDropdown)} className="w-8 h-8 rounded-full bg-[#43644d] flex items-center justify-center font-sans text-white font-bold uppercase">
                   {user.name[0]}
                 </button>
 
                 {avatarDropdown && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md overflow-hidden z-50">
+                  <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg overflow-hidden z-50">
                     <div className="p-3 border-b text-sm text-gray-700">
                       <p className="font-medium">{user.name}</p>
                       <p className="truncate text-gray-500">{user.email}</p>
@@ -105,7 +105,7 @@ const pathname = usePathname();
             ) : (
               <>
                 <Link href="/auth">
-                  <button className="bg-[#43644d] max-md:hidden text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-800 transition">
+                  <button className="bg-[#43644d] max-lg:hidden text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-800 transition">
                     Login
                   </button>
                 </Link>
@@ -114,7 +114,7 @@ const pathname = usePathname();
             )}
 
             {/* Mobile Menu Button */}
-            <button className="md:hidden text-black" onClick={() => setIsOpen(true)}>
+            <button className="lg:hidden text-black" onClick={() => setIsOpen(true)}>
               <Menu size={22} />
             </button>
           </div>
@@ -130,31 +130,31 @@ const pathname = usePathname();
           <div className="flex flex-col space-y-6 mt-10 px-6 font-semibold">
              <Link
               href="/"
-              className={`text-black   ${isActive("/")}`}
+              className={`text-black  font-sans ${isActive("/")}`}
             >
               Home
             </Link>
             <Link
               href="/shop"
-              className={`text-black   ${isActive("/shop")}`}
+              className={`text-black  font-sans ${isActive("/shop")}`}
             >
               Shop
             </Link>
             <Link
               href="/myorders"
-              className={`text-black   ${isActive("/myorders")}`}
+              className={`text-black  font-sans ${isActive("/myorders")}`}
             >
               My Orders
             </Link>
             <Link
               href="/about"
-              className={`text-black   ${isActive("/myorders")}`}
+              className={`text-black  font-sans ${isActive("/about")}`}
             >
               About
             </Link>
             <Link
-              href="/Contact"
-              className={`text-black   ${isActive("/myorders")}`}
+              href="/contact"
+              className={`text-black  font-sans ${isActive("/contact")}`}
             >
               Contact Us
             </Link>
@@ -166,7 +166,7 @@ const pathname = usePathname();
                 </button>
 
                 {avatarDropdown && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md overflow-hidden z-50">
+                  <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg overflow-hidden z-50">
                     <div className="p-3 border-b text-sm text-gray-700">
                       <p className="font-medium">{user.name}</p>
                       <p className="truncate text-gray-500">{user.email}</p>
