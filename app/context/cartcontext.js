@@ -1,5 +1,6 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const CartContext = createContext();
 
@@ -14,9 +15,7 @@ export const CartProvider = ({ children }) => {
 
   // Jab bhi cart update ho, localStorage mai save ho jaye
   useEffect(() => {
-    if (cart.length > 0) {
-      localStorage.setItem("cart", JSON.stringify(cart));
-    }
+    localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
   // ✅ Add to cart
@@ -24,13 +23,14 @@ export const CartProvider = ({ children }) => {
     setCart((prev) => {
       const exist = prev.find((item) => item.id === product._id);
       if (exist) {
+        toast.success(`added to cart`);
         return prev.map((item) =>
           item.id === product._id
             ? { ...item, quantity: item.quantity + 1 }
             : item
-          );
-          
+        );
       } else {
+        toast.success(`added to cart`);
         return [
           ...prev,
           {
@@ -43,18 +43,17 @@ export const CartProvider = ({ children }) => {
         ];
       }
     });
-    alert('updated Cart')
   };
 
   // ✅ Remove from cart
- const removeFromCart = (id) => {
-  setCart((prev) => {
-    const updatedCart = prev.filter((item) => item.id !== id);
-    // localStorage update karo
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-    return updatedCart;
-  });
-};
+  const removeFromCart = (id) => {
+    setCart((prev) => {
+      const updatedCart = prev.filter((item) => item.id !== id);
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      toast.error("Item removed from cart");
+      return updatedCart;
+    });
+  };
 
   // ✅ Update quantity
   const updateQuantity = (id, quantity) => {
@@ -64,10 +63,14 @@ export const CartProvider = ({ children }) => {
         item.id === id ? { ...item, quantity: quantity } : item
       )
     );
+    toast.success("Cart updated");
   };
 
   // ✅ Clear cart
-  const clearCart = () => setCart([]);
+  const clearCart = () => {
+    setCart([]);
+    toast.error("Cart cleared");
+  };
 
   // ✅ Subtotal
   const subtotal = cart.reduce(
@@ -75,10 +78,8 @@ export const CartProvider = ({ children }) => {
     0
   );
 
-
-
-  // ✅ Total
-  const total = subtotal
+  // ✅ Total (agar future mai discount waghera add karna ho)
+  const total = subtotal;
 
   return (
     <CartContext.Provider

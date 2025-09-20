@@ -13,6 +13,7 @@ import {
 import { useProducts } from "../context/productcontext";
 import { HashLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
+import { selector } from "gsap";
 
 
 
@@ -419,7 +420,7 @@ useEffect(() => {
     {/* Modal */}
     {selectedOrder && (
       <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex justify-center items-center z-50">
-        <div className="bg-white rounded-xl shadow-lg max-w-3xl w-full p-6 relative">
+        <div className="bg-white h-[50vh] overflow-scroll rounded-xl shadow-lg max-w-3xl w-full p-6 relative">
           <button
             onClick={() => setSelectedOrder(null)}
             className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
@@ -430,7 +431,7 @@ useEffect(() => {
           
           <div className="space-y-2">
             <p><strong>Order ID:</strong> {selectedOrder._id}</p>
-            <p><strong>Name:</strong> {o.shippingAddress.firstName + " " + o.shippingAddress.lastName}</p>
+            <p><strong>Name:</strong> {selectedOrder.shippingAddress.firstName + " " + selectedOrder.shippingAddress.lastName}</p>
             <p><strong>Email:</strong> {selectedOrder.shippingAddress.email}</p>
             <p><strong>Phone:</strong> {selectedOrder.shippingAddress.phone}</p>
             <p><strong>Description:</strong> {selectedOrder.shippingAddress.description}</p>

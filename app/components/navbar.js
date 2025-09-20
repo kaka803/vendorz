@@ -19,7 +19,8 @@ const pathname = usePathname();
   return (
     <>
       <div className="w-full navbar px-4 fixed top-5 z-30">
-        <div className="max-w-[1280px] rounded-lg shadow-[0_10px_30px_rgba(0,0,0,0.15)] bg-white mx-auto flex justify-between items-center h-19 px-6">
+        <div className="max-w-[1280px] rounded-lg backdrop-blur-md bg-white/60 border border-white/20 shadow-[0_10px_30px_rgba(0,0,0,0.15)] mx-auto flex justify-between items-center h-19 px-6">
+
 
           {/* Left Links */}
           <div className="hidden md:flex space-x-6 text-[black] font-semibold">

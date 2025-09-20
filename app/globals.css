@@ -186,3 +186,13 @@ body {
 .filter-invert{
   filter: invert(1);
 }
+button{
+  cursor: pointer;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}

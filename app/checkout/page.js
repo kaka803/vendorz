@@ -3,6 +3,7 @@ import { useState } from "react";
 import Navbar from "../components/navbar";
 import { useCart } from "../context/cartcontext";
 import { useAuth } from "../context/AuthContext";
+import { toast } from "react-hot-toast";
 
 export default function CheckoutPage() {
   const { cart, subtotal, total } = useCart();
@@ -28,37 +29,42 @@ export default function CheckoutPage() {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handlePayNow = async () => {
-    try {
-      setpayloading(true);
+ const handlePayNow = async () => {
+  const promise = (async () => {
+    setpayloading(true);
+    const response = await fetch("/api/create-payment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        shippingAddress: form,
+        products: cart,
+        subtotal,
+        total,
+        UserEmail,
+      }),
+    });
 
-      const response = await fetch("/api/create-payment", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          shippingAddress: form,
-          products: cart,
-          subtotal,
-          total,
-          UserEmail,
-        }),
-      });
+    const data = await response.json();
+    setpayloading(false);
 
-      const data = await response.json();
-      setpayloading(false);
+    if (!data.success) throw new Error(data.message);
 
-      if (!data.success) throw new Error(data.message);
-
-      if (data.exactlyPaymentUrl) {
-        window.location.href = data.exactlyPaymentUrl; // Redirect to payment
-      } else {
-        alert("Payment URL not received");
-      }
-    } catch (error) {
-      console.error(error);
-      alert("Error processing payment: " + error.message);
+    if (data.exactlyPaymentUrl) {
+      window.location.href = data.exactlyPaymentUrl; // ✅ Redirect
+    } else {
+      throw new Error("Payment URL not received");
     }
-  };
+  })();
+
+  // 🔔 Loading / Success / Error Toast
+  toast.promise(promise, {
+    loading: "Processing your order...",
+    success: "Redirecting to payment ✅",
+    error: (err) => `Payment failed ❌ ${err.message}`,
+  });
+};
 
   return (
     <>
@@ -194,7 +200,11 @@ export default function CheckoutPage() {
                       height={50}
                       className="rounded"
                     />
-                    <span className="font-medium">{item.title}</span>
+                    <span className="font-medium">
+  {item.title.split(" ").slice(0, 2).join(" ")}
+  {item.title.split(" ").length > 2 && " ..."}
+</span>
+
                   </div>
                   <div>${item.price}</div>
                   <div>{item.quantity}</div>

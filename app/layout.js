@@ -2,6 +2,7 @@ import { Geist, Geist_Mono, Josefin_Sans } from "next/font/google";
 import { ProductProvider } from "./context/productcontext";
 import { CartProvider } from "./context/cartcontext";
 import { AuthProvider } from "./context/AuthContext";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -36,6 +37,11 @@ export default function RootLayout({ children }) {
         <ProductProvider>
           <CartProvider>
         {children}
+        <Toaster position="top-right" reverseOrder={false} toastOptions={{
+    style: {
+      marginTop: '100px', // 👈 jitna neeche karna ho utna px ya rem de do
+    },
+  }} />
           </CartProvider>
         </ProductProvider>
         </AuthProvider>

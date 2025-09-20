@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useProducts } from "@/app/context/productcontext";
-import { Check, X, ShoppingCart } from "lucide-react";
+import { Check, X, ShoppingCart, ChevronRight } from "lucide-react"; // ✅ ChevronRight for breadcrumbs
 import Navbar from "@/app/components/navbar";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -11,6 +11,8 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import Link from "next/link";
 import Footer from "@/app/components/footer";
 import { useCart } from "@/app/context/cartcontext";
+import { format } from "crypto-js";
+import { formatCurrency } from "@/lib/formatcurrency";
 
 export default function ProductClient({ params }) {
   const { id } = params; // ✅ yahan `use(params)` hatao
@@ -47,45 +49,70 @@ export default function ProductClient({ params }) {
     <>
       <Navbar />
       <div className="min-h-screen main-container mt-20 py-12 px-6 lg:px-20">
+      <div className=" py-3 px-6 lg:px-10 ">
+        <div className="max-w-7xl mx-auto flex items-center text-sm text-gray-600 font-sans space-x-2">
+          <Link href="/" className="hover:text-[#365a41] font-medium">
+            Home
+          </Link>
+          <ChevronRight size={16} className="text-gray-400" />
+          <Link href="/shop" className="hover:text-[#365a41] font-medium">
+            Shop
+          </Link>
+          {product.category && (
+            <>
+              <ChevronRight size={16} className="text-gray-400" />
+              <Link
+                href={`/shop?category=${product.category}`}
+                className="hover:text-[#365a41] font-medium capitalize"
+              >
+                {product.category}
+              </Link>
+            </>
+          )}
+          <ChevronRight size={16} className="text-gray-400" />
+          <span className="text-gray-500 truncate max-w-[200px]">
+            {product.title}
+          </span>
+        </div>
+      </div>
         <div className="max-w-7xl mx-auto bg-white rounded-2xl p-6 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Left Section: Image Gallery */}
-          <section className="lg:col-span-7 max-h-[424px] flex flex-col lg:flex-row gap-6">
-            {/* Main Image */}
-            <div className="relative flex-1 rounded-2xl overflow-hidden flex items-center justify-center ">
-              {selected ? (
-                <img
-                  src={selected}
-                  alt={product.title}
-                  className="w-full h-full object-contain transition-all duration-500 ease-in-out hover:scale-105"
-                />
-              ) : (
-                <div className="flex items-center justify-center h-full text-gray-400">
-                  No image
-                </div>
-              )}
-            </div>
+         <section className="lg:col-span-7 max-h-[500px] flex flex-col lg:flex-row gap-6">
+  {/* Main Image */}
+  <div className="relative flex-1 rounded-2xl overflow-hidden flex items-center justify-center bg-gray-50">
+    {selected ? (
+      <img
+        src={selected}
+        alt={product.title}
+        className="w-full h-full object-contain transition-transform duration-500 ease-in-out hover:scale-105"
+      />
+    ) : (
+      <div className="flex items-center justify-center h-full text-gray-400">
+        No image
+      </div>
+    )}
+  </div>
 
-            {/* Thumbnails */}
-            <div className="w-full lg:w-[120px] flex lg:flex-col gap-3 overflow-x-auto lg:overflow-y-auto">
-              {(product.images || []).map((img, i) => (
-                <button
-                  key={i}
-                  onClick={() => setSelected(img)}
-                  className={`relative flex-shrink-0 w-24 h-24 rounded-xl overflow-hidden border-2 transition-all duration-300 shadow-sm hover:scale-105 ${
-                    selected === img
-                      ? "border-[#365a41] ring-2 ring-[#365a41]"
-                      : "border-gray-200"
-                  }`}
-                >
-                  <img
-                    src={img}
-                    alt={`thumb-${i}`}
-                    className="w-full h-full object-contain"
-                  />
-                </button>
-              ))}
-            </div>
-          </section>
+  {/* Thumbnails */}
+  <div className="w-full lg:w-[120px] flex lg:flex-col gap-3 overflow-x-auto lg:overflow-y-auto no-scrollbar">
+    {(product.images || []).map((img, i) => (
+      <button
+        key={i}
+        onClick={() => setSelected(img)}
+        className={`relative flex-shrink-0 w-24 h-24 rounded-xl overflow-hidden border-2 transition-all duration-300 
+         
+          hover:scale-105 shadow-sm`}
+      >
+        <img
+          src={img}
+          alt={`thumb-${i}`}
+          className="w-full h-full object-contain"
+        />
+      </button>
+    ))}
+  </div>
+</section>
+
 
           {/* Right Section: Product Details */}
           <aside className="lg:col-span-5 flex flex-col gap-6">
@@ -94,11 +121,8 @@ export default function ProductClient({ params }) {
                 {product.title}
               </h1>
               <p className="text-sm text-gray-500 mt-1 font-sans">
-                by{" "}
-                <span className="font-medium text-gray-700">
-                  {product.vendor || "Unknown"}
-                </span>{" "}
-                • {product.category || "Uncategorized"}
+                
+                {product.category || "Uncategorized"}
               </p>
             </div>
 
@@ -106,9 +130,7 @@ export default function ProductClient({ params }) {
               <div className="text-3xl font-bold font-sans text-[#365a41]">
                 ${product.price_numeric}
               </div>
-              <div className="text-sm font-sans text-gray-500">
-                {product.is_paid ? "Paid" : "Free"}
-              </div>
+              
             </div>
 
             <div className="flex flex-wrap gap-3">
@@ -121,7 +143,7 @@ export default function ProductClient({ params }) {
             </div>
 
             <div className="prose max-w-none text-gray-700">
-              <h3 className="mt-2">Description</h3>
+              <h3 className="mt-2 text-2xl font-sans font-bold">Description</h3>
               <div
   className="wrap-anywhere font-sans whitespace-pre-line"
   dangerouslySetInnerHTML={{
@@ -261,7 +283,7 @@ export default function ProductClient({ params }) {
                           {related.description}
                         </p>
                         <p className="mt-3 font-sans text-xl font-bold text-[#365a41]">
-                          ${related.price_numeric}
+                          ${formatCurrency(related.price_numeric)}
                         </p>
                       </div>
                     </div>
