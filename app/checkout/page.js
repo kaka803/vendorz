@@ -4,6 +4,7 @@ import Navbar from "../components/navbar";
 import { useCart } from "../context/cartcontext";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-hot-toast";
+import { HashLoader } from "react-spinners";
 
 export default function CheckoutPage() {
   const { cart, subtotal, total } = useCart();
@@ -172,9 +173,9 @@ export default function CheckoutPage() {
             <button
               onClick={handlePayNow}
               disabled={payloading}
-              className="bg-[#365a41] hover:bg-[#2d4934] text-white w-full py-3 rounded mt-4 font-semibold"
+              className="bg-[#365a41] hover:bg-[#2d4934] h-12 flex justify-center items-center text-white w-full py-3 rounded mt-4 font-semibold"
             >
-              {payloading ? "Processing..." : "Place Order"}
+              {payloading ? <HashLoader size={20} color="white"/> : "Place Order"}
             </button>
           </div>
 

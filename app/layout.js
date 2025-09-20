@@ -39,7 +39,8 @@ export default function RootLayout({ children }) {
         {children}
         <Toaster position="top-right" reverseOrder={false} toastOptions={{
     style: {
-      marginTop: '100px', // 👈 jitna neeche karna ho utna px ya rem de do
+      marginTop: '100px', 
+      fontFamily: 'sans-serif',
     },
   }} />
           </CartProvider>

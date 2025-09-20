@@ -2,7 +2,8 @@
 import { useState } from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
-import { set } from "mongoose";
+import { HashLoader } from "react-spinners";
+import toast from "react-hot-toast";
 
 export default function ContactPage() {
   const [contactloading, setcontactloading] = useState(false)
@@ -33,10 +34,10 @@ const handleSubmit = async (e) => {
     setcontactloading(false)
 
     if (data.success) {
-      alert("✅ Your message has been sent successfully!");
+      toast.success("Message sent successfully!");
       setFormData({ name: "", email: "", subject: "", message: "" });
     } else {
-      alert("❌ Failed to send message. Please try again later.");
+      toast.error("⚠️ Something went wrong!");
     }
   } catch (err) {
     console.error(err);
@@ -127,9 +128,9 @@ const handleSubmit = async (e) => {
 
           <button
             type="submit"
-            className="bg-[#43644d] text-white font-semibold px-8 py-2 rounded-full hover:bg-[#365a41] transition"
+            className="bg-[#43644d] text-white font-semibold flex justify-center items-center px-8 h-11 rounded-full hover:bg-[#365a41] transition"
           >
-            {contactloading ? "Sending":'SEND'}
+            {contactloading ? <HashLoader size={20} color="white"/>:'SEND'}
           </button>
         </form>
       </div>
