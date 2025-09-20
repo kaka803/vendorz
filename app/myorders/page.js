@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import Link from "next/link";
 import Navbar from "../components/navbar";
+import Footer from "../components/footer";
 
 const OrdersPage = () => {
   const { user } = useAuth();
@@ -34,7 +35,7 @@ const OrdersPage = () => {
     return (
       <>
         <Navbar />
-        <div className="max-w-2xl mt-55 mx-auto p-6 text-center bg-white shadow font-sans rounded-lg">
+        <div className="max-w-2xl mt-55 mx-auto p-6 text-center bg-white shadow font-sans rounded-lg mb-30">
           <h2 className="text-xl font-bold mb-4 text-gray-800">Order History</h2>
           <p className="text-gray-600 mb-6">
             If you want to save your order history, please{" "}
@@ -47,6 +48,7 @@ const OrdersPage = () => {
             </button>
           </Link>
         </div>
+        <Footer/>
       </>
     );
   }
@@ -144,6 +146,7 @@ const OrdersPage = () => {
           </div>
         )}
       </div>
+      <Footer/>
     </>
   );
 };

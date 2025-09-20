@@ -1,84 +1,111 @@
-// components/Footer.tsx
 import { FaFacebookF, FaInstagram, FaYoutube, FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#365a41] text-gray-300 pt-16 pb-20 overflow-hidden">
-      {/* Big Background Text (Fixed to Bottom) */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 opacity-10 select-none pointer-events-none">
-        <h1 className="text-[6rem] sm:text-[10rem] md:text-[14rem] lg:text-[18rem] font-extrabold tracking-widest text-white leading-none">
-          VENDORZ
-        </h1>
-      </div>
-
+    <footer className="bg-white font-sans text-black pt-16 pb-5">
       {/* Content */}
-      <div className="relative container mx-auto px-6 grid md:grid-cols-4 gap-12 z-10">
-        {/* Left Side */}
+      <div className="container mx-auto px-6 grid md:grid-cols-4 gap-12">
+        {/* Left Side - Logo & About */}
         <div>
-          <h3 className="uppercase text-sm font-sans font-semibold text-gray-400 tracking-wide mb-4">
-            Licenses &nbsp; | &nbsp; Coming Soon &nbsp; | &nbsp; 404
-          </h3>
-          <h2 className="text-2xl font-bold font-sans text-white leading-snug mb-3">
-            Crafting Unique Glass Designs <br /> for Elegant Living.
-          </h2>
-          <p className="text-sm text-gray-400 font-sans">
-            We are not just a glass store — we are artists, creators, and curators
-            of timeless glass design.
+          <h1 className="text-3xl font-bold font-sans mb-4">
+            <span className="text-black">3d</span>
+            <span className="text-gray-700">vendorz</span>
+          </h1>
+          <p className="text-sm text-gray-600 leading-relaxed font-sans">
+            3dvendorz is a global platform for buying and selling
+            high-quality 3D models, print-ready files, and textures for
+            use in CG, game development, 3D printing, and architectural
+            visualization.
           </p>
+
           {/* Social Icons */}
-          <div className="flex gap-4 mt-6">
-            <a href="#" className="hover:text-white transition-colors"><FaFacebookF size={20} /></a>
-            <a href="#" className="hover:text-white transition-colors"><FaInstagram size={20} /></a>
-            <a href="#" className="hover:text-white transition-colors"><FaYoutube size={20} /></a>
-            <a href="#" className="hover:text-white transition-colors"><FaXTwitter size={20} /></a>
+          <div className="flex gap-4 mt-6 text-gray-600">
+            <a href="#" className="hover:text-black transition-colors">
+              <FaFacebookF size={18} />
+            </a>
+            <a href="#" className="hover:text-black transition-colors">
+              <FaInstagram size={18} />
+            </a>
+            <a href="#" className="hover:text-black transition-colors">
+              <FaYoutube size={18} />
+            </a>
+            <a href="#" className="hover:text-black transition-colors">
+              <FaXTwitter size={18} />
+            </a>
           </div>
         </div>
 
-        {/* Links */}
+        {/* Support */}
         <div>
-          <h3 className="uppercase text-sm font-semibold text-gray-400 mb-4">
-            Links
-          </h3>
-          <ul className="space-y-2">
-            <li><a href="#" className="hover:text-yellow-400 transition-colors font-sans">Home</a></li>
-            <li><a href="#" className="hover:text-yellow-400 transition-colors font-sans">About Us</a></li>
-            <li><a href="#" className="hover:text-yellow-400 transition-colors font-sans">Blogs</a></li>
-            <li><a href="#" className="hover:text-yellow-400 transition-colors font-sans">Feedback</a></li>
+          <h3 className="text-base font-semibold mb-4">Support</h3>
+          <ul className="space-y-2 text-sm text-gray-600">
+            <li>
+              <a href="#" className="hover:text-black transition-colors">
+                Quick FAQ
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-black transition-colors">
+                Contact Us
+              </a>
+            </li>
           </ul>
         </div>
 
-        {/* Policies */}
+        {/* Company */}
         <div>
-          <h3 className="uppercase text-sm font-semibold text-gray-400 mb-4">
-            Policies
-          </h3>
-          <ul className="space-y-2">
-            <li><a href="#" className="hover:text-white transition-colors font-sans">Return Policy</a></li>
-            <li><a href="#" className="hover:text-white transition-colors font-sans">Refund Policy</a></li>
-            <li><a href="#" className="hover:text-white transition-colors font-sans">Privacy Policy</a></li>
-            <li><a href="#" className="hover:text-white transition-colors font-sans">Terms &amp; Conditions</a></li>
-
+          <h3 className="text-base font-semibold mb-4">Company</h3>
+          <ul className="space-y-2 text-sm text-gray-600">
+            <li>
+              <a href="#" className="hover:text-black transition-colors">
+                About Us
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-black transition-colors">
+                Commercial Agreement
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-black transition-colors">
+                Terms and Conditions
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-black transition-colors">
+                Privacy Policy
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-black transition-colors">
+                Refunds
+              </a>
+            </li>
           </ul>
         </div>
 
-        {/* Contact */}
+        {/* Contacts */}
         <div>
-          <h3 className="uppercase text-sm font-semibold text-gray-400 mb-4 font-sans">
-            Contact Us
-          </h3>
-          <p className="text-sm font-sans">2972 Westheimer Rd.<br /> Santa Ana, Illinois 85486</p>
-          <p className="text-sm mt-3">
-            <a href="mailto:hello@example.com" className="hover:text-white transition-colors">
-              hello@example.com
-            </a>
+          <h3 className="text-base font-semibold mb-4">Contacts</h3>
+          <p className="text-sm text-gray-600">
+            DEKARTOPO SYSTEMS LIMITED <br />
+            Reg. No: 16714225
           </p>
-          <p className="text-sm">+1 (234) 567 8910</p>
+          <p className="text-sm text-gray-600 mt-3">+XXXXXXXX</p>
+          <p className="text-sm text-gray-600">
+            hello@3dvendorz.com
+          </p>
+          <p className="text-sm text-gray-600 mt-3 leading-relaxed">
+            Registered office and headquarters <br />
+            Unit B2 at Shoreditch Exchange, Senna Building, Gorsuch
+            Place, London, E2 8JF
+          </p>
         </div>
       </div>
 
       {/* Bottom Line */}
-      <div className="relative z-10 text-center mt-12 text-xs text-gray-500">
-        © 2025 Vendorz | Work by Onmix. Made with Next.js & Tailwind.
+      <div className="text-center mt-12 text-xs text-gray-500 border-t pt-6">
+        © 2025 3dvendorz | All rights reserved.
       </div>
     </footer>
   );

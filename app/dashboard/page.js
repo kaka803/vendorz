@@ -13,6 +13,8 @@ import {
 import { useProducts } from "../context/productcontext";
 import { HashLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
+import Pagination from "../components/Paginate";
+import { formatCurrency } from "@/lib/formatcurrency";
 import { selector } from "gsap";
 
 
@@ -312,39 +314,16 @@ useEffect(() => {
         ))}
       </div>
 
-      {/* Pagination Controls */}
-      <div className="flex justify-center items-center gap-2 mt-6">
-        <button
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-          className="px-3 py-1 rounded border disabled:opacity-50"
-        >
-          Prev
-        </button>
-        
-        {Array.from({ length: totalPages }, (_, i) => (
-          <button
-            key={i + 1}
-            onClick={() => handlePageChange(i + 1)}
-            className={`px-3 py-1 rounded border ${
-              currentPage === i + 1 ? "bg-red-500 text-white" : "bg-white"
-            }`}
-          >
-            {i + 1}
-          </button>
-        ))}
-
-        <button
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-          className="px-3 py-1 rounded border disabled:opacity-50"
-        >
-          Next
-        </button>
-      </div>
+      {/* ✅ Pagination Component */}
+      <Pagination
+        pageCount={totalPages}
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+      />
     </div>
   )
 )}
+
 
 
 
@@ -400,7 +379,7 @@ useEffect(() => {
             <td className="py-2 px-4">{i + 1}</td>
             <td className="py-2 px-4 font-medium">{o.shippingAddress.firstName + " " + o.shippingAddress.lastName}</td>
             <td className="py-2 px-4">{new Date(o.createdAt).toLocaleDateString()}</td>
-            <td className="py-2 px-4 font-semibold">Rs. {o.total}</td>
+            <td className="py-2 px-4 font-semibold">${formatCurrency(o.total)}</td>
             <td className="py-2 px-4">
               <span
                 className={`px-2 py-1 rounded-full text-xs font-medium ${

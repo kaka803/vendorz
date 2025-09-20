@@ -15,7 +15,7 @@ const Navbar = () => {
   const { user, logout } = useAuth();
 const pathname = usePathname();
  const isActive = (path) =>
-    pathname === path ? "border-b-2 border-white pb-1" : "";
+    pathname === path ? "border-b-2 border-black pb-1" : "";
   return (
     <>
       <div className="w-full navbar px-4 fixed top-5 z-30">
@@ -57,18 +57,18 @@ const pathname = usePathname();
           </div>
 
           {/* Logo */}
-          <div className="text-white font-bold text-3xl mt-2 md:mt-0 lg:text-5xl mr-30 "><img src="/logo.svg" alt="" className="w-40 max-md:w-24" /></div>
+          <div className="text-white font-bold text-3xl mt-2 md:mt-0 lg:text-5xl  "><img src="/logo.svg" alt="" className="w-40 max-md:w-24" /></div>
 
           {/* Right Side */}
           <div className="flex items-center space-x-6 max-md:space-x-3">
             {/* Search Icon */}
-            <button onClick={() => setSearchOpen(true)} className="text-black hover:text-gray-800">
+            <button onClick={() => setSearchOpen(true)} className="text-black ml-5 hover:text-gray-800">
               <Search size={22} />
             </button>
 
             {/* Cart */}
             <Link href="/cart">
-              <button className="text-black hover:text-gray-800 mt-2  relative">
+              <button className="text-black hover:text-gray-800 mt-2 mr-2  relative">
                 <ShoppingCart size={22} />
                 <span className="absolute -top-4 -right-3 bg-white font-sans text-green-950 text-xs font-bold px-2 py-0.5 rounded-full">
                   {cart.reduce((acc, item) => acc + item.quantity, 0)}
@@ -105,7 +105,7 @@ const pathname = usePathname();
             ) : (
               <>
                 <Link href="/auth">
-                  <button className="bg-[#43644d] max-md:hidden text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition">
+                  <button className="bg-[#43644d] max-md:hidden text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-800 transition">
                     Login
                   </button>
                 </Link>
@@ -185,7 +185,7 @@ const pathname = usePathname();
                 )}
               </div>
             ) : (
-              <button className="bg-[#43644d]  text-[white] px-4 py-2 rounded-lg font-medium hover:bg-gray-300 transition w-fit">
+              <button className="bg-[#43644d]  text-[white] px-4 py-2 rounded-lg font-medium hover:bg-gray-800 transition w-fit">
                 Login
               </button>
             )}

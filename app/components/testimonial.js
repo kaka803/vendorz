@@ -27,7 +27,7 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section className="w-full py-16 mb-20">
+    <section className="w-full py-16 ">
       <div className="w-[95%] max-w-[1280px] mx-auto">
         <h2 className="text-6xl font-bold uppercase font-sans text-[#365a41] my-10 text-center">
           FAQs
