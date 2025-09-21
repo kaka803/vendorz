@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useForm } from "react-hook-form";
+import Link from "next/link";
 
 export default function AuthPage() {
   const { login, register, authLoading, error, setError, isLogin, setIsLogin, forgotPassword } = useAuth();
@@ -188,12 +189,12 @@ export default function AuthPage() {
 
     {/* Return to Home */}
     <div className="mt-6 text-center">
-      <a
+      <Link
         href="/"
         className="inline-block text-sm text-gray-600 hover:text-[#365a41] hover:underline"
       >
         ← Return to Home
-      </a>
+      </Link>
     </div>
   </div>
 </div>
