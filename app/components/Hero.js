@@ -39,7 +39,7 @@ const Hero = () => {
       {/* Buttons */}
       <div className="flex flex-wrap heading justify-center items-center gap-4 mt-4">
         
-        <Link href={'/shop'}><button className="bg-[#365a41] hover:bg-white hover:text-black transition px-8 py-3 rounded-lg font-sans text-sm sm:text-base md:text-lg uppercase">
+        <Link href={'/shop'}><button className="bg-[#365a41] hover:bg-white hover:text-black transition px-8 py-3 rounded-lg font-sans text-sm sm:text-base md:text-lg ">
           Explore Catalog
         </button>
         </Link>
