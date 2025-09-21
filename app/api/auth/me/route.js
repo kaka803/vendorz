@@ -14,6 +14,6 @@ export async function POST(req) {
 
     return new Response(JSON.stringify({ user }), { status: 200 });
   } catch (err) {
-    return new Response(JSON.stringify({ error: "Invalid token" }), { status: 401 });
+    return new Response(JSON.stringify({ error: "Invalid token or expire token" }), { status: 401 });
   }
 }
