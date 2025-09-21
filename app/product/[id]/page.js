@@ -88,7 +88,7 @@ export default function ProductClient({ params }) {
       <button
         key={i}
         onClick={() => setSelected(img)}
-        className={`relative flex-shrink-0 p-2 w-24 h-24 rounded-xl overflow-hidden border-2 transition-all duration-300 
+        className={`relative flex-shrink-0 m-2 p-2 w-24 h-24 rounded-xl overflow-hidden border-2 transition-all duration-300 
          
           hover:scale-105 shadow-sm`}
       >
@@ -133,7 +133,7 @@ export default function ProductClient({ params }) {
 
             <div className="prose max-w-none text-gray-700">
               <h4 className="text-2xl mb-3 font-medium font-sans">
-                Overview :-
+                Overview
               </h4>
 
               <div
@@ -267,12 +267,10 @@ export default function ProductClient({ params }) {
 
                       {/* Card Content */}
                       <div className="p-5">
-                        <h3 className="text-lg font-sans font-semibold text-gray-800 truncate">
+                        <h3 className="text-lg font-sans font-bold text-gray-800 truncate">
                           {related.title}
                         </h3>
-                        <p className="text-sm font-sans text-gray-500 mt-1 line-clamp-2">
-                          {related.description}
-                        </p>
+                        
                         <p className="mt-3 font-sans text-xl font-bold text-[#365a41]">
                           ${formatCurrency(related.price_numeric)}
                         </p>

@@ -15,6 +15,10 @@ body {
   overflow: hidden;
 }
 
+button{
+  font-family: 'Josefin Sans', Arial, Helvetica, sans-serif !important;
+}
+
 .hero-section .video-bg {
   position: absolute;
   top: 0;

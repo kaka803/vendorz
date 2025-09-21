@@ -4,8 +4,10 @@ import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function AuthPage() {
+  const router = useRouter()
   const { login, register, authLoading, error, setError, isLogin, setIsLogin, forgotPassword } = useAuth();
   const [showForgot, setShowForgot] = useState(false);
 
@@ -41,12 +43,10 @@ export default function AuthPage() {
     <div className="min-h-screen flex items-center justify-center  px-4 font-sans">
   <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
     {/* Logo + Heading */}
-    <h2 className="text-xl font-semibold mb-6 text-center tracking-tight">
-      <span className="bg-gradient-to-r from-[#365a41] to-[#2d4a35] bg-clip-text text-transparent">
-        3dvendorz
-      </span>{" "}
-      {showForgot ? "Reset Password" : isLogin ? "Login" : "Sign Up"}
-    </h2>
+    <div className="flex justify-center items-center gap-3 mb-3">
+      <img src="/logo.svg" alt="" className="w-30" />
+    
+    </div>
 
     {/* Error Message */}
     {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
@@ -188,13 +188,15 @@ export default function AuthPage() {
     )}
 
     {/* Return to Home */}
-    <div className="mt-6 text-center">
-      <Link
-        href="/"
-        className="inline-block text-sm text-gray-600 hover:text-[#365a41] hover:underline"
-      >
+    <div onClick={()=> {
+      router.push('/')
+          setIsLogin(true)
+        } } className="mt-6 text-center inline-block text-sm text-gray-600 cursor-pointer hover:text-[#365a41] ">
+      
+        
+       
+      
         ← Return to Home
-      </Link>
     </div>
   </div>
 </div>

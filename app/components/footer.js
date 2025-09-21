@@ -19,8 +19,7 @@ export default function Footer() {
         <div>
           <h1 className="text-3xl font-bold font-sans mb-4">
             <Link href="/" className="hover:text-gray-200 transition-colors">
-              <span className="text-white">3d</span>
-              <span className="text-gray-200">vendorz</span>
+              <img src="logo.svg" alt="" className="w-30 filter-invert opacity-80" />
             </Link>
           </h1>
           <p className="text-sm text-gray-200 leading-relaxed font-sans">
@@ -74,22 +73,22 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/about" className="hover:text-white transition-colors">
+              <Link href="/commercial" className="hover:text-white transition-colors">
                 Commercial Agreement
               </Link>
             </li>
             <li>
-              <Link href="/about" className="hover:text-white transition-colors">
+              <Link href="/Terms" className="hover:text-white transition-colors">
                 Terms and Conditions
               </Link>
             </li>
             <li>
-              <Link href="/about" className="hover:text-white transition-colors">
+              <Link href="/privacy" className="hover:text-white transition-colors">
                 Privacy Policy
               </Link>
             </li>
             <li>
-              <Link href="/about" className="hover:text-white transition-colors">
+              <Link href="/privacy" className="hover:text-white transition-colors">
                 Refunds
               </Link>
             </li>

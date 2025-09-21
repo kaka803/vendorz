@@ -74,14 +74,20 @@ export default function ShopPage() {
   }, [filteredProducts, currentPage]);
 
   const handleCategoryChange = (category) => {
-  setSelectedCategories((prev) =>
-    prev.includes(category)
-      ? prev.filter((c) => c !== category) // agar dobara click ho to remove
-      : [...prev, category]
-  );
+  setSelectedCategories((prev) => {
+    if (prev.includes(category)) {
+      // remove filter
+      toast.error(`Category filter removed: ${category}`);
+      return prev.filter((c) => c !== category);
+    } else {
+      // add filter
+      toast.success(`Category filter applied: ${category}`);
+      return [...prev, category];
+    }
+  });
   setCurrentPage(1);
-  toast.success(`Category filter applied: ${category}`);
 };
+
 
   return (
     <>
@@ -260,7 +266,7 @@ export default function ShopPage() {
                   {paginatedProducts.length > 0 ? (
                     paginatedProducts.map((product) => (
                       <Link key={product._id} href={`/product/${product._id}`}>
-                        <div className="group hover:scale-105 hover:-translate-y-2 duration-500 bg-white rounded-sm shadow-md overflow-hidden transition hover:shadow-lg cursor-pointer">
+                        <div className="group hover:scale-105 hover:-translate-y-2 duration-500 bg-white rounded-sm shadow-md h-90 overflow-hidden transition hover:shadow-lg cursor-pointer">
                           {/* Product Image */}
                           <div className="w-full h-56 sm:h-60 overflow-hidden relative">
                             <img

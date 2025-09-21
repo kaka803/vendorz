@@ -56,13 +56,13 @@ const OrdersPage = () => {
   return (
     <>
       <Navbar />
-      <div className="max-w-5xl mx-auto mt-35 p-6 bg-white shadow rounded-lg font-sans">
+      <div className="max-w-5xl mx-auto mt-35 p-6 bg-white shadow rounded-lg font-sans mb-20">
         <h2 className="text-xl font-bold mb-6 text-gray-800">
           Your Orders, {user.name}
         </h2>
 
         {orders.length === 0 ? (
-          <p className="text-gray-600">You don’t have any orders yet.</p>
+          <p className="text-gray-600 ">You do not have any orders yet.</p>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full border border-gray-200 rounded-lg overflow-hidden">
