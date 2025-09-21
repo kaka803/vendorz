@@ -26,7 +26,7 @@ const LatestProducts = () => {
       
 
       <div className="w-[100%] max-w-[1280px] relative ">
-      <h1 className={`text-start text-3xl mb-5 font-sans uppercase `} >Latest Products</h1>
+      <h1 className={`text-start text-3xl mb-5 font-sans `} >Latest Products</h1>
         <div className={`${loading ? 'flex justify-center items-center w-full h-[200px]' : 'block'}`}>
         {loading && <HashLoader size={40} color="#365a41" />}
         </div>

@@ -220,9 +220,10 @@ export default function ProductClient({ params }) {
       </div>
 
       {/* Related Products */}
+      <div className="main-container mx-7">
       <section className="min-h-[100%] w-full flex flex-col items-center justify-center mb-30 pt-20 relative">
         <div className="w-full max-w-[1280px] relative">
-          <h1 className="text-start text-3xl mb-5 font-sans uppercase text-[#365a41]">
+          <h1 className="text-start text-3xl mb-5 font-sans  text-[#365a41]">
             Related Products
           </h1>
 
@@ -281,8 +282,9 @@ export default function ProductClient({ params }) {
                 </SwiperSlide>
               ))}
           </Swiper>
-        </div>
+          </div>
       </section>
+        </div>
       <footer className="relative bg-[#365a41] font-sans text-white pt-16 pb-5 overflow-hidden">
       {/* Background Watermark */}
       <div className="absolute inset-0 flex justify-center items-center pointer-events-none">

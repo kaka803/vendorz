@@ -108,24 +108,7 @@ export default function ShopPage() {
         <BreadcrumbLink href="/shop">Shop</BreadcrumbLink>
       </BreadcrumbItem>
 
-      {/* Show categories in breadcrumb when filter is applied */}
-      {selectedCategories.map((cat, index) => (
-        <div key={cat} className="flex items-center">
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                handleCategoryChange(cat); // apply filter toggle
-              }}
-              className="text-[#365a41] hover:underline"
-            >
-              {cat}
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-        </div>
-      ))}
+      
     </BreadcrumbList>
   </Breadcrumb>
 </div>

@@ -32,7 +32,7 @@ const CategorySection = () => {
   return (
     <section className="w-full py-16">
       <div className="w-[95%] max-w-[1280px] mx-auto">
-        <h1 className="text-start text-3xl mb-8 font-sans uppercase text-gray-800">
+        <h1 className="text-start text-3xl mb-8 font-sans  text-gray-800">
           Categories
         </h1>
 

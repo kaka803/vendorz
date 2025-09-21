@@ -3,6 +3,7 @@ import { ProductProvider } from "./context/productcontext";
 import { CartProvider } from "./context/cartcontext";
 import { AuthProvider } from "./context/AuthContext";
 import { Toaster } from "react-hot-toast";
+import SmoothScroll from "./components/SmoothScroll";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -36,6 +37,7 @@ export default function RootLayout({ children }) {
         <AuthProvider>
         <ProductProvider>
           <CartProvider>
+            <SmoothScroll />
         {children}
         <Toaster position="top-right" reverseOrder={false} toastOptions={{
     style: {
