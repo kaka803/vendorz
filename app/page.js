@@ -47,8 +47,8 @@ export default function Home() {
   {/* Button */}
   <div className="flex justify-center md:justify-end mt-6 md:mt-0 relative md:absolute md:bottom-0 md:right-0">
     <Link href={'/contact'}>
-    <button className="bg-[#365a41] hover:bg-[#1d4d2a] text-white hover:text-white transition px-6 py-3 rounded-lg font-sans text-sm sm:text-base md:text-lg uppercase">
-      send inquiry
+    <button className="bg-[#365a41] hover:bg-[#1d4d2a] text-white hover:text-white transition px-6 py-3 rounded-lg font-sans text-sm sm:text-base md:text-lg">
+      Send inquiry
     </button>
     </Link>
   </div>

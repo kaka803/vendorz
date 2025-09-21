@@ -219,13 +219,13 @@ export default function ShopPage() {
 
 
                   {/* Sort Dropdown */}
-                  <div>
+                  <div className="mr-4">
                     <h3 className="text-sm font-medium mb-2">Sort By</h3>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button
                           variant="outline"
-                          className="w-full justify-between text-sm font-normal"
+                          className="w-full justify-between text-sm font-normal mr-2"
                         >
                           {sortOption === "low-high"
                             ? "Price: Low to High"
