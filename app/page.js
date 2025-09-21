@@ -8,6 +8,7 @@ import VendorSection from "./components/vendorsection";
 import MostSellingSection from "./components/mostsellingproducts";
 import TestimonialSection from "./components/testimonial";
 import Footer from "./components/footer";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -45,9 +46,11 @@ export default function Home() {
 
   {/* Button */}
   <div className="flex justify-center md:justify-end mt-6 md:mt-0 relative md:absolute md:bottom-0 md:right-0">
-    <button className="bg-[#365a41] hover:bg-white text-white hover:text-black transition px-6 py-3 rounded-lg font-sans text-sm sm:text-base md:text-lg uppercase">
+    <Link href={'/contact'}>
+    <button className="bg-[#365a41] hover:bg-[#1d4d2a] text-white hover:text-white transition px-6 py-3 rounded-lg font-sans text-sm sm:text-base md:text-lg uppercase">
       send inquiry
     </button>
+    </Link>
   </div>
 </div>
 

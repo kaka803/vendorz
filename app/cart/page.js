@@ -3,6 +3,7 @@ import Navbar from "../components/navbar";
 import { X } from "lucide-react";
 import Link from "next/link";
 import { useCart } from "../context/cartcontext";
+import Footer from "../components/footer";
 
 export default function CartPage() {
   const { cart, removeFromCart, updateQuantity, subtotal, total } = useCart();
@@ -84,7 +85,7 @@ export default function CartPage() {
               </div>
             ))
           ) : (
-            <div className="text-center py-10 text-gray-500">
+            <div className="text-center py-10 font-sans text-gray-500">
               Your cart is empty
             </div>
           )}
@@ -125,6 +126,7 @@ export default function CartPage() {
           </div>
         )}
       </div>
+      <Footer/>
     </>
   );
 }

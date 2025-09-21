@@ -56,7 +56,7 @@ const LatestProducts = () => {
           {productslatest.map((product) => (
             <SwiperSlide key={product.id}>
               <Link href={`/product/${product._id}`}>
-              <div  className="group bg-white rounded-sm shadow-md overflow-hidden  transition hover:shadow-lg">
+              <div  className="group bg-white rounded-sm  overflow-hidden  transition hover:shadow-lg">
                 {/* Product Image */}
                 <div className="w-full h-60 overflow-hidden relative">
                   <img
@@ -78,7 +78,7 @@ const LatestProducts = () => {
                   <h3 className="text-lg font-sans font-semibold text-gray-800 truncate">
                     {product.name}
                   </h3>
-                  <p className="text-sm font-sans text-gray-500 mt-1 line-clamp-2">
+                  <p className="text-sm font-sans text-black font-bold mt-1 line-clamp-2">
                     {product.title}
                   </p>
                   <p className="mt-3 font-sans text-xl font-bold text-[#365a41]">

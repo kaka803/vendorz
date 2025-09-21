@@ -11,7 +11,6 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import Link from "next/link";
 import Footer from "@/app/components/footer";
 import { useCart } from "@/app/context/cartcontext";
-import { format } from "crypto-js";
 import { formatCurrency } from "@/lib/formatcurrency";
 
 export default function ProductClient({ params }) {
@@ -58,17 +57,7 @@ export default function ProductClient({ params }) {
           <Link href="/shop" className="hover:text-[#365a41] font-medium">
             Shop
           </Link>
-          {product.category && (
-            <>
-              <ChevronRight size={16} className="text-gray-400" />
-              <Link
-                href={`/shop?category=${product.category}`}
-                className="hover:text-[#365a41] font-medium capitalize"
-              >
-                {product.category}
-              </Link>
-            </>
-          )}
+          
           <ChevronRight size={16} className="text-gray-400" />
           <span className="text-gray-500 truncate max-w-[200px]">
             {product.title}
@@ -99,7 +88,7 @@ export default function ProductClient({ params }) {
       <button
         key={i}
         onClick={() => setSelected(img)}
-        className={`relative flex-shrink-0 w-24 h-24 rounded-xl overflow-hidden border-2 transition-all duration-300 
+        className={`relative flex-shrink-0 p-2 w-24 h-24 rounded-xl overflow-hidden border-2 transition-all duration-300 
          
           hover:scale-105 shadow-sm`}
       >
@@ -128,7 +117,7 @@ export default function ProductClient({ params }) {
 
             <div className="flex items-center gap-4">
               <div className="text-3xl font-bold font-sans text-[#365a41]">
-                ${product.price_numeric}
+                ${formatCurrency(product.price_numeric)}
               </div>
               
             </div>
@@ -143,7 +132,10 @@ export default function ProductClient({ params }) {
             </div>
 
             <div className="prose max-w-none text-gray-700">
-              <h3 className="mt-2 text-2xl font-sans font-bold">Description</h3>
+              <h4 className="text-2xl mb-3 font-medium font-sans">
+                Overview :-
+              </h4>
+
               <div
   className="wrap-anywhere font-sans whitespace-pre-line"
   dangerouslySetInnerHTML={{
@@ -205,7 +197,6 @@ export default function ProductClient({ params }) {
                   ["Rigged", product.rigged],
                   ["Materials", product.materials],
                   ["Animated", product.animated],
-                  ["Paid", product.is_paid],
                 ].map(([label, val]) => (
                   <div
                     key={label}

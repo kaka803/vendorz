@@ -43,9 +43,9 @@ const OrdersPage = () => {
             order. After that, your order history will be saved here.
           </p>
           <Link href="/auth">
-            <button className="bg-green-700 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-800 transition">
-              Login
-            </button>
+            <button className="max-lg:hidden bg-gradient-to-r from-[#365a41] to-[#2d4a35] text-white px-6 py-2.5 rounded-xl font-sans font-medium shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
+  Login
+</button>
           </Link>
         </div>
         <Footer/>

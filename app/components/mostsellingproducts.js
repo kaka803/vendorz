@@ -68,39 +68,40 @@ const LatestProducts = () => {
           {randomProducts.map((product) => (
             <SwiperSlide key={product._id}>
               <Link href={`/product/${product._id}`}>
-                <div className="group bg-white rounded-sm overflow-hidden transition">
-                  {/* Product Image */}
-                  <div className="w-full h-60 overflow-hidden relative">
-                    <img
-                      src={product.images?.[0]}
-                      alt={product.title || product.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    {/* Hover Add to Cart */}
-                    <div className="absolute bottom-[-60px] left-0 w-full flex justify-center transition-all duration-500 group-hover:bottom-0">
-                      <button
-                        onClick={() => addToCart(product)}
-                        className="flex justify-center w-full items-center gap-2 bg-[#365a41] text-white px-6 py-2 shadow transition"
-                      >
-                        <ShoppingCart size={18} />
-                        Add to Cart
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Card Content */}
-                  <div className="p-5">
-                    <h3 className="text-lg font-sans font-semibold text-gray-800 truncate">
-                      {product.title || product.name}
-                    </h3>
-                    <p className="text-sm font-sans text-gray-500 mt-1 line-clamp-2">
-                      {product.title}
-                    </p>
-                    <p className="mt-3 font-sans text-xl font-bold text-[#365a41]">
-                      ${formatCurrency(product.price_numeric)}
-                    </p>
+              <div  className="group bg-white rounded-sm  overflow-hidden  transition hover:shadow-lg">
+                {/* Product Image */}
+                <div className="w-full h-60 overflow-hidden relative">
+                  <img
+                    src={product.images[0]}
+                    alt={product.name}
+                    className="w-full h-full object-fit group-hover:scale-105 transition-transform duration-500"
+                  />
+                  {/* Hover Add to Cart */}
+                <div className="absolute bottom-[-60px] left-0 w-full flex justify-center transition-all duration-500 group-hover:bottom-0">
+                   <button onClick={() => addToCart(product)} className="flex justify-center w-full items-center gap-2 bg-[#365a41] text-white px-6 py-2  shadow  transition">
+                    <ShoppingCart size={18} />
+                    Add to Cart
+                  </button>
                   </div>
                 </div>
+
+                {/* Card Content */}
+                <div className="p-5">
+                  <h3 className="text-lg font-sans font-semibold text-gray-800 truncate">
+                    {product.name}
+                  </h3>
+                  <p className="text-sm font-sans text-black font-bold mt-1 line-clamp-2">
+                    {product.title}
+                  </p>
+                  <p className="mt-3 font-sans text-xl font-bold text-[#365a41]">
+                    ${formatCurrency(product.price_numeric)}
+                  </p>
+                </div>
+
+                
+                 
+                
+              </div>
               </Link>
             </SwiperSlide>
           ))}

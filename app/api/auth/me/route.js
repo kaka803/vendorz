@@ -1,41 +1,19 @@
-// app/api/auth/me/route.js
-import { connectDb } from "@/app/lib/db";
+import dbConnect from "@/lib/mongodb";
 import User from "@/models/User";
 import jwt from "jsonwebtoken";
-import { NextResponse } from "next/server";
-
-const JWT_SECRET = process.env.JWT_SECRET || "dev-secret";
 
 export async function POST(req) {
-  await connectDb();
-
   try {
-    // Frontend se token body me aa raha h
+    await dbConnect();
     const { token } = await req.json();
-    if (!token) {
-      return NextResponse.json(
-        { error: "Token not provided" },
-        { status: 401 }
-      );
-    }
+    if (!token) return new Response(JSON.stringify({ error: "No token provided" }), { status: 400 });
 
-    // Token verify aur decode
-    const decoded = jwt.verify(token, JWT_SECRET);
-
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded.id).select("-password");
-    if (!user) {
-      return NextResponse.json(
-        { error: "User not found" },
-        { status: 404 }
-      );
-    }
+    if (!user) return new Response(JSON.stringify({ error: "User not found" }), { status: 404 });
 
-    // User data frontend ko bhej do
-    return NextResponse.json({ user }, { status: 200 });
+    return new Response(JSON.stringify({ user }), { status: 200 });
   } catch (err) {
-    return NextResponse.json(
-      { error: "Invalid token or session expired" },
-      { status: 401 }
-    );
+    return new Response(JSON.stringify({ error: "Invalid token" }), { status: 401 });
   }
 }

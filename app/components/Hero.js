@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
+import Link from "next/link";
 
 const Hero = () => {
   const heroRef = useRef(null);
@@ -37,12 +38,11 @@ const Hero = () => {
 
       {/* Buttons */}
       <div className="flex flex-wrap heading justify-center items-center gap-4 mt-4">
-        <button className="bg-[#365a41] hover:bg-white hover:text-black transition px-8 py-3 rounded-lg font-sans text-sm sm:text-base md:text-lg uppercase">
-          Shop
-        </button>
-        <button className="bg-[#365a41] hover:bg-white hover:text-black transition px-8 py-3 rounded-lg font-sans text-sm sm:text-base md:text-lg uppercase">
+        
+        <Link href={'/shop'}><button className="bg-[#365a41] hover:bg-white hover:text-black transition px-8 py-3 rounded-lg font-sans text-sm sm:text-base md:text-lg uppercase">
           Explore Catalog
         </button>
+        </Link>
       </div>
     </div>
   );

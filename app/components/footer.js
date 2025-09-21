@@ -1,17 +1,29 @@
+import Link from "next/link";
 import { FaFacebookF, FaInstagram, FaYoutube, FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
   return (
-    <footer className="bg-white font-sans text-black pt-16 pb-5">
+    <footer className="relative bg-[#365a41] font-sans text-white pt-16 pb-5 overflow-hidden">
+      {/* Background Watermark */}
+      <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
+        
+        <h1 className="text-[120px] sm:text-[160px] md:text-[200px] font-extrabold text-white opacity-5 select-none">
+          3dvendorz
+        </h1>
+        
+      </div>
+
       {/* Content */}
-      <div className="container mx-auto px-6 grid md:grid-cols-4 gap-12">
+      <div className="relative container mx-auto px-6 grid md:grid-cols-4 gap-12 z-10">
         {/* Left Side - Logo & About */}
         <div>
           <h1 className="text-3xl font-bold font-sans mb-4">
-            <span className="text-black">3d</span>
-            <span className="text-gray-700">vendorz</span>
+            <Link href="/" className="hover:text-gray-200 transition-colors">
+              <span className="text-white">3d</span>
+              <span className="text-gray-200">vendorz</span>
+            </Link>
           </h1>
-          <p className="text-sm text-gray-600 leading-relaxed font-sans">
+          <p className="text-sm text-gray-200 leading-relaxed font-sans">
             3dvendorz is a global platform for buying and selling
             high-quality 3D models, print-ready files, and textures for
             use in CG, game development, 3D printing, and architectural
@@ -19,35 +31,35 @@ export default function Footer() {
           </p>
 
           {/* Social Icons */}
-          <div className="flex gap-4 mt-6 text-gray-600">
-            <a href="#" className="hover:text-black transition-colors">
+          <div className="flex gap-4 mt-6 text-gray-200">
+            <Link href="#" target="_blank" className="hover:text-white transition-colors">
               <FaFacebookF size={18} />
-            </a>
-            <a href="#" className="hover:text-black transition-colors">
+            </Link>
+            <Link href="#" target="_blank" className="hover:text-white transition-colors">
               <FaInstagram size={18} />
-            </a>
-            <a href="#" className="hover:text-black transition-colors">
+            </Link>
+            <Link href="#" target="_blank" className="hover:text-white transition-colors">
               <FaYoutube size={18} />
-            </a>
-            <a href="#" className="hover:text-black transition-colors">
+            </Link>
+            <Link href="#" target="_blank" className="hover:text-white transition-colors">
               <FaXTwitter size={18} />
-            </a>
+            </Link>
           </div>
         </div>
 
         {/* Support */}
         <div>
           <h3 className="text-base font-semibold mb-4">Support</h3>
-          <ul className="space-y-2 text-sm text-gray-600">
+          <ul className="space-y-2 text-sm text-gray-200">
             <li>
-              <a href="#" className="hover:text-black transition-colors">
+              <Link href="/about" className="hover:text-white transition-colors">
                 Quick FAQ
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-black transition-colors">
+              <Link href="/contact" className="hover:text-white transition-colors">
                 Contact Us
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -55,31 +67,31 @@ export default function Footer() {
         {/* Company */}
         <div>
           <h3 className="text-base font-semibold mb-4">Company</h3>
-          <ul className="space-y-2 text-sm text-gray-600">
+          <ul className="space-y-2 text-sm text-gray-200">
             <li>
-              <a href="#" className="hover:text-black transition-colors">
+              <Link href="/about" className="hover:text-white transition-colors">
                 About Us
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-black transition-colors">
+              <Link href="/about" className="hover:text-white transition-colors">
                 Commercial Agreement
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-black transition-colors">
+              <Link href="/about" className="hover:text-white transition-colors">
                 Terms and Conditions
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-black transition-colors">
+              <Link href="/about" className="hover:text-white transition-colors">
                 Privacy Policy
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-black transition-colors">
+              <Link href="/about" className="hover:text-white transition-colors">
                 Refunds
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -87,15 +99,17 @@ export default function Footer() {
         {/* Contacts */}
         <div>
           <h3 className="text-base font-semibold mb-4">Contacts</h3>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-200">
             DEKARTOPO SYSTEMS LIMITED <br />
             Reg. No: 16714225
           </p>
-          <p className="text-sm text-gray-600 mt-3">+XXXXXXXX</p>
-          <p className="text-sm text-gray-600">
-            hello@3dvendorz.com
+          <p className="text-sm text-gray-200 mt-3">+XXXXXXXX</p>
+          <p className="text-sm text-gray-200">
+            <Link href="mailto:hello@3dvendorz.com" className="hover:text-white">
+              hello@3dvendorz.com
+            </Link>
           </p>
-          <p className="text-sm text-gray-600 mt-3 leading-relaxed">
+          <p className="text-sm text-gray-200 mt-3 leading-relaxed">
             Registered office and headquarters <br />
             Unit B2 at Shoreditch Exchange, Senna Building, Gorsuch
             Place, London, E2 8JF
@@ -104,7 +118,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom Line */}
-      <div className="text-center mt-12 text-xs text-gray-500 border-t pt-6">
+      <div className="relative text-center mt-12 text-xs text-gray-300 border-t border-gray-400/30 pt-6 z-10">
         © 2025 3dvendorz | All rights reserved.
       </div>
     </footer>

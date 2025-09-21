@@ -23,6 +23,13 @@ import {
 } from "@/components/ui/sheet";
 import Footer from "../components/footer";
 import { formatCurrency } from "@/lib/formatcurrency";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 export default function ShopPage() {
   const { allproducts, loading, products } = useProducts();
@@ -50,8 +57,10 @@ export default function ShopPage() {
 
     if (sortOption === "low-high") {
       filtered = filtered.sort((a, b) => a.price_numeric - b.price_numeric);
+      toast.success("Sorted by Price: Low to High");
     } else if (sortOption === "high-low") {
       filtered = filtered.sort((a, b) => b.price_numeric - a.price_numeric);
+      toast.success("Sorted by Price: High to Low");
     }
 
     return filtered;
@@ -65,20 +74,56 @@ export default function ShopPage() {
   }, [filteredProducts, currentPage]);
 
   const handleCategoryChange = (category) => {
-    setSelectedCategories((prev) =>
-      prev.includes(category)
-        ? prev.filter((c) => c !== category)
-        : [...prev, category]
-    );
-    setCurrentPage(1);
-
-    toast.success(`Category filter applied: ${category}`);
-  };
+  setSelectedCategories((prev) =>
+    prev.includes(category)
+      ? prev.filter((c) => c !== category) // agar dobara click ho to remove
+      : [...prev, category]
+  );
+  setCurrentPage(1);
+  toast.success(`Category filter applied: ${category}`);
+};
 
   return (
     <>
       <Navbar />
+
       <div className="main-container mt-30 py-10 font-sans px-4 sm:px-6 lg:px-8">
+        
+
+
+<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+  <Breadcrumb>
+    <BreadcrumbList>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/">Home</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/shop">Shop</BreadcrumbLink>
+      </BreadcrumbItem>
+
+      {/* Show categories in breadcrumb when filter is applied */}
+      {selectedCategories.map((cat, index) => (
+        <div key={cat} className="flex items-center">
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                handleCategoryChange(cat); // apply filter toggle
+              }}
+              className="text-[#365a41] hover:underline"
+            >
+              {cat}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+        </div>
+      ))}
+    </BreadcrumbList>
+  </Breadcrumb>
+</div>
+
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
 
           {/* Sidebar (Desktop) */}
@@ -94,7 +139,7 @@ export default function ShopPage() {
                     type="checkbox"
                     checked={selectedCategories.includes(cat)}
                     onChange={() => handleCategoryChange(cat)}
-                    className="accent-[#365a41]"
+                    className="accent-[#365a41] cursor-pointer"
                   />
                   <span className="text-sm text-gray-600">{cat}</span>
                 </label>
@@ -146,22 +191,26 @@ export default function ShopPage() {
                 <SheetHeader>
                   <SheetTitle>Filters</SheetTitle>
                 </SheetHeader>
-                <div className="mt-4 space-y-6">
+                <div className="mt-4 space-y-6 cursor-pointer">
                   {/* Categories */}
                   <div>
-                    <h3 className="text-sm font-medium mb-2">Categories</h3>
-                    {categories.map((cat) => (
-                      <label key={cat} className="flex items-center space-x-2 mb-2">
-                        <input
-                          type="checkbox"
-                          checked={selectedCategories.includes(cat)}
-                          onChange={() => handleCategoryChange(cat)}
-                          className="accent-[#365a41]"
-                        />
-                        <span className="text-sm text-gray-600">{cat}</span>
-                      </label>
-                    ))}
-                  </div>
+  <h3 className="text-sm font-medium mb-2">Categories</h3>
+  {categories.map((cat) => ( 
+    <label
+      key={cat}
+      className="flex items-center space-x-2 mb-2 cursor-pointer"
+    >
+      <input
+        type="checkbox"
+        checked={selectedCategories.includes(cat)}
+        onChange={() => handleCategoryChange(cat)}
+        className="accent-[#365a41]"
+      />
+      <span className="text-sm text-gray-600">{cat}</span>
+    </label>
+  ))}
+</div>
+
 
                   {/* Sort Dropdown */}
                   <div>
@@ -253,7 +302,10 @@ export default function ShopPage() {
                   <Pagination
                     pageCount={totalPages}
                     currentPage={currentPage}
-                    onPageChange={setCurrentPage}
+                    onPageChange={(page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" }); // Top pe scroll karega
+  }}
                   />
                 )}
               </>

@@ -5,6 +5,9 @@ import { useCart } from "../context/cartcontext";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-hot-toast";
 import { HashLoader } from "react-spinners";
+import { formatCurrency } from "@/lib/formatcurrency";
+import { format } from "crypto-js";
+import Footer from "../components/footer";
 
 export default function CheckoutPage() {
   const { cart, subtotal, total } = useCart();
@@ -70,7 +73,7 @@ export default function CheckoutPage() {
   return (
     <>
       <Navbar />
-      <div className="max-w-[90%] mx-auto mt-32 font-sans">
+      <div className="max-w-[90%] mx-auto mt-32 font-sans mb-20">
         <h2 className="text-2xl font-semibold mb-6">Checkout</h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
@@ -207,27 +210,28 @@ export default function CheckoutPage() {
 </span>
 
                   </div>
-                  <div>${item.price}</div>
+                  <div>${formatCurrency(item.price)}</div>
                   <div>{item.quantity}</div>
                   <div>
-                    ${new Intl.NumberFormat("en-US").format(item.price * item.quantity)}
+                    ${formatCurrency(item.price * item.quantity)}
                   </div>
                 </div>
               ))}
               <div className="border-t mt-4 p-4">
                 <div className="flex justify-between mb-2">
                   <span>Subtotal</span>
-                  <span>${new Intl.NumberFormat("en-US").format(subtotal)}</span>
+                  <span>${formatCurrency(subtotal)}</span>
                 </div>
                 <div className="flex justify-between font-medium">
                   <span>Total</span>
-                  <span>${new Intl.NumberFormat("en-US").format(total)}</span>
+                  <span>${formatCurrency(total)}</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 }

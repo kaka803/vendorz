@@ -21,7 +21,7 @@ const pathname = usePathname();
       <div className="w-full navbar px-4 fixed top-5 z-30">
         <div className="max-w-[1280px] rounded-lg backdrop-blur-lg bg-white/60 border border-white/20 shadow-[0_10px_30px_rgba(0,0,0,0.15)] mx-auto flex justify-between items-center h-19 px-6">
 
-
+<Link href={'/'}><div className="text-white cursor-pointer font-bold text-3xl mt-2 lg:mt-0 lg:text-5xl  "><img src="/logo.svg" alt="" className="w-40 max-lg:w-24" /></div></Link>
           {/* Left Links */}
           <div className="hidden lg:flex space-x-6 text-[black] font-semibold">
             <Link
@@ -44,20 +44,20 @@ const pathname = usePathname();
             </Link>
             <Link
               href="/about"
-              className={`text-[black] font-semibold font-sans  ${isActive("/myorders")}`}
+              className={`text-[black] font-semibold font-sans  ${isActive("/about")}`}
             >
               About
             </Link>
             <Link
               href="/contact"
-              className={`text-[black] font-semibold font-sans  ${isActive("/myorders")}`}
+              className={`text-[black] font-semibold font-sans  ${isActive("/contact")}`}
             >
               Contact Us
             </Link>
           </div>
 
           {/* Logo */}
-          <div className="text-white font-bold text-3xl mt-2 lg:mt-0 lg:text-5xl  "><img src="/logo.svg" alt="" className="w-40 max-lg:w-24" /></div>
+          
 
           {/* Right Side */}
           <div className="flex items-center space-x-6 max-lg:space-x-3">
@@ -105,9 +105,10 @@ const pathname = usePathname();
             ) : (
               <>
                 <Link href="/auth">
-                  <button className="bg-[#43644d] max-lg:hidden text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-800 transition">
-                    Login
-                  </button>
+                  <button className="max-lg:hidden bg-gradient-to-r from-[#365a41] to-[#2d4a35] text-white px-6 py-2.5 rounded-xl font-sans font-medium shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
+  Login
+</button>
+
                 </Link>
                 
               </>
@@ -185,9 +186,11 @@ const pathname = usePathname();
                 )}
               </div>
             ) : (
-              <button className="bg-[#43644d]  text-[white] px-4 py-2 rounded-lg font-medium hover:bg-gray-800 transition w-fit">
-                Login
-              </button>
+              <Link href={'/auth'}>
+              <button className="lg:hidden block bg-gradient-to-r from-[#365a41] to-[#2d4a35] text-white px-6 py-2.5 rounded-xl font-sans font-medium shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
+  Login
+</button>
+</Link>
             )}
           </div>
         </div>
