@@ -1,10 +1,10 @@
-import dbConnect from "@/lib/mongodb";
+import { connectDb } from "@/app/lib/db";
 import User from "@/models/User";
 import jwt from "jsonwebtoken";
 
 export async function POST(req) {
   try {
-    await dbConnect();
+    await connectDb();
     const { token } = await req.json();
     if (!token) return new Response(JSON.stringify({ error: "No token provided" }), { status: 400 });
 
