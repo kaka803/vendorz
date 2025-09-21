@@ -19,7 +19,7 @@ export default function Footer() {
         <div>
           <h1 className="text-3xl font-bold font-sans mb-4">
             <Link href="/" className="hover:text-gray-200 transition-colors">
-              <img src="logo.svg" alt="" className="w-30 filter-invert opacity-80" />
+              <img src="/logo.svg" alt="" className="w-30 filter-invert opacity-80" />
             </Link>
           </h1>
           <p className="text-sm text-gray-200 leading-relaxed font-sans">
