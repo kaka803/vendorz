@@ -13,15 +13,16 @@ import { useCart } from "../context/cartcontext";
 import { formatCurrency } from "@/lib/formatcurrency";
 
 const LatestProducts = () => {
-  const { products, loading } = useProducts();
+  const { products, loading, allproducts } = useProducts();
   const { addToCart } = useCart();
 
-  // ✅ Random products generate (10 items)
+  // ✅ Random products generate (15 items from allproducts if available)
   const randomProducts = useMemo(() => {
-    if (!products || products.length === 0) return [];
-    const shuffled = [...products].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, 10); // 10 random products
-  }, [products]);
+    const source = allproducts && allproducts.length > 0 ? allproducts : products;
+    if (!source || source.length === 0) return [];
+    const shuffled = [...source].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 15); // 15 random products
+  }, [products, allproducts]);
 
   // buttons ke ref
   const prevRef = useRef(null);
@@ -68,40 +69,39 @@ const LatestProducts = () => {
           {randomProducts.map((product) => (
             <SwiperSlide key={product._id}>
               <Link href={`/product/${product._id}`}>
-              <div  className="group bg-white rounded-sm  overflow-hidden  transition hover:shadow-lg">
-                {/* Product Image */}
-                <div className="w-full h-60 overflow-hidden relative">
-                  <img
-                    src={product.images[0]}
-                    alt={product.name}
-                    className="w-full h-full object-fit group-hover:scale-105 transition-transform duration-500"
-                  />
-                  {/* Hover Add to Cart */}
-                <div className="absolute bottom-[-60px] left-0 w-full flex justify-center transition-all duration-500 group-hover:bottom-0">
-                   <button onClick={() => addToCart(product)} className="flex justify-center w-full items-center gap-2 bg-[#365a41] text-white px-6 py-2  shadow  transition">
-                    <ShoppingCart size={18} />
-                    Add to Cart
-                  </button>
+                <div className="group bg-white rounded-sm overflow-hidden transition hover:shadow-lg">
+                  {/* Product Image */}
+                  <div className="w-full h-60 overflow-hidden relative">
+                    <img
+                      src={product.images[0]}
+                      alt={product.name}
+                      className="w-full h-full object-fit p-3 group-hover:scale-105 transition-transform duration-500"
+                    />
+                    {/* Hover Add to Cart */}
+                    <div className="absolute bottom-[-60px] left-0 w-full flex justify-center transition-all duration-500 group-hover:bottom-0">
+                      <button
+                        onClick={() => addToCart(product)}
+                        className="flex justify-center w-full items-center gap-2 bg-[#365a41] text-white px-6 py-2 shadow transition"
+                      >
+                        <ShoppingCart size={18} />
+                        Add to Cart
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Card Content */}
+                  <div className="p-5">
+                    <h3 className="text-lg font-sans font-semibold text-gray-800 truncate">
+                      {product.name}
+                    </h3>
+                    <p className="text-sm font-sans text-black font-bold mt-1 line-clamp-2">
+                      {product.title}
+                    </p>
+                    <p className="mt-3 font-sans text-xl font-bold text-[#365a41]">
+                      ${formatCurrency(product.price_numeric)}
+                    </p>
                   </div>
                 </div>
-
-                {/* Card Content */}
-                <div className="p-5">
-                  <h3 className="text-lg font-sans font-semibold text-gray-800 truncate">
-                    {product.name}
-                  </h3>
-                  <p className="text-sm font-sans text-black font-bold mt-1 line-clamp-2">
-                    {product.title}
-                  </p>
-                  <p className="mt-3 font-sans text-xl font-bold text-[#365a41]">
-                    ${formatCurrency(product.price_numeric)}
-                  </p>
-                </div>
-
-                
-                 
-                
-              </div>
               </Link>
             </SwiperSlide>
           ))}
