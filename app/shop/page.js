@@ -172,111 +172,243 @@ function handleFilterChange(type, value, setter) {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Sidebar Filters */}
-          {/* Sidebar Filters */}
-<aside className="hidden lg:block bg-white shadow rounded-md p-5 h-fit ">
-  {/* Header */}
-  <div className="p-4 border-b">
-    <h2 className="text-lg font-semibold">Filters</h2>
-  </div>
+          {/* Sidebar + Filter button */} 
+<div className="lg:col-span-1">
+  {/* Mobile Filter Button */}
+  <div className="lg:hidden mb-4">
+  <Sheet>
+    <SheetTrigger asChild>
+      <Button
+        variant="outline"
+        className="w-full flex items-center justify-center gap-2"
+      >
+        <Filter size={16} />
+        Filters
+      </Button>
+    </SheetTrigger>
+    <SheetContent side="left" className="w-80 h-screen p-0 flex flex-col">
+      {/* Header fixed top */}
+      <SheetHeader className="p-4 border-b">
+        <SheetTitle>Filters</SheetTitle>
+      </SheetHeader>
 
-  {/* Scrollable Filter Section */}
-  <div className="flex-1  px-5 py-4 space-y-6 ">
-    {/* Categories */}
-    <div>
-      <h3 className="text-sm font-medium mb-2 text-gray-800">Categories</h3>
-      <div className="space-y-2">
-        {categories.map((cat) => (
-          <label
-            key={cat}
-            className="flex items-center gap-2 text-sm text-gray-600 hover:text-black cursor-pointer"
-          >
-            <input
-              type="checkbox"
-              checked={selectedCategories.includes(cat)}
-              onChange={() => handleCategoryChange(cat)}
-              className="accent-black cursor-pointer"
-            />
-            {cat}
-          </label>
-        ))}
-      </div>
-    </div>
+      {/* Scrollable content */}
+      <div className="flex-1 overflow-y-auto p-5">
+        <div className="space-y-6">
+          {/* Categories */}
+          <div>
+            <h3 className="text-sm font-medium mb-2 text-gray-800">
+              Categories
+            </h3>
+            <div className="space-y-2">
+              {categories.map((cat) => (
+                <label
+                  key={cat}
+                  className="flex items-center gap-2 text-sm text-gray-600 hover:text-black cursor-pointer"
+                >
+                  <input
+                    type="checkbox"
+                    checked={selectedCategories.includes(cat)}
+                    onChange={() => handleCategoryChange(cat)}
+                    className="accent-black cursor-pointer"
+                  />
+                  {cat}
+                </label>
+              ))}
+            </div>
+          </div>
 
-    {/* Sorting */}
-    <div>
-      <h3 className="text-sm font-medium mb-2 text-gray-800">Sort by</h3>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button
-            variant="outline"
-            className="w-full flex justify-between text-sm font-medium"
-          >
-            Select <ChevronDown size={16} />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="start" className="w-full">
-          <DropdownMenuItem onClick={() => setSortOption("low-high")}>
-            Price: Low to High
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setSortOption("high-low")}>
-            Price: High to Low
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </div>
-
-    {/* File Extensions */}
-    <div>
-      <h3 className="text-sm font-medium mb-2 text-gray-800">File Extensions</h3>
-      <div className="space-y-2">
-        {extensions.map((ext) => (
-          <label
-            key={ext}
-            className="flex items-center gap-2 text-sm text-gray-600 hover:text-black cursor-pointer"
-          >
-            <input
-              type="checkbox"
-              checked={selectedExtensions.includes(ext)}
-              onChange={() => handleExtensionChange(ext)}
-              className="accent-black cursor-pointer"
-            />
-            .{ext}
-          </label>
-        ))}
-      </div>
-    </div>
-
-    
-
-    {/* Boolean Filters */}
-    <div className="space-y-2">
-  <label className="flex items-center gap-2 text-sm text-gray-600 hover:text-black cursor-pointer">
-    <input
-      type="checkbox"
-      checked={texturedOnly}
-      onChange={(e) =>
-        handleFilterChange("Textured", e.target.checked, setTexturedOnly)
-      }
-      className="accent-black cursor-pointer"
-    />
-    Textured Only
-  </label>
-
-  <label className="flex items-center gap-2 text-sm text-gray-600 hover:text-black cursor-pointer">
-    <input
-      type="checkbox"
-      checked={riggedOnly}
-      onChange={(e) =>
-        handleFilterChange("Rigged", e.target.checked, setRiggedOnly)
-      }
-      className="accent-black cursor-pointer"
-    />
-    Rigged Only
-  </label>
+          {/* File Extensions */}
+          <div>
+            <h3 className="text-sm font-medium mb-2 text-gray-800">
+              File Extensions
+            </h3>
+            <div className="space-y-2">
+              {extensions.map((ext) => (
+                <label
+                  key={ext}
+                  className="flex items-center gap-2 text-sm text-gray-600 hover:text-black cursor-pointer"
+                >
+                  <input
+                    type="checkbox"
+                    checked={selectedExtensions.includes(ext)}
+                    onChange={() => handleExtensionChange(ext)}
+                    className="accent-black cursor-pointer"
+                  />
+                  .{ext}
+                </label>
+              ))}
+            </div>
+          </div>
+          <div>
+  <h3 className="text-sm font-medium mb-2 text-gray-800">
+    Sort by Price
+  </h3>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button
+        variant="outline"
+        className="w-full justify-between"
+      >
+        {sortOption === "low-high"
+          ? "Price: Low to High"
+          : sortOption === "high-low"
+          ? "Price: High to Low"
+          : "Select"}
+        <ChevronDown size={16} />
+      </Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuItem onClick={() => setSortOption("low-high")}>
+        Low to High
+      </DropdownMenuItem>
+      <DropdownMenuItem onClick={() => setSortOption("high-low")}>
+        High to Low
+      </DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
 </div>
-  </div>
-</aside>
+
+          {/* Boolean Filters */}
+          <div className="space-y-2">
+            <label className="flex items-center gap-2 text-sm text-gray-600 hover:text-black cursor-pointer">
+              <input
+                type="checkbox"
+                checked={texturedOnly}
+                onChange={(e) =>
+                  handleFilterChange("Textured", e.target.checked, setTexturedOnly)
+                }
+                className="accent-black cursor-pointer"
+              />
+              Textured Only
+            </label>
+
+            <label className="flex items-center gap-2 text-sm text-gray-600 hover:text-black cursor-pointer">
+              <input
+                type="checkbox"
+                checked={riggedOnly}
+                onChange={(e) =>
+                  handleFilterChange("Rigged", e.target.checked, setRiggedOnly)
+                }
+                className="accent-black cursor-pointer"
+              />
+              Rigged Only
+            </label>
+          </div>
+        </div>
+      </div>
+    </SheetContent>
+  </Sheet>
+</div>
+
+
+  {/* Desktop Sidebar */}
+  <aside className="hidden lg:block bg-white shadow rounded-md p-5 h-fit">
+    <div className="p-4 border-b">
+      <h2 className="text-lg font-semibold">Filters</h2>
+    </div>
+
+    <div className="px-5 py-4 space-y-6">
+      {/* Categories */}
+      <div>
+        <h3 className="text-sm font-medium mb-2 text-gray-800">Categories</h3>
+        <div className="space-y-2">
+          {categories.map((cat) => (
+            <label
+              key={cat}
+              className="flex items-center gap-2 text-sm text-gray-600 hover:text-black cursor-pointer"
+            >
+              <input
+                type="checkbox"
+                checked={selectedCategories.includes(cat)}
+                onChange={() => handleCategoryChange(cat)}
+                className="accent-black cursor-pointer"
+              />
+              {cat}
+            </label>
+          ))}
+        </div>
+      </div>
+
+      {/* File Extensions */}
+      <div>
+        <h3 className="text-sm font-medium mb-2 text-gray-800">File Extensions</h3>
+        <div className="space-y-2">
+          {extensions.map((ext) => (
+            <label
+              key={ext}
+              className="flex items-center gap-2 text-sm text-gray-600 hover:text-black cursor-pointer"
+            >
+              <input
+                type="checkbox"
+                checked={selectedExtensions.includes(ext)}
+                onChange={() => handleExtensionChange(ext)}
+                className="accent-black cursor-pointer"
+              />
+              .{ext}
+            </label>
+          ))}
+        </div>
+      </div>
+
+<div>
+  <h3 className="text-sm font-medium mb-2 text-gray-800">
+    Sort by Price
+  </h3>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button
+        variant="outline"
+        className="w-full justify-between"
+      >
+        {sortOption === "low-high"
+          ? "Price: Low to High"
+          : sortOption === "high-low"
+          ? "Price: High to Low"
+          : "Select"}
+        <ChevronDown size={16} />
+      </Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuItem onClick={() => setSortOption("low-high")}>
+        Low to High
+      </DropdownMenuItem>
+      <DropdownMenuItem onClick={() => setSortOption("high-low")}>
+        High to Low
+      </DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</div>
+      {/* Boolean Filters */}
+      <div className="space-y-2">
+        <label className="flex items-center gap-2 text-sm text-gray-600 hover:text-black cursor-pointer">
+          <input
+            type="checkbox"
+            checked={texturedOnly}
+            onChange={(e) =>
+              handleFilterChange("Textured", e.target.checked, setTexturedOnly)
+            }
+            className="accent-black cursor-pointer"
+          />
+          Textured Only
+        </label>
+
+        <label className="flex items-center gap-2 text-sm text-gray-600 hover:text-black cursor-pointer">
+          <input
+            type="checkbox"
+            checked={riggedOnly}
+            onChange={(e) =>
+              handleFilterChange("Rigged", e.target.checked, setRiggedOnly)
+            }
+            className="accent-black cursor-pointer"
+          />
+          Rigged Only
+        </label>
+      </div>
+    </div>
+  </aside>
+</div>
+
 
 
           {/* Product Grid */}

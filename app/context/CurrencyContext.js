@@ -1,20 +1,37 @@
 "use client";
-import { createContext, useContext, useState, useMemo } from "react";
+import { createContext, useContext, useState, useEffect, useMemo } from "react";
 import toast from "react-hot-toast";
 
 const CurrencyContext = createContext();
 
 export function CurrencyProvider({ children }) {
-  // Default USD
   const [currency, setCurrencyState] = useState("USD");
+  const [eurRate, setEurRate] = useState(0.93); // fallback default EUR rate
 
-  // Rates relative to USD
-  const rates = {
-    USD: 1,
-    EUR: 0.93, // approx, aap API se fetch bhi kar sakte ho
-  };
+  // ✅ Fetch dynamic EUR rate
+  useEffect(() => {
+    async function fetchEurRate() {
+      try {
+        const res = await fetch("https://open.er-api.com/v6/latest/USD");
+        const data = await res.json();
+        if (data.result === "success" && data.rates?.EUR) {
+          setEurRate(data.rates.EUR);
+          console.log("EUR Rate updated:", data.rates.EUR);
+        }
+      } catch (error) {
+        console.error("Error fetching EUR rate:", error);
+      }
+    }
+    fetchEurRate();
+  }, []);
 
-  // Wrapper for setCurrency
+
+  useEffect(() => {
+    console.log('erur', eurRate);
+    
+  }, [eurRate])
+    
+
   const setCurrency = (newCurrency) => {
     setCurrencyState(newCurrency);
     toast.success(
@@ -27,9 +44,9 @@ export function CurrencyProvider({ children }) {
     () => ({
       currency,
       setCurrency,
-      rate: rates[currency] || 1,
+      rate: currency === "USD" ? 1 : eurRate, // USD=1, EUR=dynamic
     }),
-    [currency]
+    [currency, eurRate]
   );
 
   return (

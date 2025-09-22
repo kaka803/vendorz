@@ -32,7 +32,7 @@ const LatestProducts = () => {
     <section className="min-h-[100%] w-full flex flex-col items-center justify-center pt-20 relative">
       <div className="w-full max-w-[1280px] relative">
         <h1 className="text-start text-3xl mb-5 font-sans text-[#365a41]">
-  Editor&apos;s picks.
+  Editor&apos;s picks
 </h1>
 
         <div
@@ -75,7 +75,7 @@ const LatestProducts = () => {
                     <img
                       src={product.images[0]}
                       alt={product.name}
-                      className="w-full h-full object-fit p-3 group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-500"
                     />
                     {/* Hover Add to Cart */}
                     <div className="absolute bottom-[-60px] left-0 w-full flex justify-center transition-all duration-500 group-hover:bottom-0">
