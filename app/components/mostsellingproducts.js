@@ -31,9 +31,9 @@ const LatestProducts = () => {
   return (
     <section className="min-h-[100%] w-full flex flex-col items-center justify-center pt-20 relative">
       <div className="w-full max-w-[1280px] relative">
-        <h1 className="text-start text-3xl mb-5 font-sans  text-[#365a41]">
-          Editor's picks.
-        </h1>
+        <h1 className="text-start text-3xl mb-5 font-sans text-[#365a41]">
+  Editor&apos;s picks.
+</h1>
 
         <div
           className={`${
