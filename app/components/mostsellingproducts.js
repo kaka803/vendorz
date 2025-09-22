@@ -10,7 +10,7 @@ import { useProducts } from "../context/productcontext";
 import Link from "next/link";
 import { HashLoader } from "react-spinners";
 import { useCart } from "../context/cartcontext";
-import { formatCurrency } from "@/lib/formatcurrency";
+import Price from "./Price";
 
 const LatestProducts = () => {
   const { products, loading, allproducts } = useProducts();
@@ -21,7 +21,7 @@ const LatestProducts = () => {
     const source = allproducts && allproducts.length > 0 ? allproducts : products;
     if (!source || source.length === 0) return [];
     const shuffled = [...source].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, 15); // 15 random products
+    return shuffled.slice(0, 10); // 15 random products
   }, [products, allproducts]);
 
   // buttons ke ref
@@ -32,7 +32,7 @@ const LatestProducts = () => {
     <section className="min-h-[100%] w-full flex flex-col items-center justify-center pt-20 relative">
       <div className="w-full max-w-[1280px] relative">
         <h1 className="text-start text-3xl mb-5 font-sans  text-[#365a41]">
-          Most Selling Products
+          Editor's picks.
         </h1>
 
         <div
@@ -97,9 +97,10 @@ const LatestProducts = () => {
                     <p className="text-sm font-sans text-black font-bold mt-1 line-clamp-2">
                       {product.title}
                     </p>
-                    <p className="mt-3 font-sans text-xl font-bold text-[#365a41]">
-                      ${formatCurrency(product.price_numeric)}
-                    </p>
+                    
+<p className="mt-3 font-sans text-xl font-bold text-[#365a41]">
+  <Price basePrice={product.price_numeric} />
+</p>
                   </div>
                 </div>
               </Link>

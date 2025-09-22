@@ -6,13 +6,14 @@ import { useAuth } from "../context/AuthContext";
 import { toast } from "react-hot-toast";
 import { HashLoader } from "react-spinners";
 import { formatCurrency } from "@/lib/formatcurrency";
-import { format } from "crypto-js";
 import Footer from "../components/footer";
+import { useCurrency } from "../context/CurrencyContext";
 
 export default function CheckoutPage() {
   const { cart, subtotal, total } = useCart();
   const [payloading, setpayloading] = useState(false);
   const { user } = useAuth();
+  const { currency, rate } = useCurrency();
 
   const UserEmail = user ? user.email : "";
 
@@ -33,42 +34,44 @@ export default function CheckoutPage() {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
- const handlePayNow = async () => {
-  const promise = (async () => {
-    setpayloading(true);
-    const response = await fetch("/api/create-payment", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        shippingAddress: form,
-        products: cart,
-        subtotal,
-        total,
-        UserEmail,
-      }),
+  const handlePayNow = async () => {
+    const promise = (async () => {
+      setpayloading(true);
+      const response = await fetch("/api/create-payment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          shippingAddress: form,
+          products: cart,
+          subtotal: subtotal * rate,   // ✅ converted amount
+          total: total * rate,         // ✅ converted amount
+          currency,                    // ✅ send selected currency
+          UserEmail,
+        }),
+      });
+
+      const data = await response.json();
+      setpayloading(false);
+
+      if (!data.success) throw new Error(data.message);
+
+      if (data.exactlyPaymentUrl) {
+        window.location.href = data.exactlyPaymentUrl; // ✅ Redirect
+      } else {
+        throw new Error("Payment URL not received");
+      }
+    })();
+
+    // 🔔 Loading / Success / Error Toast
+    toast.promise(promise, {
+      loading: "Processing your order...",
+      success: "Redirecting to payment ✅",
+      error: (err) => `Payment failed ❌ ${err.message}`,
     });
+  };
 
-    const data = await response.json();
-    setpayloading(false);
-
-    if (!data.success) throw new Error(data.message);
-
-    if (data.exactlyPaymentUrl) {
-      window.location.href = data.exactlyPaymentUrl; // ✅ Redirect
-    } else {
-      throw new Error("Payment URL not received");
-    }
-  })();
-
-  // 🔔 Loading / Success / Error Toast
-  toast.promise(promise, {
-    loading: "Processing your order...",
-    success: "Redirecting to payment ✅",
-    error: (err) => `Payment failed ❌ ${err.message}`,
-  });
-};
 
   return (
     <>
@@ -178,7 +181,11 @@ export default function CheckoutPage() {
               disabled={payloading}
               className="bg-[#365a41] hover:bg-[#2d4934] h-12 flex justify-center items-center text-white w-full py-3 rounded mt-4 font-semibold"
             >
-              {payloading ? <HashLoader size={20} color="white"/> : "Place Order"}
+              {payloading ? (
+                <HashLoader size={20} color="white" />
+              ) : (
+                "Place Order"
+              )}
             </button>
           </div>
 
@@ -191,47 +198,51 @@ export default function CheckoutPage() {
                 <div>Qty</div>
                 <div>Subtotal</div>
               </div>
-              {cart.map((item) => (
-                <div
-                  key={item.id}
-                  className="grid grid-cols-4 items-center border-t p-4 text-sm"
-                >
-                  <div className="flex items-center gap-3">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      width={50}
-                      height={50}
-                      className="rounded"
-                    />
-                    <span className="font-medium">
-  {item.title.split(" ").slice(0, 2).join(" ")}
-  {item.title.split(" ").length > 2 && " ..."}
-</span>
 
+              {cart.map((item) => {
+                const convertedPrice = item.price * rate;
+                const convertedSubtotal = item.price * item.quantity * rate;
+
+                return (
+                  <div
+                    key={item.id}
+                    className="grid grid-cols-4 items-center border-t p-4 text-sm"
+                  >
+                    <div className="flex items-center gap-3">
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        width={50}
+                        height={50}
+                        className="rounded"
+                      />
+                      <span className="font-medium">
+                        {item.title.split(" ").slice(0, 2).join(" ")}
+                        {item.title.split(" ").length > 2 && " ..."}
+                      </span>
+                    </div>
+                    <div>{formatCurrency(convertedPrice, currency)}</div>
+                    <div>{item.quantity}</div>
+                    <div>{formatCurrency(convertedSubtotal, currency)}</div>
                   </div>
-                  <div>${formatCurrency(item.price)}</div>
-                  <div>{item.quantity}</div>
-                  <div>
-                    ${formatCurrency(item.price * item.quantity)}
-                  </div>
-                </div>
-              ))}
+                );
+              })}
+
               <div className="border-t mt-4 p-4">
                 <div className="flex justify-between mb-2">
                   <span>Subtotal</span>
-                  <span>${formatCurrency(subtotal)}</span>
+                  <span>{formatCurrency(subtotal * rate, currency)}</span>
                 </div>
                 <div className="flex justify-between font-medium">
                   <span>Total</span>
-                  <span>${formatCurrency(total)}</span>
+                  <span>{formatCurrency(total * rate, currency)}</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }

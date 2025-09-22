@@ -11,6 +11,7 @@ import { useCart } from "../context/cartcontext";
 import Link from "next/link";
 import { HashLoader } from "react-spinners";
 import { formatCurrency } from "@/lib/formatcurrency";
+import Price from "./Price";
 
 const LatestProducts = () => {
   const { products,loading } = useProducts();
@@ -81,9 +82,10 @@ const LatestProducts = () => {
                   <p className="text-sm font-sans text-black font-bold mt-1 line-clamp-2">
                     {product.title}
                   </p>
-                  <p className="mt-3 font-sans text-xl font-bold text-[#365a41]">
-                    ${formatCurrency(product.price_numeric)}
-                  </p>
+                  
+<p className="mt-3 font-sans text-xl font-bold text-[#365a41]">
+  <Price basePrice={product.price_numeric} />
+</p>
                 </div>
 
                 

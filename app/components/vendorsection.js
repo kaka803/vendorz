@@ -34,7 +34,7 @@ const ctx = gsap.context(() => {
       className="w-full overflow-x-hidden bg-[#365a41] h-[100vh] text-white  flex items-center overflow-hidden py-20"
     >
       <h1 className="vendor-text uppercase pl-5 max-md:text-7xl text-9xl font-extrabold whitespace-nowrap tracking-wide">
-        VENDORZ • 3D Modeling Files Marketplace
+        3dvendorz • 3D Modeling Files Marketplace
       </h1>
     </section>
   );

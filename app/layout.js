@@ -5,6 +5,8 @@ import { AuthProvider } from "./context/AuthContext";
 import { Toaster } from "react-hot-toast";
 import SmoothScroll from "./components/SmoothScroll";
 import "./globals.css";
+import { CurrencyProvider } from "./context/CurrencyContext";
+import CurrencySidebar from "./components/CurrencySidebar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +36,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${josefinSans.variable} antialiased`}
       >
+        <CurrencyProvider>
         <AuthProvider>
         <ProductProvider>
           <CartProvider>
@@ -45,9 +48,11 @@ export default function RootLayout({ children }) {
       fontFamily: 'sans-serif',
     },
   }} />
+  <CurrencySidebar />
           </CartProvider>
         </ProductProvider>
         </AuthProvider>
+        </CurrencyProvider>
       </body>
     </html>
   );

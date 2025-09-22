@@ -11,8 +11,9 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import Link from "next/link";
 import Footer from "@/app/components/footer";
 import { useCart } from "@/app/context/cartcontext";
-import { formatCurrency } from "@/lib/formatcurrency";
+
 import { FaFacebookF, FaInstagram, FaYoutube, FaXTwitter } from "react-icons/fa6";
+import Price from "@/app/components/Price";
 
 export default function ProductClient({ params }) {
   const { id } = params; // ✅ yahan `use(params)` hatao
@@ -66,157 +67,141 @@ export default function ProductClient({ params }) {
         </div>
       </div>
         <div className="max-w-7xl mx-auto bg-white rounded-2xl p-6 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Left Section: Image Gallery */}
-         <section className="lg:col-span-7 max-h-[500px] flex flex-col lg:flex-row gap-6">
-  {/* Main Image */}
-  <div className="relative flex-1 rounded-2xl overflow-hidden flex items-center justify-center bg-gray-50">
-    {selected ? (
-      <img
-        src={selected}
-        alt={product.title}
-        className="w-full h-full object-contain transition-transform duration-500 ease-in-out hover:scale-105"
-      />
-    ) : (
-      <div className="flex items-center justify-center h-full text-gray-400">
-        No image
-      </div>
-    )}
-  </div>
-
-  {/* Thumbnails */}
-  <div className="w-full lg:w-[120px] flex lg:flex-col gap-3 overflow-x-auto lg:overflow-y-auto no-scrollbar">
-    {(product.images || []).map((img, i) => (
-      <button
-        key={i}
-        onClick={() => setSelected(img)}
-        className={`relative flex-shrink-0 m-2 p-2 w-24 h-24 rounded-xl overflow-hidden border-2 transition-all duration-300 
-         
-          hover:scale-105 shadow-sm`}
-      >
+  {/* Left Section: Image Gallery */}
+  <section className="lg:col-span-7 max-h-[500px] flex flex-col lg:flex-row gap-6">
+    {/* Main Image */}
+    <div className="relative flex-1 rounded-2xl overflow-hidden flex items-center justify-center bg-gray-50">
+      {selected ? (
         <img
-          src={img}
-          alt={`thumb-${i}`}
-          className="w-full h-full object-contain"
+          src={selected}
+          alt={product.title}
+          className="w-full h-full object-contain transition-transform duration-500 ease-in-out hover:scale-105"
         />
-      </button>
-    ))}
-  </div>
-</section>
-
-
-          {/* Right Section: Product Details */}
-          <aside className="lg:col-span-5 flex flex-col gap-6">
-            <div>
-              <h1 className="text-2xl lg:text-3xl font-semibold font-sans text-[#365a41]">
-                {product.title}
-              </h1>
-              <p className="text-sm text-gray-500 mt-1 font-sans">
-                
-                {product.category || "Uncategorized"}
-              </p>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <div className="text-3xl font-bold font-sans text-[#365a41]">
-                ${formatCurrency(product.price_numeric)}
-              </div>
-              
-            </div>
-
-            <div className="flex flex-wrap gap-3">
-              <button
-                onClick={() => addToCart(product)}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#365a41] text-white "
-              >
-                <ShoppingCart size={16} /> Add to Cart
-              </button>
-            </div>
-
-            <div className="prose max-w-none text-gray-700">
-              <h4 className="text-2xl mb-3 font-medium font-sans">
-                Overview
-              </h4>
-
-              <div
-  className="wrap-anywhere font-sans whitespace-pre-line"
-  dangerouslySetInnerHTML={{
-    __html: product.description || "",
-  }}
-/>
-            </div>  
-
-            {/* Technical Specs */}
-            <div className="mt-2">
-              <h4 className="text-lg font-medium font-sans">
-                Technical details
-              </h4>
-              <div className="mt-3 overflow-x-auto">
-                <table className="w-full text-sm border-collapse">
-                  <tbody>
-                    <tr className="border-t">
-                      <td className="py-3 font-medium font-sans">Format</td>
-                      <td className="py-3 text-right font-sans">
-                        {(product.file_formats || []).join(", ")}
-                      </td>
-                    </tr>
-                    <tr className="border-t">
-                      <td className="py-3 font-medium font-sans">Size</td>
-                      <td className="py-3 text-right font-sans">
-                        {product.file_size || "—"}
-                      </td>
-                    </tr>
-                    <tr className="border-t">
-                      <td className="py-3 font-medium font-sans">
-                        Render Engine
-                      </td>
-                      <td className="py-3 text-right font-sans">
-                        {product.render_engine || "—"}
-                      </td>
-                    </tr>
-                    <tr className="border-t">
-                      <td className="py-3 font-medium font-sans">
-                        Polygon Count
-                      </td>
-                      <td className="py-3 text-right font-sans">
-                        {product.polygon_count ?? "—"}
-                      </td>
-                    </tr>
-                    <tr className="border-t">
-                      <td className="py-3 font-medium font-sans">Vertices</td>
-                      <td className="py-3 text-right font-sans">
-                        {product.vertices_count ?? "—"}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <div className="mt-4 grid grid-cols-2 gap-2">
-                {[
-                  ["Textured", product.textured],
-                  ["Low poly", product.low_poly],
-                  ["Rigged", product.rigged],
-                  ["Materials", product.materials],
-                  ["Animated", product.animated],
-                ].map(([label, val]) => (
-                  <div
-                    key={label}
-                    className="flex items-center justify-between bg-[#365a41] p-3 rounded-md border"
-                  >
-                    <div className="text-sm font-sans text-white">{label}</div>
-                    <div>
-                      {val ? (
-                        <Check size={18} className="text-white" />
-                      ) : (
-                        <X size={18} className="text-white" />
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </aside>
+      ) : (
+        <div className="flex items-center justify-center h-full text-gray-400">
+          No image
         </div>
+      )}
+    </div>
+
+    {/* Thumbnails */}
+    <div className="w-full lg:w-[120px] flex lg:flex-col gap-3 overflow-x-auto lg:overflow-y-auto no-scrollbar">
+      {(product.images || []).map((img, i) => (
+        <button
+          key={i}
+          onClick={() => setSelected(img)}
+          className={`relative flex-shrink-0 m-2 p-2 w-24 h-24 rounded-xl overflow-hidden border-2 transition-all duration-300 hover:scale-105 shadow-sm`}
+        >
+          <img
+            src={img}
+            alt={`thumb-${i}`}
+            className="w-full h-full object-contain"
+          />
+        </button>
+      ))}
+    </div>
+  </section>
+
+  {/* Right Section: Product Details */}
+  <aside className="lg:col-span-5 flex flex-col gap-6">
+    <div>
+      <h1 className="text-2xl lg:text-3xl font-semibold font-sans text-[#365a41]">
+        {product.title}
+      </h1>
+      <p className="text-sm text-gray-500 mt-1 font-sans">
+        {product.category || "Uncategorized"}
+      </p>
+    </div>
+
+    <div className="flex items-center gap-4">
+      <div className="text-3xl font-bold font-sans text-[#365a41]">
+  <Price basePrice={product.price_numeric} />
+</div>
+
+    </div>
+
+    <div className="flex flex-wrap gap-3">
+      <button
+        onClick={() => addToCart(product)}
+        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#365a41] text-white hover:bg-[#2d4a35] transition"
+      >
+        <ShoppingCart size={16} /> Add to Cart
+      </button>
+    </div>
+
+    {/* Technical Specs */}
+    <div className="mt-2">
+  <h4 className="text-xl font-semibold font-sans mb-4 text-[#365a41] border-b pb-2">
+    Technical Details
+  </h4>
+  <div className="overflow-hidden rounded-xl shadow-sm border border-gray-200">
+    <table className="w-full text-sm font-sans">
+      <tbody>
+        {[
+          ["Format", (product.file_formats || []).join(", ")],
+          ["Size", product.file_size || "—"],
+          ["Render Engine", product.render_engine || "—"],
+          ["Polygon Count", product.polygon_count ?? "—"],
+          ["Vertices", product.vertices_count ?? "—"],
+        ].map(([label, value], i) => (
+          <tr
+            key={label}
+            className={`${
+              i % 2 === 0 ? "bg-gray-50" : "bg-white"
+            } hover:bg-gray-100 transition`}
+          >
+            <td className="px-4 py-3 font-medium text-gray-700">{label}</td>
+            <td className="px-4 py-3 text-right text-gray-600">{value}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+  </aside>
+
+  {/* Features Section (Textured, Low poly, etc.) */}
+  <div className="lg:col-span-12 mt-6">
+    <h4 className="text-xl font-semibold font-sans mb-3 text-[#365a41] border-b pb-2">
+      Key Features
+    </h4>
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+      {[
+        ["Textured", product.textured],
+        ["Low poly", product.low_poly],
+        ["Rigged", product.rigged],
+        ["Materials", product.materials],
+        ["Animated", product.animated],
+      ].map(([label, val]) => (
+        <div
+          key={label}
+          className="flex items-center justify-between bg-[#365a41] px-4 py-3 rounded-lg shadow-md hover:shadow-lg transition"
+        >
+          <div className="text-sm font-sans text-white font-medium">{label}</div>
+          <div>
+            {val ? (
+              <Check size={18} className="text-white" />
+            ) : (
+              <X size={18} className="text-white" />
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {/* Product Description */}
+  <div className="lg:col-span-12 mt-10">
+    <h4 className="text-2xl mb-4 font-semibold font-sans text-[#365a41] border-b pb-2">
+      Product Overview
+    </h4>
+    <div
+      className="prose max-w-none p-5 rounded-lg bg-gray-50 text-gray-800 leading-relaxed font-sans whitespace-pre-line shadow-sm"
+      dangerouslySetInnerHTML={{ __html: product.description || "" }}
+    />
+  </div>
+</div>
       </div>
 
       {/* Related Products */}
@@ -273,9 +258,10 @@ export default function ProductClient({ params }) {
                           {related.title}
                         </h3>
                         
-                        <p className="mt-3 font-sans text-xl font-bold text-[#365a41]">
-                          ${formatCurrency(related.price_numeric)}
-                        </p>
+                        
+<p className="mt-3 font-sans text-xl font-bold text-[#365a41]">
+  <Price basePrice={product.price_numeric} />
+</p>
                       </div>
                     </div>
                   </Link>

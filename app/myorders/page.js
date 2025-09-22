@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import Link from "next/link";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
+import Price from "../components/Price";
 
 const OrdersPage = () => {
   const { user } = useAuth();
@@ -90,7 +91,10 @@ const OrdersPage = () => {
                         {new Date(order.createdAt).toLocaleDateString("en-US")}
                       </td>
                       <td className="p-3 border font-semibold">
-                        ${order.total}
+                        
+<p className="mt-3 font-sans text-xl font-bold text-[#365a41]">
+  <Price basePrice={order.total} />
+</p>
                       </td>
                       <td className="p-3 border">
                         {order.paymentStatus}

@@ -7,7 +7,7 @@ export async function POST(req) {
   await connectDb();
   try {
     // 📦 Request body parse
-    const { products, subtotal, total, UserEmail, shippingAddress } = await req.json();
+    const { products, subtotal, total, UserEmail, shippingAddress, currency } = await req.json();
 
     // 🏷️ Shipping fields destructure
     const {
@@ -39,7 +39,7 @@ export async function POST(req) {
             projectId: process.env.NEXT_PUBLIC_EXACTLY_PROJECT_ID,
             paymentMethod: "card",
             amount: amountString,
-            currency: "USD",
+            currency: currency || "USD",
             referenceId,
           },
         },
@@ -89,7 +89,7 @@ export async function POST(req) {
         <h2>New Order Alert</h2>
         <p><strong>Order ID:</strong> ${newOrder._id}</p>
         <p><strong>Customer Email:</strong> ${UserEmail ? UserEmail : email}</p>
-        <p><strong>Total:</strong> $${total}</p>
+        <p><strong>Total:</strong> ${currency} ${total}</p>
         <p><strong>Shipping Address:</strong></p>
         <pre>${JSON.stringify(shippingAddress, null, 2)}</pre>
         <p><strong>Products:</strong></p>
