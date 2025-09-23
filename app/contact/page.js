@@ -4,6 +4,7 @@ import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import { HashLoader } from "react-spinners";
 import toast from "react-hot-toast";
+import CurrencySidebar from "../components/CurrencySidebar";
 
 export default function ContactPage() {
   const [contactloading, setcontactloading] = useState(false)
@@ -48,6 +49,7 @@ const handleSubmit = async (e) => {
 
   return (
     <>
+    <CurrencySidebar />
     <Navbar/>
     <div className="min-h-screen mt-20  flex-col flex  justify-center items-start py-16 px-6">
         <h1 className="text-4xl text-black text-center font-semibold font-sans w-full">Contact Us</h1>

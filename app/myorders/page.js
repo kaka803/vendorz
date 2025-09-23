@@ -5,6 +5,7 @@ import Link from "next/link";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import Price from "../components/Price";
+import CurrencySidebar from "../components/CurrencySidebar";
 
 const OrdersPage = () => {
   const { user } = useAuth();
@@ -35,6 +36,7 @@ const OrdersPage = () => {
   if (!user) {
     return (
       <>
+      <CurrencySidebar />
         <Navbar />
         <div className="max-w-2xl mt-55 mx-auto p-6 text-center bg-white shadow font-sans rounded-lg mb-30">
           <h2 className="text-xl font-bold mb-4 text-gray-800">Order History</h2>
@@ -56,6 +58,7 @@ const OrdersPage = () => {
 
   return (
     <>
+    <CurrencySidebar />
       <Navbar />
       <div className="max-w-5xl mx-auto mt-35 p-6 bg-white shadow rounded-lg font-sans mb-20">
         <h2 className="text-xl font-bold mb-6 text-gray-800">

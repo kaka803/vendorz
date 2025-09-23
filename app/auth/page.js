@@ -40,12 +40,11 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center  px-4 font-sans">
+    <div className="min-h-screen flex items-center justify-center px-4 font-sans">
   <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
     {/* Logo + Heading */}
     <div className="flex justify-center items-center gap-3 mb-3">
-      <img src="/logo.svg" alt="" className="w-30" />
-    
+      <img src="/logo.svg" alt="" className="w-24 sm:w-28" />
     </div>
 
     {/* Error Message */}
@@ -149,17 +148,19 @@ export default function AuthPage() {
 
     {/* Links Section */}
     {!showForgot ? (
-      <div className="mt-5 flex justify-between items-center text-sm">
-        <button
-          onClick={() => {
-            setShowForgot(true);
-            setError(null);
-          }}
-          className="text-gray-600 hover:text-[#365a41] hover:underline"
-        >
-          Forgot password?
-        </button>
-        <p className="text-gray-600">
+      <div className="mt-5 flex flex-col sm:flex-row justify-between items-center text-sm gap-3">
+        {isLogin && (
+          <button
+            onClick={() => {
+              setShowForgot(true);
+              setError(null);
+            }}
+            className="text-gray-600 hover:text-[#365a41] hover:underline"
+          >
+            Forgot password?
+          </button>
+        )}
+        <p className="text-gray-600 text-center sm:text-left">
           {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
           <button
             onClick={() => {
@@ -188,18 +189,18 @@ export default function AuthPage() {
     )}
 
     {/* Return to Home */}
-    <div onClick={()=> {
-      router.push('/')
-          setIsLogin(true)
-        } } className="mt-6 text-center inline-block text-sm text-gray-600 cursor-pointer hover:text-[#365a41] ">
-      
-        
-       
-      
-        ← Return to Home
+    <div
+      onClick={() => {
+        router.push("/");
+        setIsLogin(true);
+      }}
+      className="mt-6 text-center text-sm text-gray-600 cursor-pointer hover:text-[#365a41]"
+    >
+      ← Return to Home
     </div>
   </div>
 </div>
+
 
   );
 }

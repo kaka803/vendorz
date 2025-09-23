@@ -9,10 +9,12 @@ import MostSellingSection from "./components/mostsellingproducts";
 import TestimonialSection from "./components/testimonial";
 import Footer from "./components/footer";
 import Link from "next/link";
+import CurrencySidebar from "./components/CurrencySidebar";
 
 export default function Home() {
   return (
     <>
+    <CurrencySidebar />
     <div className="relative">
     <Navbar/>
     <div className="main hero-section relative w-full h-screen overflow-hidden">

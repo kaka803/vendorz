@@ -8,6 +8,7 @@ import { HashLoader } from "react-spinners";
 import { formatCurrency } from "@/lib/formatcurrency";
 import Footer from "../components/footer";
 import { useCurrency } from "../context/CurrencyContext";
+import CurrencySidebar from "../components/CurrencySidebar";
 
 export default function CheckoutPage() {
   const { cart, subtotal, total } = useCart();
@@ -75,6 +76,7 @@ export default function CheckoutPage() {
 
   return (
     <>
+    <CurrencySidebar />
       <Navbar />
       <div className="max-w-[90%] mx-auto mt-32 font-sans mb-20">
         <h2 className="text-2xl font-semibold mb-6">Checkout</h2>

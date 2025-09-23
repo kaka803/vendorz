@@ -1,9 +1,11 @@
 import React from 'react'
 import Navbar from '../components/navbar'
 import Footer from '../components/footer'
+import CurrencySidebar from '../components/CurrencySidebar'
 const Privacy = () => {
   return (
     <>
+    <CurrencySidebar />
     <Navbar/>
     <div>
       <div className="min-h-screen bg-gray-50 font-sans  text-gray-800 px-6 py-12">

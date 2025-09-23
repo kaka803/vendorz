@@ -1,9 +1,11 @@
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
+import CurrencySidebar from "../components/CurrencySidebar";
 export default function AboutPage() {
 
   return (
     <>
+    <CurrencySidebar />
     <Navbar/>
     <div className="min-h-screen mt-10 flex justify-center items-start py-16 px-6">
       <div className="w-full main-container bg-white rounded-lg  p-8 leading-relaxed font-sans">

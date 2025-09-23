@@ -6,6 +6,7 @@ import { ShoppingCart, ChevronDown, Filter } from "lucide-react";
 import Navbar from "../components/navbar";
 import { HashLoader } from "react-spinners";
 import Pagination from "../components/Paginate";
+import CurrencySidebar from "../components/CurrencySidebar";
 import toast from "react-hot-toast";
 import {
   DropdownMenu,
@@ -154,6 +155,7 @@ function handleFilterChange(type, value, setter) {
 
   return (
     <>
+    <CurrencySidebar />
       <Navbar />
 
       <div className="main-container mt-30 py-10 font-sans px-4 sm:px-6 lg:px-8">
@@ -345,7 +347,7 @@ function handleFilterChange(type, value, setter) {
                 onChange={() => handleExtensionChange(ext)}
                 className="accent-black cursor-pointer"
               />
-              .{ext}
+              {ext}
             </label>
           ))}
         </div>

@@ -11,7 +11,7 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import Link from "next/link";
 import Footer from "@/app/components/footer";
 import { useCart } from "@/app/context/cartcontext";
-
+import CurrencySidebar from "@/app/components/CurrencySidebar";
 import { FaFacebookF, FaInstagram, FaYoutube, FaXTwitter } from "react-icons/fa6";
 import Price from "@/app/components/Price";
 
@@ -48,6 +48,7 @@ export default function ProductClient({ params }) {
 
   return (
     <>
+    <CurrencySidebar />
       <Navbar />
       <div className="min-h-screen main-container mt-20 py-12 px-6 lg:px-20">
       <div className=" py-3 px-6 lg:px-10 ">

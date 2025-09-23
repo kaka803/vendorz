@@ -1,10 +1,11 @@
 import React from 'react'
 import Navbar from '../components/navbar'
 import Footer from '../components/footer'
-
+import CurrencySidebar from '../components/CurrencySidebar'
 const Terms = () => {
   return (
     <>
+    <CurrencySidebar />
     <Navbar/>
     <div className="min-h-screen  my-30  text-gray-800 px-6  font-sans">
       <div className="main-container mx-auto">

@@ -6,6 +6,7 @@ import { useCart } from "../context/cartcontext";
 import Footer from "../components/footer";
 import { useCurrency } from "../context/CurrencyContext";
 import { formatCurrency } from "@/lib/formatcurrency";
+import CurrencySidebar from "../components/CurrencySidebar";
 
 export default function CartPage() {
   const { cart, removeFromCart, updateQuantity, subtotal, total } = useCart();
@@ -13,6 +14,7 @@ export default function CartPage() {
 
   return (
     <>
+    <CurrencySidebar />
       <Navbar />
       <div className="main-container mt-30 py-10">
         {/* Cart Container */}

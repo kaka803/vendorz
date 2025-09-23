@@ -1,10 +1,12 @@
 import React from 'react'
 import Navbar from '../components/navbar'
 import Footer from '../components/footer'
+import CurrencySidebar from '../components/CurrencySidebar'
 
 const Commercial = () => {
   return (
     <>
+    <CurrencySidebar />
     <Navbar/>
     <div className="min-h-screen  text-gray-800 px-6 my-30 font-sans">
       <div className="main-container mx-auto">

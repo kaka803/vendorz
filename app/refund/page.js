@@ -2,10 +2,12 @@
 import Navbar from "../components/navbar";
 import React from "react";
 import Footer from "../components/footer";
+import CurrencySidebar from "../components/CurrencySidebar";
 
 const RefundPolicy = () => {
   return (
     <>
+    <CurrencySidebar />
     <Navbar/>
     <div className="min-h-screen mt-17 py-10 px-5 md:px-20 font-sans">
       <div className="main-container mx-auto bg-white  rounded-xl p-8">

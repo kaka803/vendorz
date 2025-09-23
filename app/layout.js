@@ -48,7 +48,7 @@ export default function RootLayout({ children }) {
       fontFamily: 'sans-serif',
     },
   }} />
-  <CurrencySidebar />
+  
           </CartProvider>
         </ProductProvider>
         </AuthProvider>
