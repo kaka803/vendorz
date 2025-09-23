@@ -84,7 +84,7 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/commercial" className="hover:text-white transition-colors">
+              <Link href="/refund" className="hover:text-white transition-colors">
                 Refunds
               </Link>
             </li>
