@@ -29,7 +29,7 @@ const FeaturedProducts = () => {
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {randomProducts.map((product) => (
-           <div className="group overflow-hidden  rounded-2xl my-2 white-border shadow-md hover:shadow-lg transition-all duration-300 w-[260px] h-85 mx-auto flex flex-col">
+           <div key={product._id} className="group overflow-hidden  rounded-2xl my-2 white-border shadow-md hover:shadow-lg transition-all duration-300 w-[260px] h-85 mx-auto flex flex-col">
                          
                          {/* Badge */}
                          <div className="px-3 py-1 exo bg-[#EDE9FE] text-[black] text-xs font-medium rounded-br-xl w-fit">
