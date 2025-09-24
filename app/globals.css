@@ -7,12 +7,50 @@ body {
   color: black;
   font-family: 'Josefin Sans', Arial, Helvetica, sans-serif;
 }
+.audiowide {
+  font-family: "Audiowide", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.bg {
+  /* set this on the element: style="--bg-url: url('/path/to/image.jpg')" */
+  background-image: url('/bg.jpg');
+  background-size: cover;           /* cover, contain, or a custom value */
+  background-position: center;      /* e.g. center top, 50% 30% */
+  background-repeat: no-repeat;     /* repeat, repeat-x, repeat-y */
+  display: block;
+}
+.hero-bg {
+  /* set this on the element: style="--bg-url: url('/path/to/image.jpg')" */
+  background-image: url('/hero-bg.jpg');
+  background-size: cover;           /* cover, contain, or a custom value */
+  background-position: center;      /* e.g. center top, 50% 30% */
+  background-repeat: no-repeat;     /* repeat, repeat-x, repeat-y */
+  
+}
+.orbitron {
+  font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: 2px;
+}
+p, .exo {
+  font-family: "Exo 2", sans-serif !important;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
 
 .hero-section {
   position: relative;
   width: 100%;
   height: 100vh; /* full screen height */
   overflow: hidden;
+}
+
+.white-border{
+  border: 1px solid rgba(255, 255, 255, 0.651);
 }
 
 button{
@@ -54,10 +92,10 @@ button{
 }
 
 .bottom-border{
-  border-bottom: 1px solid rgba(0, 0, 0, 0.719);
+  border-bottom: 1px solid white;
 }
-.bottom-top{
-  border-top: 1px solid rgba(0, 0, 0, 0.719);
+.border-top{
+  border-top: 1px solid white;
 }
 
 @theme inline {

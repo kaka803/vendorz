@@ -27,25 +27,25 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section className="w-full py-16 ">
+    <section className="w-full py-16 pb-30">
       <div className="w-[95%] max-w-[1280px] mx-auto">
-        <h2 className="text-6xl font-bold uppercase font-sans text-[#365a41] my-10 text-center">
+        <h2 className="text-5xl font-bold uppercase font-sans orbitron text-center text-white mb-15 pt-10">
           FAQs
         </h2>
 
-        <div className="flex flex-col gap-4 max-w-3xl mx-auto">
+        <div className="flex flex-col gap-4 main-container mx-auto">
           {faqs.map((faq, index) => (
             <Accordion
               key={index}
               type="single"
               collapsible
-              className="bg-[#365a41] rounded-md"
+              className="rounded-lg shadow-md"
             >
               <AccordionItem value={`item-${index}`}>
-                <AccordionTrigger className="text-white font-semibold px-5 py-6 font-sans hover:bg-[#2d4634] rounded-xl">
+                <AccordionTrigger className="bg-gray-800 text-white exo font-semibold px-5 py-6 font-sans hover:opacity-90 rounded-lg">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-gray-200 px-5 py-3 font-sans border-t border-white/20">
+                <AccordionContent className="bg-gray-700 text-white exo px-5 py-3 font-sans rounded-lg mt-2 ">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>

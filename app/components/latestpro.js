@@ -23,81 +23,104 @@ const LatestProducts = () => {
   const nextRef = useRef(null);
 
   return (
-    <section className="min-h-[400px]  w-full flex flex-col items-center justify-center bottom-top pt-20  relative">
-      
+    <section className="min-h-[400px] w-full flex flex-col items-center justify-center bottom-top pt-20 relative">
+  <div className="w-full max-w-[1280px] relative">
+    <h1 className="text-start text-3xl ml-4 mb-6 orbitron text-[white]">
+      Latest Products
+    </h1>
 
-      <div className="w-[100%] max-w-[1280px] relative ">
-      <h1 className={`text-start text-3xl mb-5 font-sans `} >Latest Products</h1>
-        <div className={`${loading ? 'flex justify-center items-center w-full h-[200px]' : 'block'}`}>
-        {loading && <HashLoader size={40} color="#365a41" />}
-        </div>
+    <div
+      className={`${
+        loading
+          ? "flex justify-center items-center w-full h-[200px]"
+          : "block"
+      }`}
+    >
+      {loading && <HashLoader size={40} color="#4F46E5" />}
+    </div>
+
+    <Swiper
+      modules={[Navigation, Pagination, Autoplay]}
+      spaceBetween={20}
+      slidesPerView={1}
+      autoplay={{
+        delay: 3000,
+        disableOnInteraction: false,
+      }}
+      loop={true}
+      onInit={(swiper) => {
+        swiper.params.navigation.prevEl = prevRef.current;
+        swiper.params.navigation.nextEl = nextRef.current;
+        swiper.navigation.init();
+        swiper.navigation.update();
+      }}
+      breakpoints={{
+        640: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
+        1280: { slidesPerView: 4 },
+      }}
+    >
+      {productslatest.map((product) => (
+        <SwiperSlide key={product.id}>
           
-        <Swiper
-          modules={[Navigation, Pagination, Autoplay]}
-          spaceBetween={30}
-          slidesPerView={1}
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-          }}
-          loop= {true}
-          onInit={(swiper) => {
-            // custom buttons attach karna
-            swiper.params.navigation.prevEl = prevRef.current;
-            swiper.params.navigation.nextEl = nextRef.current;
-            swiper.navigation.init();
-            swiper.navigation.update();
-          }}
-          breakpoints={{
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-            1280: { slidesPerView: 4 },
-          }}
-        >
-          {productslatest.map((product) => (
-            <SwiperSlide key={product.id}>
-              <Link href={`/product/${product._id}`}>
-              <div  className="group bg-white rounded-sm  overflow-hidden  transition hover:shadow-lg">
-                {/* Product Image */}
-                <div className="w-full h-60 overflow-hidden relative">
-                  <img
-                    src={product.images[0]}
-                    alt={product.name}
-                    className="w-full h-full object-fit group-hover:scale-105 transition-transform duration-500"
-                  />
-                  {/* Hover Add to Cart */}
-                <div className="absolute bottom-[-60px] left-0 w-full flex justify-center transition-all duration-500 group-hover:bottom-0">
-                   <button onClick={() => addToCart(product)} className="flex justify-center w-full items-center gap-2 bg-[#365a41] text-white px-6 py-2  shadow  transition">
-                    <ShoppingCart size={18} />
-                    Add to Cart
-                  </button>
-                  </div>
-                </div>
-
-                {/* Card Content */}
-                <div className="p-5">
-                  <h3 className="text-lg font-sans font-semibold text-gray-800 truncate">
-                    {product.name}
-                  </h3>
-                  <p className="text-sm font-sans text-black font-bold mt-1 line-clamp-2">
-                    {product.title}
-                  </p>
-                  
-<p className="mt-3 font-sans text-xl font-bold text-[#365a41]">
-  <Price basePrice={product.price_numeric} />
-</p>
-                </div>
-
-                
-                 
-                
+            <div className="group overflow-hidden  rounded-2xl my-2 white-border shadow-md hover:shadow-lg transition-all duration-300 w-[260px] h-85 mx-auto flex flex-col">
+              
+              {/* Badge */}
+              <div className="px-3 py-1 exo bg-[#EDE9FE] text-[black] text-xs font-medium rounded-br-xl w-fit">
+                New Arrival
               </div>
-              </Link>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-    </section>
+
+              {/* Product Image */}
+              <div className="relative w-full h-44 flex items-center justify-center p-4">
+                <img
+                  src={product.images[0]}
+                  alt={product.name}
+                  className="max-h-full max-w-full object-contain"
+                />
+              </div>
+
+              {/* Card Content */}
+              <div className="flex flex-col flex-grow px-4 pb-4">
+                <h3 className="text-base exo font-semibold text-gray-900 truncate">
+                  {product.name}
+                </h3>
+                <p className="text-sm exo text-white mt-1 line-clamp-2">
+                  {product.title}
+                </p>
+
+                {/* Price */}
+                <p className="text-lg exo font-bold text-[white] mt-2">
+                  <Price basePrice={product.price_numeric} />
+                </p>
+
+                {/* Buttons */}
+                <div className="mt-3 flex gap-2">
+  {/* Add to cart button */}
+  <button
+    onClick={() => addToCart(product)}
+    className="flex-1 flex items-center justify-center gap-1 bg-gray-100 text-gray-600 text-sm font-medium px-3 py-2 rounded-lg hover:bg-gray-200 transition"
+  >
+    <ShoppingCart size={16} />
+    Add
+  </button>
+
+  {/* Link styled like a button */}
+  <Link
+    href={`/product/${product._id}`}
+    className="flex-1 white-border text-white text-sm font-semibold px-3 py-2 rounded-lg  transition flex items-center justify-center"
+  >
+    Buy
+  </Link>
+</div>
+
+              </div>
+            </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  </div>
+</section>
+
   );
 };
 

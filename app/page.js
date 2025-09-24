@@ -10,51 +10,42 @@ import TestimonialSection from "./components/testimonial";
 import Footer from "./components/footer";
 import Link from "next/link";
 import CurrencySidebar from "./components/CurrencySidebar";
+import FeaturedProducts from "./components/featured";
 
 export default function Home() {
   return (
     <>
     <CurrencySidebar />
-    <div className="relative">
+    <div className="relative bg-black">
     <Navbar/>
-    <div className="main hero-section relative w-full h-screen overflow-hidden">
-  {/* Background Video */}
-  <video
-    autoPlay
-    muted
-    loop
-    playsInline
-    className="absolute top-0 left-0 w-full h-full object-cover"
-  >
-    <source src="/background.mp4" type="video/mp4" />
-  </video>
+   <Hero/>
 
-  {/* Black Overlay */}
-  <div className="absolute inset-0 bg-black/70"></div>
-
-  {/* Content */}
-  <div className="relative flex flex-col items-center justify-center h-full text-white text-center z-10">
-    <Hero/>
-  </div>
-</div>
-
-<div className="section flex flex-col md:flex-row justify-between   w-full min-h-[100px] my-20 max-md:my-15 main-container relative">
+<div className="section flex flex-col md:flex-row justify-between items-center w-full min-h-[120px] my-20 main-container relative white-border rounded-2xl  px-6 py-10 md:px-10 md:py-14">
   {/* Heading */}
-  <h1 className="text-2xl sm:text-3xl md:text-4xl  font-sans text-[#365a41] font-normal leading-snug md:leading-tight text-center md:text-left">
+  <h1 className="text-2xl orbitron sm:text-3xl text-white  font-semibold 
+    
+    leading-snug md:leading-tight 
+    text-center md:text-left max-w-2xl">
     Need Unique 3D Designs? From <br className="hidden sm:block" /> 
     Vehicles to Virtual Beasts, We <br className="hidden sm:block" /> 
     Build Models That Inspire.
   </h1>
 
   {/* Button */}
-  <div className="flex justify-center md:justify-end mt-6 md:mt-0 relative md:absolute md:bottom-0 md:right-0">
-    <Link href={'/contact'}>
-    <button className="bg-[#365a41] hover:bg-[#1d4d2a] text-white hover:text-white transition px-6 py-3 rounded-lg font-sans text-sm sm:text-base md:text-lg">
-      Send inquiry
-    </button>
-    </Link>
-  </div>
+  <Link href={'/contact'}>
+  <button className="px-8 py-3 rounded-xl font-semibold text-base sm:text-lg font-sans 
+    white-border
+    text-white shadow-lg 
+    hover:shadow-[0_6px_15px_rgba(109,40,217,0.6)] 
+    hover:scale-105 
+    active:translate-y-[2px] active:shadow-none
+    transition-all duration-300">
+    ✉️ Send Inquiry
+  </button>
+</Link>
+
 </div>
+
 
 
 
@@ -65,6 +56,9 @@ export default function Home() {
   <CategorySection/>
 </section>
 
+<section className="w-full main-container">
+  <FeaturedProducts/>
+</section>
 <section>
   <VendorSection/>
 </section>

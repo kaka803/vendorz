@@ -18,8 +18,8 @@ const pathname = usePathname();
     pathname === path ? "border-b-2 border-black pb-1" : "";
   return (
     <>
-      <div className="w-full navbar px-4 fixed top-5 z-30">
-        <div className="max-w-[1280px] rounded-lg backdrop-blur-lg bg-white/60 border border-white/20 shadow-[0_10px_30px_rgba(0,0,0,0.15)] mx-auto flex justify-between items-center h-19 px-6">
+      <div className="w-full navbar px-4 shadow-[0_10px_30px_rgba(0,0,0,0.55)] bg fixed top-0 z-30">
+        <div className="max-w-[1280px] rounded-lg   mx-auto flex justify-between items-center h-19 px-6">
 
 <Link href={'/'}><div className="text-white cursor-pointer font-bold text-3xl mt-2 lg:mt-0 lg:text-5xl  "><img src="/logo.svg" alt="" className="w-40 max-lg:w-24" /></div></Link>
           {/* Left Links */}
@@ -104,12 +104,13 @@ const pathname = usePathname();
               </div>
             ) : (
               <>
-                <Link href="/auth">
-                  <button className="max-lg:hidden bg-gradient-to-r from-[#365a41] to-[#2d4a35] text-white px-6 py-2.5 rounded-xl font-sans font-medium shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
+                <Link
+  href="/auth"
+  className="max-lg:hidden inline-block bg-gradient-to-r from-[#4e47af] to-[#4C1D95] text-white px-6 py-2.5 rounded-xl font-sans font-semibold shadow-md hover:shadow-lg hover:scale-105 hover:from-[#312E81] hover:to-[#6D28D9] transition-all duration-300"
+>
   Login
-</button>
+</Link>
 
-                </Link>
                 
               </>
             )}
@@ -187,7 +188,7 @@ const pathname = usePathname();
               </div>
             ) : (
               <Link href={'/auth'}>
-              <button className="lg:hidden block bg-gradient-to-r from-[#365a41] to-[#2d4a35] text-white px-6 py-2.5 rounded-xl font-sans font-medium shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
+              <button className="lg:hidden block bg-gradient-to-r from-[#4e47af] to-[#4C1D95] text-white px-6 py-2.5 rounded-xl font-sans font-medium shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
   Login
 </button>
 </Link>

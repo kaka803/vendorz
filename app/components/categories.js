@@ -16,65 +16,59 @@ const CategorySection = () => {
   }, [allproducts]);
 
   // Optional: Different background colors for each category
-  const bgColorMap = {
-    tree: "bg-green-200",
-    sports: "bg-red-200",
-    car: "bg-blue-200",
-    vegetable: "bg-emerald-200",
-    jewlery: "bg-yellow-200",
-    fruit: "bg-pink-200",
-    bathroom: "bg-indigo-200",
-    stool: "bg-purple-200",
-    clothing: "bg-orange-200",
-    buildings: "bg-slate-200",
-  };
+
 
   return (
-    <section className="w-full py-16">
-      <div className="w-[95%] max-w-[1280px] mx-auto">
-        <h1 className="text-start text-3xl mb-8 font-sans  text-gray-800">
-          Categories
-        </h1>
+    <section className="w-full py-16 bottom-border">
+  <div className="w-[95%] max-w-[1280px] mx-auto">
+    <h1 className="text-start text-3xl ml-4 mb-6 orbitron text-[white]">
+      Categories
+    </h1>
 
-        <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
-          spaceBetween={15}
-          slidesPerView={2}
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-          }}
-          loop= {true}
-          breakpoints={{
-            640: { slidesPerView: 3 },
-            1024: { slidesPerView: 4 },
-            1280: { slidesPerView: 5 },
-          }}
-        >
-          {categories.map((category, index) => (
-            <SwiperSlide key={index}>
-              <Link href={'/shop'}>
-              <div
-                className={`flex items-center justify-center rounded-lg text-white p-6 cursor-pointer transition-transform transform hover:scale-105 ${
-                  "bg-[#365a41]"
-                }`}
-              >
-                <div className="text-center">
-                  <h3 className="text-lg font-semibold text-white font-sans">
-                    {category.charAt(0).toUpperCase() + category.slice(1)}
-                  </h3>
-                  <p className="text-xs text-white mt-1 font-sans">
-                    {allproducts.filter((p) => p.category === category).length}{" "}
-                    Products
-                  </p>
-                </div>
+    {/* Swiper */}
+    <Swiper
+      modules={[Navigation, Pagination, Autoplay]}
+      spaceBetween={20}
+      slidesPerView={2}
+      autoplay={{
+        delay: 3000,
+        disableOnInteraction: false,
+      }}
+      loop={true}
+      breakpoints={{
+        640: { slidesPerView: 3 },
+        1024: { slidesPerView: 4 },
+        1280: { slidesPerView: 5 },
+      }}
+    >
+      {categories.map((category, index) => (
+        <SwiperSlide key={index}>
+          <Link href="/shop">
+            <div
+              className={`flex my-4 mx-2 items-center justify-center rounded-xl p-6 cursor-pointer 
+             
+              
+             white-border
+              transition-all duration-300 hover:scale-105`}
+            >
+              <div className="text-center">
+                <h3 className="text-lg font-semibold text-white font-sans tracking-wide">
+                  {category.charAt(0).toUpperCase() + category.slice(1)}
+                </h3>
+                <p className="text-xs text-gray-100 mt-1 font-sans">
+                  {allproducts.filter((p) => p.category === category).length}{" "}
+                  Products
+                </p>
               </div>
-              </Link>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-    </section>
+            </div>
+          </Link>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  </div>
+</section>
+
+
   );
 };
 
