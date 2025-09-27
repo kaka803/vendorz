@@ -21,7 +21,7 @@ const CategorySection = () => {
   return (
     <section className="w-full py-16 bottom-border">
   <div className="w-[95%] max-w-[1280px] mx-auto">
-    <h1 className="text-start text-3xl ml-4 mb-6 orbitron text-[white]">
+    <h1 className="text-start max-md:text-2xl text-3xl ml-4 mb-6 orbitron text-[white]">
       Categories
     </h1>
 
@@ -48,7 +48,7 @@ const CategorySection = () => {
               className={`flex my-4 mx-2 items-center justify-center rounded-xl p-6 cursor-pointer 
              
               
-             white-border
+             bg-gradient-to-r from-[#4e47af] to-[#4C1D95]
               transition-all duration-300 hover:scale-105`}
             >
               <div className="text-center">

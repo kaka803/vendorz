@@ -33,9 +33,11 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Slider } from "@/components/ui/slider";
 import Price from "../components/Price";
+import { useCart } from "../context/cartcontext";
 
 export default function ShopPage() {
   const { allproducts, loading, products } = useProducts();
+  const {addToCart} = useCart()
   const productData = allproducts.length > 0 ? allproducts : products;
 
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -158,16 +160,16 @@ function handleFilterChange(type, value, setter) {
     <CurrencySidebar />
       <Navbar />
 
-      <div className="main-container mt-30 py-10 font-sans px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+      <div className="main-container  mt-30 py-10 font-sans  sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto  mb-6">
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                <BreadcrumbLink href="/" className={'text-white hover:text-white/70'}>Home</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink href="/shop">Shop</BreadcrumbLink>
+                <BreadcrumbLink href="/shop" className={'text-white hover:text-white/70'}>Shop</BreadcrumbLink>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
@@ -305,7 +307,7 @@ function handleFilterChange(type, value, setter) {
 
 
   {/* Desktop Sidebar */}
-  <aside className="hidden lg:block bg-white shadow rounded-md p-5 h-fit">
+  <aside className="hidden lg:block bg-black white-border shadow rounded-md p-5 h-fit">
     <div className="p-4 border-b">
       <h2 className="text-lg font-semibold">Filters</h2>
     </div>
@@ -313,12 +315,12 @@ function handleFilterChange(type, value, setter) {
     <div className="px-5 py-4 space-y-6">
       {/* Categories */}
       <div>
-        <h3 className="text-sm font-medium mb-2 text-gray-800">Categories</h3>
+        <h3 className="text-sm font-medium mb-2 text-white/90">Categories</h3>
         <div className="space-y-2">
           {categories.map((cat) => (
             <label
               key={cat}
-              className="flex items-center gap-2 text-sm text-gray-600 hover:text-black cursor-pointer"
+              className="flex items-center gap-2 text-sm text-white/70 hover:text-white cursor-pointer"
             >
               <input
                 type="checkbox"
@@ -334,12 +336,12 @@ function handleFilterChange(type, value, setter) {
 
       {/* File Extensions */}
       <div>
-        <h3 className="text-sm font-medium mb-2 text-gray-800">File Extensions</h3>
+        <h3 className="text-sm font-medium mb-2 text-white/90">File Extensions</h3>
         <div className="space-y-2">
           {extensions.map((ext) => (
             <label
               key={ext}
-              className="flex items-center gap-2 text-sm text-gray-600 hover:text-black cursor-pointer"
+              className="flex items-center gap-2 text-sm text-white/70 hover:text-white cursor-pointer"
             >
               <input
                 type="checkbox"
@@ -354,14 +356,14 @@ function handleFilterChange(type, value, setter) {
       </div>
 
 <div>
-  <h3 className="text-sm font-medium mb-2 text-gray-800">
+  <h3 className="text-sm font-medium mb-2 text-white/90">
     Sort by Price
   </h3>
   <DropdownMenu>
     <DropdownMenuTrigger asChild>
       <Button
         variant="outline"
-        className="w-full justify-between"
+        className="w-full justify-between bg-black hover:bg-white/80"
       >
         {sortOption === "low-high"
           ? "Price: Low to High"
@@ -383,7 +385,7 @@ function handleFilterChange(type, value, setter) {
 </div>
       {/* Boolean Filters */}
       <div className="space-y-2">
-        <label className="flex items-center gap-2 text-sm text-gray-600 hover:text-black cursor-pointer">
+        <label className="flex items-center gap-2 text-sm text-white/70 hover:text-white cursor-pointer">
           <input
             type="checkbox"
             checked={texturedOnly}
@@ -395,7 +397,7 @@ function handleFilterChange(type, value, setter) {
           Textured Only
         </label>
 
-        <label className="flex items-center gap-2 text-sm text-gray-600 hover:text-black cursor-pointer">
+        <label className="flex items-center gap-2 text-sm text-white/70 hover:text-white cursor-pointer">
           <input
             type="checkbox"
             checked={riggedOnly}
@@ -424,33 +426,57 @@ function handleFilterChange(type, value, setter) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                   {paginatedProducts.length > 0 ? (
                     paginatedProducts.map((product) => (
-                      <Link key={product._id} href={`/product/${product._id}`}>
-                        <div className="group hover:scale-105 hover:-translate-y-2 duration-500 bg-white rounded-sm shadow-md h-90 overflow-hidden transition hover:shadow-lg cursor-pointer">
-                          <div className="w-full h-56 sm:h-60 overflow-hidden relative">
-                            <img
-                              src={product.images[0]}
-                              alt={product.name}
-                              className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
-                            />
-                            <div className="absolute bottom-[-60px] left-0 w-full flex justify-center transition-all duration-500 group-hover:bottom-0">
-                              <button className="flex justify-center w-full items-center gap-2 bg-[#365a41] text-white px-6 py-2 shadow transition">
-                                <ShoppingCart size={18} />
-                                Add to Cart
-                              </button>
-                            </div>
-                          </div>
-
-                          <div className="p-5">
-                           
-                            <p className="text-sm font-sans text-black  mt-1 line-clamp-2">
-                              {product.title}
-                            </p>
-                            <p className="mt-3 font-sans text-xl font-bold text-black">
-                              <Price basePrice={product.price_numeric} />
-                            </p>
-                          </div>
+                      
+                         <div className="group overflow-hidden  rounded-2xl my-2 white-border shadow-md hover:shadow-lg transition-all duration-300 max-md:w-full w-[260px] h-85 mx-auto flex flex-col">
+                                      
+                                      
+                        
+                                      {/* Product Image */}
+                                      <div className="relative w-full h-44 flex items-center justify-center p-4">
+                                        <img
+                                          src={product.images[0]}
+                                          alt={product.name}
+                                          className="max-h-full max-w-full object-contain"
+                                        />
+                                      </div>
+                        
+                                      {/* Card Content */}
+                                      <div className="flex flex-col flex-grow px-4 pb-4">
+                                        <h3 className="text-base exo font-semibold text-gray-900 truncate">
+                                          {product.name}
+                                        </h3>
+                                        <p className="text-sm exo text-white mt-1 line-clamp-2">
+                                          {product.title}
+                                        </p>
+                        
+                                        {/* Price */}
+                                        <p className="text-lg exo font-bold text-[white] mt-2">
+                                          <Price basePrice={product.price_numeric} />
+                                        </p>
+                        
+                                        {/* Buttons */}
+                                        <div className="mt-3 flex gap-2">
+                          {/* Add to cart button */}
+                          <button
+                            onClick={() => addToCart(product)}
+                            className="flex-1 flex items-center justify-center gap-1 bg-gray-100 text-gray-600 text-sm font-medium px-3 py-2 rounded-lg hover:bg-gray-200 transition"
+                          >
+                            <ShoppingCart size={16} />
+                            Add
+                          </button>
+                        
+                          {/* Link styled like a button */}
+                          <Link
+                            href={`/product/${product._id}`}
+                            className="flex-1 white-border text-white text-sm font-semibold px-3 py-2 rounded-lg  transition flex items-center justify-center"
+                          >
+                            Buy
+                          </Link>
                         </div>
-                      </Link>
+                        
+                                      </div>
+                                    </div>
+                     
                     ))
                   ) : (
                     <p className="text-gray-500">No products found</p>

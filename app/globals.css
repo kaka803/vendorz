@@ -4,8 +4,9 @@
 @custom-variant dark (&:is(.dark *));
 
 body {
-  color: black;
+  color: white;
   font-family: 'Josefin Sans', Arial, Helvetica, sans-serif;
+  background-color: black;
 }
 .audiowide {
   font-family: "Audiowide", sans-serif;
@@ -20,14 +21,7 @@ body {
   background-repeat: no-repeat;     /* repeat, repeat-x, repeat-y */
   display: block;
 }
-.hero-bg {
-  /* set this on the element: style="--bg-url: url('/path/to/image.jpg')" */
-  background-image: url('/hero-bg.jpg');
-  background-size: cover;           /* cover, contain, or a custom value */
-  background-position: center;      /* e.g. center top, 50% 30% */
-  background-repeat: no-repeat;     /* repeat, repeat-x, repeat-y */
-  
-}
+
 .orbitron {
   font-family: "Orbitron", sans-serif;
   font-optical-sizing: auto;

@@ -52,22 +52,22 @@ export default function ProductClient({ params }) {
       <Navbar />
       <div className="min-h-screen main-container mt-20 py-12 px-6 lg:px-20">
       <div className=" py-3 px-6 lg:px-10 ">
-        <div className="max-w-7xl mx-auto flex items-center text-sm text-gray-600 font-sans space-x-2">
-          <Link href="/" className="hover:text-[#365a41] font-medium">
+        <div className="max-w-7xl mx-auto flex items-center text-sm text-white font-sans space-x-2">
+          <Link href="/" className="hover:text-white/70 font-medium">
             Home
           </Link>
           <ChevronRight size={16} className="text-gray-400" />
-          <Link href="/shop" className="hover:text-[#365a41] font-medium">
+          <Link href="/shop" className="hover:text-white/70 font-medium">
             Shop
           </Link>
           
           <ChevronRight size={16} className="text-gray-400" />
-          <span className="text-gray-500 truncate max-w-[200px]">
+          <span className="hover:text-white/70 truncate max-w-[200px]">
             {product.title}
           </span>
         </div>
       </div>
-        <div className="max-w-7xl mx-auto bg-white rounded-2xl p-6 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="max-w-7xl mx-auto  rounded-2xl p-6 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8">
   {/* Left Section: Image Gallery */}
   <section className="lg:col-span-7 max-h-[500px] flex flex-col lg:flex-row gap-6">
     {/* Main Image */}
@@ -106,16 +106,16 @@ export default function ProductClient({ params }) {
   {/* Right Section: Product Details */}
   <aside className="lg:col-span-5 flex flex-col gap-6">
     <div>
-      <h1 className="text-2xl lg:text-3xl font-semibold font-sans text-[#365a41]">
+      <h1 className="text-2xl lg:text-3xl font-semibold font-sans text-[white]">
         {product.title}
       </h1>
-      <p className="text-sm text-gray-500 mt-1 font-sans">
+      <p className="text-sm text-gray-200 mt-1 font-sans">
         {product.category || "Uncategorized"}
       </p>
     </div>
 
     <div className="flex items-center gap-4">
-      <div className="text-3xl font-bold font-sans text-[#365a41]">
+      <div className="text-3xl font-bold font-sans text-[white]">
   <Price basePrice={product.price_numeric} />
 </div>
 
@@ -124,7 +124,7 @@ export default function ProductClient({ params }) {
     <div className="flex flex-wrap gap-3">
       <button
         onClick={() => addToCart(product)}
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#365a41] text-white hover:bg-[#2d4a35] transition"
+        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg white-border text-white hover:bg-[#2d4a35] transition"
       >
         <ShoppingCart size={16} /> Add to Cart
       </button>
@@ -132,10 +132,10 @@ export default function ProductClient({ params }) {
 
     {/* Technical Specs */}
     <div className="mt-2">
-  <h4 className="text-xl font-semibold font-sans mb-4 text-[#365a41] border-b pb-2">
+  <h4 className="text-xl font-semibold font-sans mb-4 text-[white]  pb-2">
     Technical Details
   </h4>
-  <div className="overflow-hidden rounded-xl shadow-sm border border-gray-200">
+  <div className=" rounded-xl shadow-sm ">
     <table className="w-full text-sm font-sans">
       <tbody>
         {[
@@ -148,11 +148,11 @@ export default function ProductClient({ params }) {
           <tr
             key={label}
             className={`${
-              i % 2 === 0 ? "bg-gray-50" : "bg-white"
-            } hover:bg-gray-100 transition`}
+              i % 2 === 0 ? "white-border" : "white-border"
+            } hover:white-border transition`}
           >
-            <td className="px-4 py-3 font-medium text-gray-700">{label}</td>
-            <td className="px-4 py-3 text-right text-gray-600">{value}</td>
+            <td className="px-4 py-3 font-medium text-white">{label}</td>
+            <td className="px-4 py-3 text-right text-white">{value}</td>
           </tr>
         ))}
       </tbody>
@@ -164,7 +164,7 @@ export default function ProductClient({ params }) {
 
   {/* Features Section (Textured, Low poly, etc.) */}
   <div className="lg:col-span-12 mt-6">
-    <h4 className="text-xl font-semibold font-sans mb-3 text-[#365a41] border-b pb-2">
+    <h4 className="text-xl font-semibold orbiton  mb-3 text-[white]  pb-2">
       Key Features
     </h4>
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -177,7 +177,7 @@ export default function ProductClient({ params }) {
       ].map(([label, val]) => (
         <div
           key={label}
-          className="flex items-center justify-between bg-[#365a41] px-4 py-3 rounded-lg shadow-md hover:shadow-lg transition"
+          className="flex items-center justify-between white-border px-4 py-3 rounded-lg shadow-md hover:shadow-lg transition"
         >
           <div className="text-sm font-sans text-white font-medium">{label}</div>
           <div>
@@ -194,11 +194,11 @@ export default function ProductClient({ params }) {
 
   {/* Product Description */}
   <div className="lg:col-span-12 mt-10">
-    <h4 className="text-2xl mb-4 font-semibold font-sans text-[#365a41] border-b pb-2">
+    <h4 className="text-2xl mb-4 font-semibold orbiton pb-2">
       Product Overview
     </h4>
     <div
-      className="prose max-w-none p-5 rounded-lg bg-gray-50 text-gray-800 leading-relaxed font-sans whitespace-pre-line shadow-sm"
+      className="prose max-w-none p-5 rounded-lg white-border text-white leading-relaxed font-sans whitespace-pre-line shadow-sm"
       dangerouslySetInnerHTML={{ __html: product.description || "" }}
     />
   </div>
@@ -209,7 +209,7 @@ export default function ProductClient({ params }) {
       <div className="main-container mx-7">
       <section className="min-h-[100%] w-full flex flex-col items-center justify-center mb-30 pt-20 relative">
         <div className="w-full max-w-[1280px] relative">
-          <h1 className="text-start text-3xl mb-5 font-sans  text-[#365a41]">
+          <h1 className="text-start text-3xl ml-2 mb-5 font-sans  text-white">
             Related Products
           </h1>
 
@@ -235,158 +235,65 @@ export default function ProductClient({ params }) {
               )
               .map((related) => (
                 <SwiperSlide key={related._id}>
-                  <Link href={`/product/${related._id}`}>
-                    <div className="group bg-white rounded-sm overflow-hidden transition">
-                      {/* Product Image */}
-                      <div className="w-full h-60 overflow-hidden relative">
-                        <img
-                          src={related.images?.[0] || "/placeholder.png"}
-                          alt={related.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                        {/* Hover Add to Cart */}
-                        <div className="absolute bottom-[-60px] left-0 w-full flex justify-center transition-all duration-500 group-hover:bottom-0">
-                          <button className="flex justify-center w-full items-center gap-2 bg-[#365a41] text-white px-6 py-2 shadow transition">
-                            <ShoppingCart size={18} />
-                            Add to Cart
-                          </button>
-                        </div>
-                      </div>
-
-                      {/* Card Content */}
-                      <div className="p-5">
-                        <h3 className="text-lg font-sans font-bold text-gray-800 truncate">
-                          {related.title}
-                        </h3>
-                        
-                        
-<p className="mt-3 font-sans text-xl font-bold text-[#365a41]">
-  <Price basePrice={product.price_numeric} />
-</p>
-                      </div>
-                    </div>
-                  </Link>
+                    <div key={product._id} className="group overflow-hidden  rounded-2xl my-2 white-border shadow-md hover:shadow-lg transition-all duration-300 max-md:w-full w-[260px] h-85 mx-auto flex flex-col">
+                         
+                         {/* Badge */}
+                         <div className="px-3 py-1 exo bg-[#EDE9FE] text-[black] text-xs font-medium rounded-br-xl w-fit">
+                           New Arrival
+                         </div>
+           
+                         {/* Product Image */}
+                         <div className="relative w-full h-44 flex items-center justify-center p-4">
+                           <img
+                             src={product.images[0]}
+                             alt={product.name}
+                             className="max-h-full max-w-full object-contain"
+                           />
+                         </div>
+           
+                         {/* Card Content */}
+                         <div className="flex flex-col flex-grow px-4 pb-4">
+                           <h3 className="text-base exo font-semibold text-gray-900 truncate">
+                             {product.name}
+                           </h3>
+                           <p className="text-sm exo text-white mt-1 line-clamp-2">
+                             {product.title}
+                           </p>
+           
+                           {/* Price */}
+                           <p className="text-lg exo font-bold text-[white] mt-2">
+                             <Price basePrice={product.price_numeric} />
+                           </p>
+           
+                           {/* Buttons */}
+                           <div className="mt-3 flex gap-2">
+             {/* Add to cart button */}
+             <button
+               onClick={() => addToCart(product)}
+               className="flex-1 flex items-center justify-center gap-1 bg-gray-100 text-gray-600 text-sm font-medium px-3 py-2 rounded-lg hover:bg-gray-200 transition"
+             >
+               <ShoppingCart size={16} />
+               Add
+             </button>
+           
+             {/* Link styled like a button */}
+             <Link
+               href={`/product/${product._id}`}
+               className="flex-1 white-border text-white text-sm font-semibold px-3 py-2 rounded-lg  transition flex items-center justify-center"
+             >
+               Buy
+             </Link>
+           </div>
+           
+                         </div>
+                       </div>
                 </SwiperSlide>
               ))}
           </Swiper>
           </div>
       </section>
         </div>
-      <footer className="relative bg-[#365a41] font-sans text-white pt-16 pb-5 overflow-hidden">
-      {/* Background Watermark */}
-      <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
-        
-        <h1 className="text-[120px] sm:text-[160px] md:text-[200px] font-extrabold text-white opacity-5 select-none">
-          3dvendorz
-        </h1>
-        
-      </div>
-
-      {/* Content */}
-      <div className="relative container mx-auto px-6 grid md:grid-cols-4 gap-12 z-10">
-        {/* Left Side - Logo & About */}
-        <div>
-          <h1 className="text-3xl font-bold font-sans mb-4">
-            <Link href="/" className="hover:text-gray-200 transition-colors">
-              <img src="/logo.svg" alt="" className="w-30 filter-invert opacity-80" />
-              
-            </Link>
-          </h1>
-          <p className="text-sm text-gray-200 leading-relaxed font-sans">
-            3dvendorz is a global platform for buying and selling
-            high-quality 3D models, print-ready files, and textures for
-            use in CG, game development, 3D printing, and architectural
-            visualization.
-          </p>
-
-          {/* Social Icons */}
-          <div className="flex gap-4 mt-6 text-gray-200">
-            <Link href="#" target="_blank" className="hover:text-white transition-colors">
-              <FaFacebookF size={18} />
-            </Link>
-            <Link href="#" target="_blank" className="hover:text-white transition-colors">
-              <FaInstagram size={18} />
-            </Link>
-            <Link href="#" target="_blank" className="hover:text-white transition-colors">
-              <FaYoutube size={18} />
-            </Link>
-            <Link href="#" target="_blank" className="hover:text-white transition-colors">
-              <FaXTwitter size={18} />
-            </Link>
-          </div>
-        </div>
-
-        {/* Support */}
-        <div>
-          <h3 className="text-base font-semibold mb-4">Support</h3>
-          <ul className="space-y-2 text-sm text-gray-200">
-            
-            <li>
-              <Link href="/contact" className="hover:text-white transition-colors">
-                Contact Us
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        {/* Company */}
-        <div>
-          <h3 className="text-base font-semibold mb-4">Company</h3>
-          <ul className="space-y-2 text-sm text-gray-200">
-            <li>
-              <Link href="/about" className="hover:text-white transition-colors">
-                About Us
-              </Link>
-            </li>
-            <li>
-              <Link href="/commercial" className="hover:text-white transition-colors">
-                Commercial Agreement
-              </Link>
-            </li>
-            <li>
-              <Link href="/Terms" className="hover:text-white transition-colors">
-                Terms and Conditions
-              </Link>
-            </li>
-            <li>
-              <Link href="/privacy" className="hover:text-white transition-colors">
-                Privacy Policy
-              </Link>
-            </li>
-            <li>
-              <Link href="/privacy" className="hover:text-white transition-colors">
-                Refunds
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        {/* Contacts */}
-        <div>
-          <h3 className="text-base font-semibold mb-4">Contacts</h3>
-          <p className="text-sm text-gray-200">
-            DEKARTOPO SYSTEMS LIMITED <br />
-            Reg. No: 16714225
-          </p>
-          <p className="text-sm text-gray-200 mt-3">+XXXXXXXX</p>
-          <p className="text-sm text-gray-200">
-            <Link href="mailto:hello@3dvendorz.com" className="hover:text-white">
-              hello@3dvendorz.com
-            </Link>
-          </p>
-          <p className="text-sm text-gray-200 mt-3 leading-relaxed">
-            Registered office and headquarters <br />
-            Unit B2 at Shoreditch Exchange, Senna Building, Gorsuch
-            Place, London, E2 8JF
-          </p>
-        </div>
-      </div>
-
-      {/* Bottom Line */}
-      <div className="relative text-center mt-12 text-xs text-gray-300 border-t border-gray-400/30 pt-6 z-10">
-        © 2025 3dvendorz | All rights reserved.
-      </div>
-    </footer>
+      <Footer/>
     </>
   );
 }
