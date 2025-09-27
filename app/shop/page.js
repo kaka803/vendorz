@@ -427,7 +427,7 @@ function handleFilterChange(type, value, setter) {
                   {paginatedProducts.length > 0 ? (
                     paginatedProducts.map((product) => (
                       
-                         <div className="group overflow-hidden  rounded-2xl my-2 white-border shadow-md hover:shadow-lg transition-all duration-300 max-md:w-full w-[260px] h-85 mx-auto flex flex-col">
+                         <div key={product._id} className="group overflow-hidden  rounded-2xl my-2 white-border shadow-md hover:shadow-lg transition-all duration-300 max-md:w-full w-[260px] h-85 mx-auto flex flex-col">
                                       
                                       
                         
