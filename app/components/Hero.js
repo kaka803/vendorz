@@ -96,21 +96,21 @@ const Hero = () => {
 
   {/* Selling Points */}
   <div className="heading relative z-10 grid grid-cols-1 sm:grid-cols-3 gap-6 mt-14 max-w-5xl exo">
-    <div className="p-6 rounded-xl bg-gradient-to-r from-[#4e47af] to-[#4C1D95] hover:scale-105 shadow-md hover:shadow-lg transition duration-450">
+    <div className="p-6 rounded-xl bg-white/30 backdrop-blur-lg hover:scale-105 shadow-md hover:shadow-lg transition duration-450">
       <h3 className="text-white font-semibold text-lg">High-Quality Assets</h3>
-      <p className="text-gray-400 text-sm mt-2">
+      <p className="text-gray-200 text-sm mt-2">
         Carefully crafted 3D models optimized for performance & realism.
       </p>
     </div>
-    <div className="p-6 rounded-xl bg-gradient-to-r from-[#4e47af] to-[#4C1D95] hover:scale-105 shadow-md hover:shadow-lg transition duration-450">
+    <div className="p-6 rounded-xl bg-white/30 backdrop-blur-lg hover:scale-105 shadow-md hover:shadow-lg transition duration-450">
       <h3 className="text-white font-semibold text-lg">Creative Freedom</h3>
-      <p className="text-gray-400 text-sm mt-2">
+      <p className="text-gray-200 text-sm mt-2">
         Perfect for games, animations, and architectural designs.
       </p>
     </div>
-    <div className="p-6 rounded-xl bg-gradient-to-r from-[#4e47af] to-[#4C1D95] hover:scale-105 shadow-md hover:shadow-lg transition duration-450">
+    <div className="p-6 rounded-xl bg-white/30 backdrop-blur-lg hover:scale-105 shadow-md hover:shadow-lg transition duration-450">
       <h3 className="text-white font-semibold text-lg">Instant Download</h3>
-      <p className="text-gray-400 text-sm mt-2">
+      <p className="text-gray-200 text-sm mt-2">
         Access your 3D assets immediately after purchase.
       </p>
     </div>

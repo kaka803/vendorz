@@ -8,14 +8,14 @@ export default function AboutPage() {
     <CurrencySidebar />
     <Navbar/>
     <div className="min-h-screen mt-10 flex justify-center items-start py-16 px-6">
-      <div className="w-full main-container bg-white rounded-lg  p-8 leading-relaxed font-sans">
+      <div className="w-full main-container text-white rounded-lg  p-8 leading-relaxed font-sans">
         {/* Page Title */}
-        <h1 className="text-3xl font-bold text-center text-gray-900 mb-8">
+        <h1 className="text-3xl font-bold text-center text-white orbitron mb-8">
           About 3D Vendorz
         </h1>
 
         {/* Content */}
-        <div className="space-y-6 text-gray-700">
+        <div className="space-y-6 text-white">
           <p>
             <span className="font-semibold">3D Assets. Zero Hassle. All Cozy.</span>
           </p>
@@ -55,7 +55,7 @@ export default function AboutPage() {
 
           {/* Company Info */}
           <div className="mt-6 space-y-1">
-            <p className="font-semibold text-gray-900">
+            <p className="font-semibold text-white">
               DEKARTOPO SYSTEMS LIMITED
             </p>
             <p>Reg. No: 16714225</p>

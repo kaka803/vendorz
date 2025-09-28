@@ -76,175 +76,172 @@ export default function CheckoutPage() {
 
   return (
     <>
-    <CurrencySidebar />
-      <Navbar />
-      <div className="max-w-[90%] mx-auto mt-32 font-sans mb-20">
-        <h2 className="text-2xl font-semibold mb-6">Checkout</h2>
+  <CurrencySidebar />
+  <Navbar />
+  <div className="max-w-[90%] mx-auto mt-32 font-sans mb-20">
+    <h2 className="text-2xl font-semibold mb-6 text-white orbitron">Checkout</h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-          {/* Left Side - Billing Info */}
-          <div className="space-y-4 bg-white shadow p-6 rounded-md">
-            <h3 className="text-lg font-medium mb-2">Contact Information</h3>
-            <div className="grid grid-cols-2 gap-4">
-              <input
-                type="text"
-                name="firstName"
-                placeholder="First Name*"
-                value={form.firstName}
-                onChange={handleChange}
-                className="w-full border p-2 rounded"
-                required
-              />
-              <input
-                type="text"
-                name="lastName"
-                placeholder="Last Name*"
-                value={form.lastName}
-                onChange={handleChange}
-                className="w-full border p-2 rounded"
-                required
-              />
-            </div>
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+      {/* Left Side - Billing Info */}
+      <div className="space-y-4 bg-white/5 backdrop-blur-md shadow-md border border-white/10 p-6 rounded-2xl">
+        <h3 className="text-lg font-medium mb-2 text-white">Contact Information</h3>
+        <div className="grid grid-cols-2 gap-4">
+          <input
+            type="text"
+            name="firstName"
+            placeholder="First Name*"
+            value={form.firstName}
+            onChange={handleChange}
+            className="w-full border border-white/20 bg-transparent text-white placeholder-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
+            required
+          />
+          <input
+            type="text"
+            name="lastName"
+            placeholder="Last Name*"
+            value={form.lastName}
+            onChange={handleChange}
+            className="w-full border border-white/20 bg-transparent text-white placeholder-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
+            required
+          />
+        </div>
 
-            <input
-              type="email"
-              name="email"
-              placeholder="Email Address*"
-              value={form.email}
-              onChange={handleChange}
-              className="w-full border p-2 rounded"
-              required
-            />
-            <input
-              type="text"
-              name="phone"
-              placeholder="Phone (optional)"
-              value={form.phone}
-              onChange={handleChange}
-              className="w-full border p-2 rounded"
-            />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email Address*"
+          value={form.email}
+          onChange={handleChange}
+          className="w-full border border-white/20 bg-transparent text-white placeholder-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
+          required
+        />
+        <input
+          type="text"
+          name="phone"
+          placeholder="Phone (optional)"
+          value={form.phone}
+          onChange={handleChange}
+          className="w-full border border-white/20 bg-transparent text-white placeholder-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
+        />
 
-            <h3 className="text-lg font-medium mt-6 mb-2">Billing Address</h3>
-            <select
-              name="country"
-              value={form.country}
-              onChange={handleChange}
-              className="w-full border p-2 rounded"
-              required
-            >
-              <option value="">Select Country/Region</option>
-              <option value="United States">United States</option>
-              <option value="United Kingdom">United Kingdom</option>
-              <option value="Pakistan">Pakistan</option>
-              <option value="India">India</option>
-              <option value="Latvia">Latvia</option>
-              <option value="Germany">Germany</option>
-            </select>
+        <h3 className="text-lg font-medium mt-6 mb-2 text-white">Billing Address</h3>
+        <select
+          name="country"
+          value={form.country}
+          onChange={handleChange}
+          className="w-full border border-white/20 bg-transparent text-white placeholder-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
+          required
+        >
+          <option value="" className="text-gray-800">Select Country/Region</option>
+          <option value="United States" className="text-gray-800">United States</option>
+          <option value="United Kingdom" className="text-gray-800">United Kingdom</option>
+          <option value="Pakistan" className="text-gray-800">Pakistan</option>
+          <option value="India" className="text-gray-800">India</option>
+          <option value="Latvia" className="text-gray-800">Latvia</option>
+          <option value="Germany" className="text-gray-800">Germany</option>
+        </select>
 
-            <input
-              type="text"
-              name="address"
-              placeholder="Address*"
-              value={form.address}
-              onChange={handleChange}
-              className="w-full border p-2 rounded"
-              required
-            />
-            <input
-              type="text"
-              name="city"
-              placeholder="City*"
-              value={form.city}
-              onChange={handleChange}
-              className="w-full border p-2 rounded"
-              required
-            />
-            <input
-              type="text"
-              name="postalCode"
-              placeholder="Postal Code*"
-              value={form.postalCode}
-              onChange={handleChange}
-              className="w-full border p-2 rounded"
-              required
-            />
+        <input
+          type="text"
+          name="address"
+          placeholder="Address*"
+          value={form.address}
+          onChange={handleChange}
+          className="w-full border border-white/20 bg-transparent text-white placeholder-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
+          required
+        />
+        <input
+          type="text"
+          name="city"
+          placeholder="City*"
+          value={form.city}
+          onChange={handleChange}
+          className="w-full border border-white/20 bg-transparent text-white placeholder-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
+          required
+        />
+        <input
+          type="text"
+          name="postalCode"
+          placeholder="Postal Code*"
+          value={form.postalCode}
+          onChange={handleChange}
+          className="w-full border border-white/20 bg-transparent text-white placeholder-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
+          required
+        />
 
-            <textarea
-              name="note"
-              placeholder="Add a note to your order (optional)"
-              value={form.note}
-              onChange={handleChange}
-              className="w-full border p-2 rounded"
-              rows={4}
-            />
+        <textarea
+          name="note"
+          placeholder="Add a note to your order (optional)"
+          value={form.note}
+          onChange={handleChange}
+          className="w-full border border-white/20 bg-transparent text-white placeholder-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
+          rows={4}
+        />
 
-            <button
-              onClick={handlePayNow}
-              disabled={payloading}
-              className="bg-[#365a41] hover:bg-[#2d4934] h-12 flex justify-center items-center text-white w-full py-3 rounded mt-4 font-semibold"
-            >
-              {payloading ? (
-                <HashLoader size={20} color="white" />
-              ) : (
-                "Place Order"
-              )}
-            </button>
+        <button
+          onClick={handlePayNow}
+          disabled={payloading}
+          className="bg-gradient-to-r from-[#4e47af] to-[#351466] hover:brightness-110 h-12 flex justify-center items-center text-white w-full py-3 rounded-xl mt-4 font-semibold shadow-md transition"
+        >
+          {payloading ? <HashLoader size={20} color="white" /> : "Place Order"}
+        </button>
+      </div>
+
+      {/* Right Side - Order Summary */}
+      <div>
+        <div className="border border-white/10 rounded-2xl overflow-hidden bg-white/5 backdrop-blur-md shadow-md">
+          <div className="grid grid-cols-4 bg-white/10 text-sm font-semibold text-white p-4">
+            <div>Product</div>
+            <div>Price</div>
+            <div>Qty</div>
+            <div>Subtotal</div>
           </div>
 
-          {/* Right Side - Order Summary */}
-          <div>
-            <div className="border rounded-md overflow-hidden bg-white shadow">
-              <div className="grid grid-cols-4 bg-gray-50 text-sm font-semibold text-gray-700 p-4">
-                <div>Product</div>
-                <div>Price</div>
-                <div>Qty</div>
-                <div>Subtotal</div>
-              </div>
+          {cart.map((item) => {
+            const convertedPrice = item.price * rate;
+            const convertedSubtotal = item.price * item.quantity * rate;
 
-              {cart.map((item) => {
-                const convertedPrice = item.price * rate;
-                const convertedSubtotal = item.price * item.quantity * rate;
-
-                return (
-                  <div
-                    key={item.id}
-                    className="grid grid-cols-4 items-center border-t p-4 text-sm"
-                  >
-                    <div className="flex items-center gap-3">
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        width={50}
-                        height={50}
-                        className="rounded"
-                      />
-                      <span className="font-medium">
-                        {item.title.split(" ").slice(0, 2).join(" ")}
-                        {item.title.split(" ").length > 2 && " ..."}
-                      </span>
-                    </div>
-                    <div>{formatCurrency(convertedPrice, currency)}</div>
-                    <div>{item.quantity}</div>
-                    <div>{formatCurrency(convertedSubtotal, currency)}</div>
-                  </div>
-                );
-              })}
-
-              <div className="border-t mt-4 p-4">
-                <div className="flex justify-between mb-2">
-                  <span>Subtotal</span>
-                  <span>{formatCurrency(subtotal * rate, currency)}</span>
+            return (
+              <div
+                key={item.id}
+                className="grid grid-cols-4 items-center border-t border-white/10 p-4 text-sm text-white"
+              >
+                <div className="flex items-center gap-3">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    width={50}
+                    height={50}
+                    className="rounded-lg shadow-md"
+                  />
+                  <span className="font-medium truncate max-w-[120px]">
+                    {item.title.split(" ").slice(0, 2).join(" ")}
+                    {item.title.split(" ").length > 2 && " ..."}
+                  </span>
                 </div>
-                <div className="flex justify-between font-medium">
-                  <span>Total</span>
-                  <span>{formatCurrency(total * rate, currency)}</span>
-                </div>
+                <div>{formatCurrency(convertedPrice, currency)}</div>
+                <div>{item.quantity}</div>
+                <div>{formatCurrency(convertedSubtotal, currency)}</div>
               </div>
+            );
+          })}
+
+          <div className="border-t border-white/10 mt-4 p-4 text-white">
+            <div className="flex justify-between mb-2">
+              <span>Subtotal</span>
+              <span>{formatCurrency(subtotal * rate, currency)}</span>
+            </div>
+            <div className="flex justify-between font-medium">
+              <span>Total</span>
+              <span>{formatCurrency(total * rate, currency)}</span>
             </div>
           </div>
         </div>
       </div>
-      <Footer />
-    </>
+    </div>
+  </div>
+  <Footer />
+</>
+
   );
 }

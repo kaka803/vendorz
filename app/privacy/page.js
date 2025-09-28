@@ -8,7 +8,7 @@ const Privacy = () => {
     <CurrencySidebar />
     <Navbar/>
     <div>
-      <div className="min-h-screen bg-gray-50 font-sans  text-gray-800 px-6 py-12">
+      <div className="min-h-screen  font-sans  text-gray-200 px-6 py-12">
       <div className="main-container mx-auto pt-25 pb-15">
         <h1 className="text-5xl font-bold mb-6 text-center">Privacy Policy</h1>
         <p className="mb-4">

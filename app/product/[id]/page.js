@@ -91,7 +91,7 @@ export default function ProductClient({ params }) {
         <button
           key={i}
           onClick={() => setSelected(img)}
-          className={`relative flex-shrink-0 m-2 p-2 w-24 h-24 rounded-xl overflow-hidden border-2 transition-all duration-300 hover:scale-105 shadow-sm`}
+          className={`relative flex-shrink-0 m-2 p-2 w-24 h-24 rounded-xl overflow-hidden border-2 border-[#a39dfa] transition-all duration-300 hover:scale-105 shadow-sm`}
         >
           <img
             src={img}
@@ -124,7 +124,7 @@ export default function ProductClient({ params }) {
     <div className="flex flex-wrap gap-3">
       <button
         onClick={() => addToCart(product)}
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg white-border text-white hover:bg-[#2d4a35] transition"
+        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-[#4e47af] to-[#351466] text-white hover:bg-[#2d4a35] transition"
       >
         <ShoppingCart size={16} /> Add to Cart
       </button>
@@ -132,39 +132,42 @@ export default function ProductClient({ params }) {
 
     {/* Technical Specs */}
     <div className="mt-2">
-  <h4 className="text-xl font-semibold font-sans mb-4 text-[white]  pb-2">
+  <h4 className="text-xl font-semibold orbitron mb-4 text-[white]  pb-2">
     Technical Details
   </h4>
-  <div className=" rounded-xl shadow-sm ">
-    <table className="w-full text-sm font-sans">
-      <tbody>
-        {[
-          ["Format", (product.file_formats || []).join(", ")],
-          ["Size", product.file_size || "—"],
-          ["Render Engine", product.render_engine || "—"],
-          ["Polygon Count", product.polygon_count ?? "—"],
-          ["Vertices", product.vertices_count ?? "—"],
-        ].map(([label, value], i) => (
-          <tr
-            key={label}
-            className={`${
-              i % 2 === 0 ? "white-border" : "white-border"
-            } hover:white-border transition`}
-          >
-            <td className="px-4 py-3 font-medium text-white">{label}</td>
-            <td className="px-4 py-3 text-right text-white">{value}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
+  <div className="overflow-hidden rounded-2xl shadow-md border border-white/10">
+  <table className="w-full text-sm font-sans border-collapse">
+    <tbody>
+      {[
+        ["Format", (product.file_formats || []).join(", ")],
+        ["Size", product.file_size || "—"],
+        ["Render Engine", product.render_engine || "—"],
+        ["Polygon Count", product.polygon_count ?? "—"],
+        ["Vertices", product.vertices_count ?? "—"],
+      ].map(([label, value], i) => (
+        <tr
+          key={label}
+          className={`${
+            i % 2 === 0
+              ? "bg-gray-700"
+              : "bg-gray-600"
+          } hover:brightness-110 transition`}
+        >
+          <td className="px-4 py-2.5 font-medium text-white">{label}</td>
+          <td className="px-4 py-2.5 text-right text-white">{value}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
 </div>
 
   </aside>
 
   {/* Features Section (Textured, Low poly, etc.) */}
   <div className="lg:col-span-12 mt-6">
-    <h4 className="text-xl font-semibold orbiton  mb-3 text-[white]  pb-2">
+    <h4 className="text-xl font-semibold orbitron  mb-3 text-[white]  pb-2">
       Key Features
     </h4>
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -177,7 +180,7 @@ export default function ProductClient({ params }) {
       ].map(([label, val]) => (
         <div
           key={label}
-          className="flex items-center justify-between white-border px-4 py-3 rounded-lg shadow-md hover:shadow-lg transition"
+          className="flex items-center justify-between bg-gradient-to-r from-[#4e47af] to-[#351466] px-4 py-3 rounded-lg shadow-md hover:shadow-lg transition"
         >
           <div className="text-sm font-sans text-white font-medium">{label}</div>
           <div>
@@ -194,11 +197,11 @@ export default function ProductClient({ params }) {
 
   {/* Product Description */}
   <div className="lg:col-span-12 mt-10">
-    <h4 className="text-2xl mb-4 font-semibold orbiton pb-2">
+    <h4 className="text-2xl mb-4 orbitron font-semibold  pb-2">
       Product Overview
     </h4>
     <div
-      className="prose max-w-none p-5 rounded-lg white-border text-white leading-relaxed font-sans whitespace-pre-line shadow-sm"
+      className="prose max-w-none p-5 rounded-lg bg-gray-700 text-white leading-relaxed font-sans whitespace-pre-line shadow-sm"
       dangerouslySetInnerHTML={{ __html: product.description || "" }}
     />
   </div>
@@ -206,10 +209,10 @@ export default function ProductClient({ params }) {
       </div>
 
       {/* Related Products */}
-      <div className="main-container mx-7">
-      <section className="min-h-[100%] w-full flex flex-col items-center justify-center mb-30 pt-20 relative">
+      <div className="main-container px-6">
+      <section className="min-h-[100%] w-full flex flex-col items-center justify-center mb-30  relative">
         <div className="w-full max-w-[1280px] relative">
-          <h1 className="text-start text-3xl ml-2 mb-5 font-sans  text-white">
+          <h1 className="text-start text-3xl ml-6 mb-5 orbitron  text-white">
             Related Products
           </h1>
 
@@ -229,66 +232,75 @@ export default function ProductClient({ params }) {
             }}
           >
             {allproducts
-              ?.filter(
-                (p) =>
-                  p.category === product.category && p._id !== product._id
-              )
-              .map((related) => (
-                <SwiperSlide key={related._id}>
-                    <div key={product._id} className="group overflow-hidden  rounded-2xl my-2 white-border shadow-md hover:shadow-lg transition-all duration-300 max-md:w-full w-[260px] h-85 mx-auto flex flex-col">
-                         
-                         {/* Badge */}
-                         <div className="px-3 py-1 exo bg-[#EDE9FE] text-[black] text-xs font-medium rounded-br-xl w-fit">
-                           New Arrival
-                         </div>
-           
-                         {/* Product Image */}
-                         <div className="relative w-full h-44 flex items-center justify-center p-4">
-                           <img
-                             src={product.images[0]}
-                             alt={product.name}
-                             className="max-h-full max-w-full object-contain"
-                           />
-                         </div>
-           
-                         {/* Card Content */}
-                         <div className="flex flex-col flex-grow px-4 pb-4">
-                           <h3 className="text-base exo font-semibold text-gray-900 truncate">
-                             {product.name}
-                           </h3>
-                           <p className="text-sm exo text-white mt-1 line-clamp-2">
-                             {product.title}
-                           </p>
-           
-                           {/* Price */}
-                           <p className="text-lg exo font-bold text-[white] mt-2">
-                             <Price basePrice={product.price_numeric} />
-                           </p>
-           
-                           {/* Buttons */}
-                           <div className="mt-3 flex gap-2">
-             {/* Add to cart button */}
-             <button
-               onClick={() => addToCart(product)}
-               className="flex-1 flex items-center justify-center gap-1 bg-gray-100 text-gray-600 text-sm font-medium px-3 py-2 rounded-lg hover:bg-gray-200 transition"
-             >
-               <ShoppingCart size={16} />
-               Add
-             </button>
-           
-             {/* Link styled like a button */}
-             <Link
-               href={`/product/${product._id}`}
-               className="flex-1 white-border text-white text-sm font-semibold px-3 py-2 rounded-lg  transition flex items-center justify-center"
-             >
-               Buy
-             </Link>
-           </div>
-           
-                         </div>
-                       </div>
-                </SwiperSlide>
+  ?.filter(
+    (p) => p.category === product.category && p._id !== product._id
+  )
+  .map((related) => (
+    <SwiperSlide key={related._id}>
+      <div className="group overflow-hidden rounded-2xl my-2 white-border shadow-md hover:shadow-lg transition-all duration-300 max-md:w-[300px] w-[260px] h-83 md:h-92 mx-auto flex flex-col">
+        {/* Product Image */}
+        <div className="relative w-full h-44 flex items-center justify-center p-4">
+          <img
+            src={related.images[0]}
+            alt={related.title}
+            className="max-h-full max-w-full object-contain"
+          />
+        </div>
+
+        {/* Card Content */}
+        <div className="flex flex-col flex-grow px-4 pb-4">
+          <h3 className="text-base exo font-semibold text-white truncate">
+            {related.title}
+          </h3>
+
+          {/* Price */}
+          <p className="text-lg exo font-bold text-white mt-2">
+            <Price basePrice={related.price_numeric} />
+          </p>
+
+          {/* File Formats */}
+          {related.file_formats?.length > 0 && (
+            <div className="mt-2 flex flex-wrap gap-2">
+              {related.file_formats.slice(0, 4).map((ext, i) => (
+                <span
+                  key={i}
+                  className="text-xs exo px-2 py-1 rounded-md bg-gradient-to-r from-[#4e47af] to-[#4C1D95] text-white"
+                >
+                  {ext}
+                </span>
               ))}
+              {related.file_formats.length > 4 && (
+                <span className="text-xs exo px-2 py-1 rounded-md bg-gray-200 text-gray-600">
+                  +{related.file_formats.length - 4} more
+                </span>
+              )}
+            </div>
+          )}
+
+          {/* Buttons */}
+          <div className="mt-3 flex gap-2">
+            {/* Add to cart */}
+            <button
+              onClick={() => addToCart(related)}
+              className="flex-1/2 flex items-center justify-center gap-1 bg-gray-100 text-gray-600 text-sm font-medium px-3 py-2 rounded-lg hover:bg-gray-200 transition"
+            >
+              <ShoppingCart size={16} />
+              Add
+            </button>
+
+            {/* Buy */}
+            <Link
+              href={`/product/${related._id}`}
+              className="flex-1 bg-gradient-to-r from-[#4e47af] to-[#4C1D95] text-white text-sm font-semibold px-3 py-2 rounded-lg transition flex items-center justify-center"
+            >
+              Buy
+            </Link>
+          </div>
+        </div>
+      </div>
+    </SwiperSlide>
+  ))}
+
           </Swiper>
           </div>
       </section>

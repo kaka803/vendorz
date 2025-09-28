@@ -8,7 +8,7 @@ const Commercial = () => {
     <>
     <CurrencySidebar />
     <Navbar/>
-    <div className="min-h-screen  text-gray-800 px-6 my-30 font-sans">
+    <div className="min-h-screen  text-gray-200 px-6 my-30 font-sans">
       <div className="main-container mx-auto">
         <h1 className="text-5xl font-bold mb-6 text-center">Commercial Agreement</h1>
 

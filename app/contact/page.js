@@ -52,21 +52,21 @@ const handleSubmit = async (e) => {
     <CurrencySidebar />
     <Navbar/>
     <div className="min-h-screen mt-20  flex-col flex  justify-center items-start py-16 px-6">
-        <h1 className="text-4xl text-black text-center font-semibold font-sans w-full">Contact Us</h1>
-      <div className="w-full main-container font-sans bg-white rounded-lg  p-8">
+        <h1 className="text-4xl text-white orbitron text-center font-semibold font-sans w-full">Contact Us</h1>
+      <div className="w-full main-container font-sans rounded-lg  p-8">
         {/* Company Info */}
         <div className="mb-10">
-          <h2 className="text-xl font-bold text-gray-800 mb-2">
+          <h2 className="text-xl font-bold text-gray-100 mb-2">
             DEKARTOPO SYSTEMS LIMITED
           </h2>
-          <p className="text-gray-600">Reg. No: 16714225</p>
-          <p className="text-gray-600 mt-2">+XXXXXXX</p>
-          <p className="text-gray-600">hello@cozyrender.com</p>
-          <p className="text-gray-600 mt-2">
+          <p className="text-gray-200">Reg. No: 16714225</p>
+          <p className="text-gray-200 mt-2">+XXXXXXX</p>
+          <p className="text-gray-200">hello@cozyrender.com</p>
+          <p className="text-gray-200 mt-2">
             Office: Unit B2 at Shoreditch Exchange, Senna Building, Gorsuch
             Place, London, E2 8JF
           </p>
-          <p className="text-gray-600">
+          <p className="text-gray-200">
             Legal: 5 Brayford Square, London, England, E1 0SG
           </p>
         </div>
@@ -74,7 +74,7 @@ const handleSubmit = async (e) => {
         {/* Contact Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-200">
               Name <span className="text-red-500">*</span>
             </label>
             <input
@@ -88,7 +88,7 @@ const handleSubmit = async (e) => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-300">
               Email <span className="text-red-500">*</span>
             </label>
             <input
@@ -102,7 +102,7 @@ const handleSubmit = async (e) => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-300">
               Subject <span className="text-red-500">*</span>
             </label>
             <input
@@ -116,7 +116,7 @@ const handleSubmit = async (e) => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-300">
               Message
             </label>
             <textarea
@@ -130,9 +130,9 @@ const handleSubmit = async (e) => {
 
           <button
             type="submit"
-            className="bg-[#43644d] text-white font-semibold flex justify-center items-center px-8 h-11 rounded-full hover:bg-[#365a41] transition"
+            className="bg-gradient-to-r exo from-[#4e47af] to-[#4C1D95] text-white font-semibold flex justify-center items-center px-8 h-11 rounded-full hover:bg-[#365a41] transition"
           >
-            {contactloading ? <HashLoader size={20} color="white"/>:'SEND'}
+            {contactloading ? <HashLoader size={20} color="white"/>:'Send'}
           </button>
         </form>
       </div>

@@ -11,6 +11,7 @@ import Footer from "./components/footer";
 import Link from "next/link";
 import CurrencySidebar from "./components/CurrencySidebar";
 import FeaturedProducts from "./components/featured";
+import FeautredCard from "./components/FeatureCard";
 
 export default function Home() {
   return (
@@ -25,6 +26,9 @@ export default function Home() {
 
 
 
+<section className=" w-full main-container">
+<FeautredCard/>
+</section>
 <section className=" w-full main-container">
 <LatestProducts/>
 </section>

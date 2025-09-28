@@ -41,10 +41,10 @@ export default function AuthPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 font-sans">
-  <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
+  <div className="w-full max-w-md white-border rounded-2xl shadow-xl p-8">
     {/* Logo + Heading */}
     <div className="flex justify-center items-center gap-3 mb-3">
-      <img src="/logo.svg" alt="" className="w-24 sm:w-28" />
+      <img src="/logo.svg" alt="" className="w-24 sm:w-28 filter-invert" />
     </div>
 
     {/* Error Message */}
@@ -55,7 +55,7 @@ export default function AuthPage() {
       {showForgot ? (
         <>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-300 mb-1">
               Email
             </label>
             <input
@@ -75,7 +75,7 @@ export default function AuthPage() {
             className={`w-full py-2.5 rounded-lg text-white font-medium shadow-md transition-all duration-300 ${
               authLoading
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-gradient-to-r from-[#365a41] to-[#2d4a35] hover:opacity-90"
+                : "bg-gradient-to-r from-[#4e47af] to-[#351466] exo hover:opacity-90"
             }`}
           >
             {authLoading ? "Please wait..." : "Send Reset Email"}
@@ -85,7 +85,7 @@ export default function AuthPage() {
         <>
           {!isLogin && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-300 mb-1">
                 Name
               </label>
               <input
@@ -100,7 +100,7 @@ export default function AuthPage() {
           )}
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-300 mb-1">
               Email
             </label>
             <input
@@ -115,7 +115,7 @@ export default function AuthPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-300 mb-1">
               Password
             </label>
             <input
@@ -137,7 +137,7 @@ export default function AuthPage() {
             className={`w-full py-2.5 rounded-lg text-white font-medium shadow-md transition-all duration-300 ${
               authLoading
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-gradient-to-r from-[#365a41] to-[#2d4a35] hover:opacity-90"
+                : "bg-gradient-to-r from-[#4e47af] to-[#351466] hover:opacity-90"
             }`}
           >
             {authLoading ? "Please wait..." : isLogin ? "Login" : "Sign Up"}
@@ -155,33 +155,33 @@ export default function AuthPage() {
               setShowForgot(true);
               setError(null);
             }}
-            className="text-gray-600 hover:text-[#365a41] hover:underline"
+            className="text-gray-300 hover:text-[#ffffff] hover:underline"
           >
             Forgot password?
           </button>
         )}
-        <p className="text-gray-600 text-center sm:text-left">
+        <p className="text-gray-300 text-center sm:text-left">
           {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
           <button
             onClick={() => {
               setIsLogin(!isLogin);
               setError(null);
             }}
-            className="text-[#365a41] font-medium hover:underline"
+            className="text-[white/70] font-medium hover:underline"
           >
             {isLogin ? "Sign Up" : "Login"}
           </button>
         </p>
       </div>
     ) : (
-      <p className="text-sm text-gray-600 mt-4 text-center">
+      <p className="text-sm text-gray-400 mt-4 text-center">
         Remembered?{" "}
         <button
           onClick={() => {
             setShowForgot(false);
             setError(null);
           }}
-          className="text-[#365a41] font-medium hover:underline"
+          className="text-gray-200 font-medium hover:underline"
         >
           Back to login
         </button>
@@ -194,7 +194,7 @@ export default function AuthPage() {
         router.push("/");
         setIsLogin(true);
       }}
-      className="mt-6 text-center text-sm text-gray-600 cursor-pointer hover:text-[#365a41]"
+      className="mt-6 text-center text-sm text-gray-300 cursor-pointer hover:text-[white]"
     >
       ← Return to Home
     </div>

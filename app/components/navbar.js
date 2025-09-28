@@ -79,7 +79,7 @@ const pathname = usePathname();
             {/* Conditional User/Login */}
             {user ? (
               <div className="relative hidden lg:block">
-                <button onClick={() => setAvatarDropdown(!avatarDropdown)} className="w-8 h-8 rounded-full bg-[#43644d] flex items-center justify-center font-sans text-white font-bold uppercase">
+                <button onClick={() => setAvatarDropdown(!avatarDropdown)} className="w-8 h-8 rounded-full bg-gradient-to-r from-[#4e47af] to-[#4C1D95] exo flex items-center justify-center font-sans text-white font-bold uppercase">
                   {user.name[0]}
                 </button>
 
@@ -94,7 +94,7 @@ const pathname = usePathname();
                         setAvatarDropdown(false);
                         logout();
                       }}
-                      className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                      className="w-full text-left px-4 py-2 bg-gradient-to-r from-[#4e47af] to-[#4C1D95] exo flex items-center gap-2"
                     >
                       <LogOut size={16} />
                       Logout
@@ -123,47 +123,47 @@ const pathname = usePathname();
         </div>
 
         {/* Mobile Sidebar */}
-        <div className={`fixed top-0 right-0 h-full w-64 bg-[white] text-black transform ${isOpen ? "translate-x-0" : "translate-x-full"} transition-transform duration-300 ease-in-out z-20`}>
+        <div className={`fixed top-0 right-0 h-full w-64 bg-[white]/20 backdrop-blur-2xl text-white  transform ${isOpen ? "translate-x-0" : "translate-x-full"} transition-transform duration-300 ease-in-out z-20`}>
           <div className="flex justify-end p-4">
             <button onClick={() => setIsOpen(false)}>
-              <X size={26} className="text-black" />
+              <X size={26} className="text-white" />
             </button>
           </div>
           <div className="flex flex-col space-y-6 mt-10 px-6 font-semibold">
              <Link
               href="/"
-              className={`text-black  font-sans ${isActive("/")}`}
+              className={`text-white  font-sans `}
             >
               Home
             </Link>
             <Link
               href="/shop"
-              className={`text-black  font-sans ${isActive("/shop")}`}
+              className={`text-white  font-sans `}
             >
               Shop
             </Link>
             <Link
               href="/myorders"
-              className={`text-black  font-sans ${isActive("/myorders")}`}
+              className={`text-white  font-sans `}
             >
               My Orders
             </Link>
             <Link
               href="/about"
-              className={`text-black  font-sans ${isActive("/about")}`}
+              className={`text-white  font-sans `}
             >
               About
             </Link>
             <Link
               href="/contact"
-              className={`text-black  font-sans ${isActive("/contact")}`}
+              className={`text-white  font-sans `}
             >
               Contact Us
             </Link>
 
             {user ? (
              <div className="relative">
-                <button onClick={() => setAvatarDropdown(!avatarDropdown)} className="w-8 h-8 rounded-full bg-[#43644d] flex items-center justify-center text-white font-sans font-bold uppercase">
+                <button onClick={() => setAvatarDropdown(!avatarDropdown)} className="w-8 h-8 rounded-full bg-gradient-to-r from-[#4e47af] to-[#4C1D95] exo flex items-center justify-center text-white font-sans font-bold uppercase">
                   {user.name[0]}
                 </button>
 
@@ -178,7 +178,7 @@ const pathname = usePathname();
                         setAvatarDropdown(false);
                         logout();
                       }}
-                      className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                      className="w-full text-left px-4 py-2 bg-gradient-to-r from-[#4e47af] to-[#4C1D95] exo flex items-center gap-2"
                     >
                       <LogOut size={16} />
                       Logout
