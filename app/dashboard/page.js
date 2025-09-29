@@ -220,15 +220,14 @@ useEffect(() => {
     router.push("/adminlogin");
   };
   return (
-    <div className="flex h-screen overflow-hidden font-sans">
+    <div className="flex min-h-screen  font-sans bg-white text-black">
       {/* Sidebar */}
       <div
-        className={`fixed lg:static z-40 w-64 bg-white shadow-md h-full transition-transform duration-300 ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
-        }`}
-      >
-        <div className="p-4 font-bold text-xl border-b">Admin Panel</div>
-        <nav className="p-4 space-y-3 text-gray-800">
+    className={`fixed lg:sticky top-0 z-40 w-64 bg-white shadow-md h-screen transition-transform duration-300 
+      ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}
+  >
+        <div className="p-4 font-bold text-xl border-b orbitron">Admin Panel</div>
+        <nav className="p-4 space-y-3 text-gray-800 exo">
          {[
   { key: "products", label: "Products", icon: Package },
   { key: "users", label: "Users", icon: Users },
@@ -240,7 +239,7 @@ useEffect(() => {
     <button
       key={item.key}
       onClick={() => setActivePage(item.key)}
-      className={`flex items-center gap-2 px-4 py-2 w-full text-left rounded-lg transition-all duration-200 ${
+      className={`flex items-center exo gap-2 px-4 py-2 w-full text-left rounded-lg transition-all duration-200 ${
         activePage === item.key
           ? "bg-gray-200 text-gray-800 shadow-sm font-semibold"
           : "hover:bg-gray-100 text-gray-800"
@@ -265,18 +264,18 @@ useEffect(() => {
       {/* Main Content */}
       <div className="flex flex-col flex-1">
         {/* Topbar */}
-        <header className="flex items-center justify-between px-4 py-5 sticky top-0 z-20 bg-white border-b">
+        <header className="flex items-center justify-between px-4 py-3 exo sticky top-0 z-20 bg-white border-b">
           <button onClick={() => setSidebarOpen(!sidebarOpen)} className="lg:hidden">
             <Menu size={24} />
           </button>
-          <h1 className="text-lg font-semibold capitalize">{activePage}</h1>
-          <button onClick={handleLogout} className="bg-[#365a41] text-white text-sm px-4 py-2 rounded hover:bg-[#203b28] transition-all">
+          <h1 className="text-lg font-semibold capitalize exo">{activePage}</h1>
+          <button onClick={handleLogout} className="bg-gradient-to-r from-[#4e47af]  to-[#4C1D95] text-white text-sm px-4 py-2 rounded hover:bg-gradient-to-r hover:from-[#413b92] hover:to-[#3f187a] duration-200 transition-all">
             Logout
           </button>
         </header>
 
         {/* Pages */}
-        <main className="p-6 space-y-8  overflow-y-auto">
+        <main className="flex-1 p-6 space-y-8 overflow-y-auto">
           
 
           {/* Products */}
@@ -346,7 +345,7 @@ useEffect(() => {
                       <td className="py-3 px-4">{i + 1}</td>
                       <td className="py-3 px-4">{u.name}</td>
                       <td className="py-3 px-4">{u.email}</td>
-                      <td className="py-3 px-4">{u.role}</td>
+                      <td className="py-3 px-4">User</td>
                     </tr>
                   ))}
                 </tbody>
@@ -359,44 +358,89 @@ useEffect(() => {
 {activePage === "orders" && (
   <div>
     <h2 className="text-xl font-bold mb-4">All Orders</h2>
-    <table className="min-w-full text-sm bg-white rounded-xl shadow overflow-hidden">
-      <thead className="bg-gray-100 text-gray-600">
-        <tr>
-          <th className="py-2 px-4 text-left">#</th>
-          <th className="py-2 px-4 text-left">Customer</th>
-          <th className="py-2 px-4 text-left">Date</th>
-          <th className="py-2 px-4 text-left">Total</th>
-          <th className="py-2 px-4 text-left">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        {Orders.map((o, i) => (
-          <tr
-            key={o._id}
-            className="border-b hover:bg-gray-50 transition-colors cursor-pointer"
-            onClick={() => setSelectedOrder(o)}
-          >
-            <td className="py-2 px-4">{i + 1}</td>
-            <td className="py-2 px-4 font-medium">{o.shippingAddress.firstName + " " + o.shippingAddress.lastName}</td>
-            <td className="py-2 px-4">{new Date(o.createdAt).toLocaleDateString()}</td>
-            <td className="py-2 px-4 font-semibold">${formatCurrency(o.total)}</td>
-            <td className="py-2 px-4">
-              <span
-                className={`px-2 py-1 rounded-full text-xs font-medium ${
-                  o.paymentStatus.toLowerCase() === "processed"
-                    ? "bg-green-100 text-green-800"
-                    : "bg-red-100 text-red-800"
-                }`}
-              >
-                {o.paymentStatus}
-              </span>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
 
-    {/* Modal */}
+    {/* ✅ Desktop Table */}
+    <div className="hidden md:block">
+      <table className="min-w-full text-sm bg-white rounded-xl shadow overflow-hidden">
+        <thead className="bg-gray-100 text-gray-600">
+          <tr>
+            <th className="py-2 px-4 text-left">#</th>
+            <th className="py-2 px-4 text-left">Customer</th>
+            <th className="py-2 px-4 text-left">Date</th>
+            <th className="py-2 px-4 text-left">Total</th>
+            <th className="py-2 px-4 text-left">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Orders.map((o, i) => (
+            <tr
+              key={o._id}
+              className="border-b hover:bg-gray-50 transition-colors cursor-pointer"
+              onClick={() => setSelectedOrder(o)}
+            >
+              <td className="py-2 px-4">{i + 1}</td>
+              <td className="py-2 px-4 font-medium">
+                {o.shippingAddress.firstName + " " + o.shippingAddress.lastName}
+              </td>
+              <td className="py-2 px-4">
+                {new Date(o.createdAt).toLocaleDateString()}
+              </td>
+              <td className="py-2 px-4 font-semibold">
+                ${formatCurrency(o.total)}
+              </td>
+              <td className="py-2 px-4">
+                <span
+                  className={`px-2 py-1 rounded-full text-xs font-medium ${
+                    o.paymentStatus.toLowerCase() === "processed"
+                      ? "bg-green-100 text-green-800"
+                      : "bg-red-100 text-red-800"
+                  }`}
+                >
+                  {o.paymentStatus}
+                </span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    {/* ✅ Mobile Cards */}
+    <div className="grid gap-4 md:hidden">
+      {Orders.map((o, i) => (
+        <div
+          key={o._id}
+          className="bg-white shadow rounded-lg p-4 border cursor-pointer"
+          onClick={() => setSelectedOrder(o)}
+        >
+          <div className="flex justify-between items-center mb-2">
+            <h3 className="font-semibold text-sm">
+              {o.shippingAddress.firstName + " " + o.shippingAddress.lastName}
+            </h3>
+            <span
+              className={`px-2 py-1 rounded-full text-xs font-medium ${
+                o.paymentStatus.toLowerCase() === "processed"
+                  ? "bg-green-100 text-green-800"
+                  : "bg-red-100 text-red-800"
+              }`}
+            >
+              {o.paymentStatus}
+            </span>
+          </div>
+          <p className="text-xs text-gray-600">
+            <strong>Date:</strong> {new Date(o.createdAt).toLocaleDateString()}
+          </p>
+          <p className="text-xs text-gray-600">
+            <strong>Total:</strong> ${formatCurrency(o.total)}
+          </p>
+          <p className="text-xs text-gray-600">
+            <strong>Order #:</strong> {i + 1}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    {/* Modal same rahega */}
     {selectedOrder && (
       <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex justify-center items-center z-50">
         <div className="bg-white h-[50vh] overflow-scroll rounded-xl shadow-lg max-w-3xl w-full p-6 relative">
@@ -407,26 +451,58 @@ useEffect(() => {
             ✕
           </button>
           <h3 className="text-xl font-bold mb-4">Order Details</h3>
-          
+
           <div className="space-y-2">
-            <p><strong>Order ID:</strong> {selectedOrder._id}</p>
-            <p><strong>Name:</strong> {selectedOrder.shippingAddress.firstName + " " + selectedOrder.shippingAddress.lastName}</p>
-            <p><strong>Email:</strong> {selectedOrder.shippingAddress.email}</p>
-            <p><strong>Phone:</strong> {selectedOrder.shippingAddress.phone}</p>
-            <p><strong>Description:</strong> {selectedOrder.shippingAddress.description}</p>
-            <p><strong>Shipping Fee:</strong> ${selectedOrder.shippingFee}</p>
-            <p><strong>Total:</strong> ${selectedOrder.total}</p>
-            <p><strong>Status:</strong> {selectedOrder.paymentStatus}</p>
-            <p><strong>Reference ID:</strong> {selectedOrder.referenceId}</p>
-            <p><strong>Date:</strong> {new Date(selectedOrder.createdAt).toLocaleString()}</p>
+            <p>
+              <strong>Order ID:</strong> {selectedOrder._id}
+            </p>
+            <p>
+              <strong>Name:</strong>{" "}
+              {selectedOrder.shippingAddress.firstName +
+                " " +
+                selectedOrder.shippingAddress.lastName}
+            </p>
+            <p>
+              <strong>Email:</strong> {selectedOrder.shippingAddress.email}
+            </p>
+            <p>
+              <strong>Phone:</strong> {selectedOrder.shippingAddress.phone}
+            </p>
+            <p>
+              <strong>Description:</strong>{" "}
+              {selectedOrder.shippingAddress.description}
+            </p>
+            <p>
+              <strong>Shipping Fee:</strong> ${selectedOrder.shippingFee}
+            </p>
+            <p>
+              <strong>Total:</strong> ${selectedOrder.total}
+            </p>
+            <p>
+              <strong>Status:</strong> {selectedOrder.paymentStatus}
+            </p>
+            <p>
+              <strong>Reference ID:</strong> {selectedOrder.referenceId}
+            </p>
+            <p>
+              <strong>Date:</strong>{" "}
+              {new Date(selectedOrder.createdAt).toLocaleString()}
+            </p>
           </div>
 
           <div className="mt-4">
             <h4 className="font-semibold mb-2">Products</h4>
             <div className="space-y-2 max-h-64 overflow-y-auto">
               {selectedOrder.products.map((p) => (
-                <div key={p._id} className="flex items-center gap-4 border p-2 rounded">
-                  <img src={p.image} alt={p.id} className="w-16 h-16 object-cover rounded" />
+                <div
+                  key={p._id}
+                  className="flex items-center gap-4 border p-2 rounded"
+                >
+                  <img
+                    src={p.image}
+                    alt={p.id}
+                    className="w-16 h-16 object-cover rounded"
+                  />
                   <div>
                     <p className="font-medium">ID: {p.id}</p>
                     <p>Quantity: {p.quantity}</p>
@@ -442,6 +518,7 @@ useEffect(() => {
     )}
   </div>
 )}
+
 
 
 

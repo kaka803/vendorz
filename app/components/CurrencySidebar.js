@@ -20,7 +20,7 @@ export default function CurrencySidebar() {
           shadow-lg border-2 transition-all duration-300 transform hover:scale-110
           ${
             currency === c.code
-              ? "bg-black text-white border-black shadow-2xl"
+              ? "bg-black white-border text-white  shadow-2xl"
               : "bg-white/80 text-black border-gray-400 hover:shadow-xl"
           }`}
         >

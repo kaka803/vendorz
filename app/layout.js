@@ -72,6 +72,7 @@ export default function RootLayout({ children }) {
                     style: {
                       marginTop: "100px",
                       fontFamily: "sans-serif",
+                      pointerEvents: "auto"
                     },
                   }}
                 />

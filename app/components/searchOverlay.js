@@ -27,7 +27,7 @@ export default function SearchOverlay({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 font-sans bg-[#365a41] animate-slideDown flex flex-col">
+    <div className="fixed inset-0 z-50 font-sans bg-black animate-slideDown flex flex-col">
   {/* Header with Close */}
   <div className="flex items-center justify-between p-4 border-b border-white/20">
     <div className="flex items-center w-full max-w-2xl mx-auto bg-white rounded-full px-4 py-2 shadow-md focus-within:ring-2 focus-within:ring-yellow-400">
@@ -74,14 +74,14 @@ export default function SearchOverlay({ isOpen, onClose }) {
                 <p className="text-sm text-gray-600 line-clamp-1">
                   {product.title}
                 </p>
-                <p className="text-[#365a41] font-bold mt-1">
+                <p className="text-[black] font-bold mt-1">
                   ${product.price_numeric}
                 </p>
               </div>
             </div>
 
            
-            <button  onClick={() => addToCart(product)} className="flex items-center gap-2 bg-[#365a41] text-white px-3 py-2 rounded-lg hover:bg-[#2d4a35] transition">
+            <button  onClick={() => addToCart(product)} className="flex items-center gap-2 bg-gradient-to-r from-[#4e47af] to-[#4C1D95] text-white px-3 py-2 rounded-lg hover:bg-[#2d4a35] transition">
               <ShoppingCart size={16} />
               <span className="text-sm">Add</span>
             </button>

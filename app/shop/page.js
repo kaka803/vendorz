@@ -72,10 +72,11 @@ export default function ShopPage() {
     }
 
     if (selectedExtensions.length > 0) {
-      filtered = filtered.filter((p) =>
-        (p.extensions || []).some((ext) => selectedExtensions.includes(ext))
-      );
-    }
+  filtered = filtered.filter((p) =>
+    (p.file_formats || []).some((ext) => selectedExtensions.includes(ext))
+  );
+}
+
 
     filtered = filtered.filter(
       (p) =>
@@ -145,8 +146,11 @@ const handleExtensionChange = (ext) => {
       return [...prev, ext];
     }
   });
+
+  // Reset page to 1 whenever filter changes
   setCurrentPage(1);
 };
+
 
 function handleFilterChange(type, value, setter) {
   setter(value);
@@ -252,7 +256,7 @@ function handleFilterChange(type, value, setter) {
                 onChange={() => handleExtensionChange(ext)}
                 className="accent-white cursor-pointer rounded"
               />
-              .{ext}
+              {ext}
             </label>
           ))}
         </div>

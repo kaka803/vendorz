@@ -47,7 +47,7 @@ export default function FeautredCard() {
             >
               <div className="p-6 flex flex-col gap-4">
                 {/* Video */}
-                <div className="w-25 h-25 rounded-xl overflow-hidden bg-black/40 mx-auto">
+                <div className="w-30 h-30 rounded-xl overflow-hidden bg-black/40 mx-auto">
                   <video
                     src={f.video}
                     className="w-full h-full object-contain"

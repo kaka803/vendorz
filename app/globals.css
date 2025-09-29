@@ -232,3 +232,9 @@ button{
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;     /* Firefox */
 }
+/* toast ko scroll block karne se roko */
+#toast-container,
+[data-sonner-toaster],
+[data-sonner-toaster] * {
+  pointer-events: none !important;
+}
