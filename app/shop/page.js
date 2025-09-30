@@ -139,10 +139,10 @@ export default function ShopPage() {
 const handleExtensionChange = (ext) => {
   setSelectedExtensions((prev) => {
     if (prev.includes(ext)) {
-      toast(`Removed extension: .${ext}`);
+      toast(`Removed extension: ${ext}`);
       return prev.filter((e) => e !== ext);
     } else {
-      toast.success(`Added extension: .${ext}`);
+      toast.success(`Added extension: ${ext}`);
       return [...prev, ext];
     }
   });
@@ -254,7 +254,7 @@ function handleFilterChange(type, value, setter) {
                 type="checkbox"
                 checked={selectedExtensions.includes(ext)}
                 onChange={() => handleExtensionChange(ext)}
-                className="accent-white cursor-pointer rounded"
+                className="accent-black cursor-pointer rounded"
               />
               {ext}
             </label>

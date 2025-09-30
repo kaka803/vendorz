@@ -24,7 +24,7 @@ const Hero = () => {
   return (
     <section
   ref={heroRef}
-  className="relative mt-8 min-h-screen flex flex-col justify-center items-center text-center px-6 py-30 sm:py-20 md:py-28 lg:py-32 overflow-hidden"
+  className="relative  min-h-screen flex flex-col justify-center items-center text-center px-6 py-30 sm:py-20 md:py-28 lg:py-30 overflow-hidden"
 >
   {/* Background Video */}
   <video

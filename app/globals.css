@@ -14,13 +14,29 @@ body {
   font-style: normal;
 }
 .bg {
-  /* set this on the element: style="--bg-url: url('/path/to/image.jpg')" */
-  background-image: url('/bg.jpg');
-  background-size: cover;           /* cover, contain, or a custom value */
-  background-position: center;      /* e.g. center top, 50% 30% */
-  background-repeat: no-repeat;     /* repeat, repeat-x, repeat-y */
+  /* Pink center + smooth blend of other colors */
+  background: radial-gradient(circle at center, #ff4fa2 -15%, #ffd6a5 28%, #fffbc1 45%, #a4f5ff 77%, #60aaff 200%); /* sky blue edge */
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   display: block;
+  position: relative;
+  overflow: hidden;
 }
+
+/* Grain overlay */
+.bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTAwJScgaGVpZ2h0PScxMDAlJyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnPjxmZVR1cmJ1bGVuY2UgdHlwZT0nZnJhY3RhbCcgYmFzZUZyZXF1ZW5jeT0nMC4wNScgbnVtT2N0YXZlcz0nNScvPjxmZURpc3BsYWNlbWVudCB0eXBlPSdmaWx0ZXInIGZpbHRlclVuaXRzPSdtYXRyaXgnPjwvZmVEaXNwbGFjZW1lbnQ+PC9zdmc+");
+  filter: contrast(200%) brightness(100%);
+  opacity: 0.15; /* adjust grain intensity */
+  mix-blend-mode: overlay;
+}
+
 
 .orbitron {
   font-family: "Orbitron", sans-serif;
